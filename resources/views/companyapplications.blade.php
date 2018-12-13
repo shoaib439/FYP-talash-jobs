@@ -1,0 +1,75 @@
+
+{{--/**--}}
+ {{--* Created by PhpStorm.--}}
+ {{--* User: shoaib--}}
+ {{--* Date: 12/11/2018--}}
+ {{--* Time: 11:18 PM--}}
+ {{--*/--}}
+
+@extends('companydashboardnav')
+
+@section('companyapplication')
+
+
+    <div class="container-fluid ">
+        <div class="container shadow-sms  bg-white  mb-3">
+
+
+            <div class="row mt-5">
+                <div class="col-md-6 my-heading-text2 mt-2 mb-3">
+                    My Applications
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-12 mr-auto ml-auto">
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Applicant Name</th>
+                                <th>Job Title</th>
+                                <th>Last Date</th>
+                                <th class="text-right">Status</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Shoaib Shahid</td>
+                                <td>Android Developer</td>
+                                <td>12/12/12</td>
+                                <td class="text-right">review</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" class="btn btn-dark  btn-sm" >
+                                        <i class="fa fa-user"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" >
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" >
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" >
+                                        <i class="fa fa-remove"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+@endsection
