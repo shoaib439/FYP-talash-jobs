@@ -11,5 +11,5 @@ class Jobseekercontactus extends Controller
 {
    public function jobseekercontactus(){
         echo 'A';
-   }
+   } 
 }

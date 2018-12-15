@@ -12,10 +12,27 @@ class Vacancy extends Migration
      * @return void
      */
     public function up()
+
+
     {
         Schema::create('vacancy', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('vacancy_type');
+            $table->string('description');
+            $table->string('no_of_position');
+            $table->string('industry');
+            $table->string('job_city');
+            $table->string('job_type');
+            $table->string('job_shift');
+            $table->string('degree_level');
+            $table->string('carrier_level');
+            $table->string('skills_required');
+            $table->string('salary');
+            $table->string('experience');
+            $table->string('age_range');
+            $table->string('working_hours');
+            $table->string('last_date');
             $table->timestamps();
         });
     }
