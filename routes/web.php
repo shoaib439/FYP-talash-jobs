@@ -32,8 +32,10 @@ Route::get('/jobseekersignup', function () {
     return view('jobseekersignup');
 });
 
-Route::post('/jobseekersignup', 'jobseekersignupcontroller@jobsignup');
-//for jobseeker signup form start
+//job seeker signup controller start
+Route::post('/jobseekersignup','signupjobseeker@submission');
+//job seeker signup controller start
+
 
 //for company signup form start
 Route::get('/companysignup', function () {
@@ -54,7 +56,7 @@ Route::get('/jobseeker/contactus', function () {
     return view('contactus');
 });
 
-Route::post('/jobseekercontactus','jobseekercontactus@jobseekercontactus');
+Route::post('/jobseekercontactus','jobseekercontactus@store');
 
 
 
@@ -113,5 +115,7 @@ Route::get('/company/companyapplicationslist', function () {
 Route::get('/company/profile', function () {
     return view('companyprofile');
 });
+
+Route::post('/company/profile','companyprofile@cprofile');
 
 

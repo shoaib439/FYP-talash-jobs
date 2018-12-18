@@ -22,13 +22,15 @@
                         <div class="w-15">
                             <div class="jbs-logo-container">
                                 <div class="jbs-logo">
-                                    <img  src="{{asset('images/logo.png')}}" class="img-rounded profile-image-set" alt="Cinque Terre">
+                                    <img   class="profile-image-set" src="{{asset('images/Profile.png')}}" alt="Cinque Terre">
                                 </div>
 
                                 <div class="jbs-edit">
-                                    <i class="fa fa-edit"></i>
+                                    <i class="fa fa-camera upload-button"></i>
+                                    <input class="file-upload" type="file" accept="image/*"/>
                                 </div>
                             </div>
+
                         </div>
 
 
@@ -95,13 +97,13 @@
 
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="age">Age</label>
-                                        <input type="text" class="form-control" id="age" required aria-describedby="agehelp" placeholder="Age">
+                                        <input type="text" class="form-control" id="cnic" required aria-describedby="cnichelp" placeholder="Cnic">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="age">Phone</label>
                                         <input type="tel" class="form-control" id="phone" required aria-describedby="phonehelp" placeholder="Phone">
@@ -110,6 +112,27 @@
 
 
                             </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="age">Age</label>
+                                        <input type="text" class="form-control" id="age" required aria-describedby="agehelp" placeholder="Age">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="age">Phone</label>
+                                        <input type="tel" class="form-control" id="phone" required aria-describedby="phonehelp" placeholder="Phone">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
 
                         </div>
                     </div>

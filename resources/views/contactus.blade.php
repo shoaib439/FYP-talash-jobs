@@ -8,7 +8,7 @@
         <div class="row" >
             <div class="col-md-6 offset-md-3"  >
 
-                <form class="pb-40" action="{{url('/jobseekercontactus')}}" method="POST">
+                <form class="pb-40" action="{{url('jobseekercontactus')}}" method="POST">
                     <div class="form-group">
                         <input type="text" class="form-control" id="Cname" name="Cname"  placeholder="Enter Name" >
                     </div>
@@ -23,11 +23,14 @@
                         <input type="text" class="form-control" id="Csubject" name="Csubject"  placeholder="Enter Subject" >
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" rows="5" id="cmsg" placeholder="Message"></textarea>
+                        <textarea class="form-control" rows="5" id="cmsg"  name="Cmsg"  placeholder="Message"></textarea>
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn my-btn btn-lg"  id="Cbtn" >Submit</button>
                     </div>
+
+                    {{csrf_field()}}
+
                 </form>
 
             </div>
