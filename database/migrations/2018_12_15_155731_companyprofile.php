@@ -15,8 +15,9 @@ class Companyprofile extends Migration
     {
 
 
-      Schema::create('companyprofile', function (Blueprint $table) {
+      Schema::create('companyprofiles', function (Blueprint $table) {
           $table->increments('id');
+          $table->integer('user_id');
           $table->string('company_name');
           $table->string('type');
           $table->string('address');

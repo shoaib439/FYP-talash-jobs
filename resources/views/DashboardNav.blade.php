@@ -4,7 +4,12 @@
 search-nav-brand
 @endsection
 @section('usernameclass')
-    username
+    @guest
+
+    @elseif( Auth::guard() )
+        {{ Auth::user()->name }}
+
+    @endif
 @endsection
 @section('afternavlogo')
     <form action="" method="get">

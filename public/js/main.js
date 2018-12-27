@@ -21,6 +21,110 @@ $(document).ready(function(){
 
     });
 
+    ///////////////////////////////
+    //user profile edit section start
+
+    // ye edit icon click krnay pe run hoga
+
+    $('.company-edit-btn').click(function (e) {
+        e.preventDefault();
+
+        var btn = $(this);
+        var containerid = btn.data('containerid');
+
+
+        var container = $('#'+containerid);
+        container.fadeIn();
+
+        var form = container.find('form');
+        if(!form.length){
+            return;
+        }
+
+        var openercontainer = $('#'+form.data('submission'));
+        var gender = openercontainer.find('#company-personal-gender');
+        var phone = openercontainer.find('#company-personal-phone');
+        var city = openercontainer.find('#company-personal-city');
+        var email = openercontainer.find('#company-personal-email');
+        var cnic = openercontainer.find('#company-personal-cnic');
+        var website = openercontainer.find('#company-personal-website');
+        var skype = openercontainer.find('#company-personal-skype');
+        var address = openercontainer.find('#company-personal-address');
+
+        container.find('#gender').val(gender.text());
+        container.find('#phone').val(phone.text());
+
+        container.find('#city').val(city.text());
+        container.find('#email').val(email.text());
+
+        container.find('#website').val(website.text());
+        container.find('#cnic').val(cnic.text());
+
+        container.find('#skype').val(skype.text());
+        container.find('#address').val(address.text());
+    });
+
+    //till open . open ho gya edit/ update k liye
+
+    //nechay wala code se update hoga
+
+    $('#company-personal-form').submit(function (e) {
+        e.preventDefault();
+
+        var form = $(this);
+        var gender = $('#gender',form);
+        var phone = $('#phone',form);
+        var city = $('#city',form);
+        var email = $('#email',form);
+        var website = $('#website',form);
+        var cnic = $('#cnic',form);
+        var skype = $('#skype',form);
+        var address = $('#address',form);
+
+
+
+        $.post( window.location.origin+"/ajax-upload-personal",
+            {
+                gendersent: gender.val(),
+                time: "2pm",
+                csrf_token: $('#ajax_csrf_token').val()
+            },
+            function(response){
+
+            }
+        );
+
+
+        var submission = $('#'+form.data('submission'));
+
+        var genderhtml = $('#company-personal-gender',submission);
+        var phonehtml = $('#company-personal-phone',submission);
+        var cityhtml = $('#company-personal-city',submission);
+        var emailhtml = $('#company-personal-email',submission);
+        var websitehtml = $('#company-personal-website',submission);
+        var cnichtml = $('#company-personal-cnic',submission);
+        var skypehtml = $('#company-personal-skype',submission);
+        var addresshtml = $('#company-personal-address',submission);
+
+
+        genderhtml.html(gender.val()); //ye gender ki value ko update kr ra html main
+        phonehtml.html(phone.val()); //ye phone ki value ko update kr ra html main
+
+        cityhtml.html(city.val());
+        emailhtml.html(email.val());
+        websitehtml.html(website.val());
+        cnichtml.html(cnic.val());
+        skypehtml.html(skype.val());
+        addresshtml.html(address.val());
+
+
+    });
+
+
+    //to form submit
+
+    /////////////////////////////////
+
 
 
     $('.jbs-add-btn').click(function (e) {
@@ -466,15 +570,83 @@ $(document).ready(function(){
 
 
     //function to open image choose for company profile start
+
+    var Upload = function (file) {
+        this.file = file;
+    };
+
+    Upload.prototype.getType = function() {
+        return this.file.type;
+    };
+    Upload.prototype.getSize = function() {
+        return this.file.size;
+    };
+    Upload.prototype.getName = function() {
+        return this.file.name;
+    };
+    Upload.prototype.doUpload = function () {
+        var that = this;
+        var formData = new FormData();
+
+        // add assoc key values, this will be posts values
+        formData.append("file", this.file, this.getName());
+        formData.append("upload_file", true);
+
+
+
+        $.ajax({
+            type: "POST",
+            url: window.location.origin+"/ajax-upload-dp",
+            xhr: function () {
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) {
+                   // myXhr.upload.addEventListener('progress', that.progressHandling, false);
+                }
+                return myXhr;
+            },
+            success: function (data) {
+                alert('Ok');
+            },
+            error: function (error) {
+                alert('No');
+            },
+            async: true,
+            data: {},
+            cache: false,
+            contentType: false,
+            processData: false,
+            timeout: 60000
+        });
+    };
     var readURL = function(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
                 $('.profile-image-set').attr('src', e.target.result);
+                var file = $(input)[0].files[0];
+                var upload = new Upload(file);
             }
 
             reader.readAsDataURL(input.files[0]);
+
+            $.ajax({
+                url: window.location.origin+"/ajax-dp-change",
+                type: "post",
+                data: {
+                    'url':'',
+                    'csrf':$('#dp_upload_csrf').val()
+                } ,
+                success: function (response) {
+                    // you will get response from your php page (what you echo or print)
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+
+
+            });
         }
     }
 
@@ -487,9 +659,31 @@ $(document).ready(function(){
         $(".file-upload").click();
     });
 
-    //function to open image choose for company profile start
+    //function to open image choose for company profile end
 
+//for rating start
+    $(".btnrating").on('click',(function(e) {
 
+        var previous_value = $("#selected_rating").val();
+
+        var selected_value = $(this).attr("data-attr");
+        $("#selected_rating").val(selected_value);
+
+        $(".selected-rating").empty();
+        $(".selected-rating").html(selected_value);
+
+        for (i = 1; i <= selected_value; ++i) {
+            $("#rating-star-"+i).toggleClass('btn-warning');
+            $("#rating-star-"+i).toggleClass('btn-default');
+        }
+
+        for (ix = 1; ix <= previous_value; ++ix) {
+            $("#rating-star-"+ix).toggleClass('btn-warning');
+            $("#rating-star-"+ix).toggleClass('btn-default');
+        }
+
+    }));
+    //for raring end
 
 });
 

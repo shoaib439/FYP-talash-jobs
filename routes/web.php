@@ -11,20 +11,14 @@
 |
 */
 
+Auth::routes();
+
+
 Route::get('/', function () {
     return view('Landing');
 });
 
-Route::get('/signup', function () {
-    return view('signup');
-});
 
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::post('/login', 'logincontroller@login');
 
 
 //for jobseeker signup form start
@@ -33,7 +27,7 @@ Route::get('/jobseekersignup', function () {
 });
 
 //job seeker signup controller start
-Route::post('/jobseekersignup','signupjobseeker@submission');
+Route::post('/jobseekersignup','signupjobseeker@submission')->name('jobseeker.signup');
 //job seeker signup controller start
 
 
@@ -42,7 +36,7 @@ Route::get('/companysignup', function () {
     return view('CompanySignup');
 });
 
-Route::post('/companysignup', 'companysignupcontroller@companysignup');
+Route::post('/companysignup', 'signupcompany@submission');
 //for company signup form end
 
 
@@ -57,7 +51,6 @@ Route::get('/jobseeker/contactus', function () {
 });
 
 Route::post('/jobseekercontactus','jobseekercontactus@store');
-
 
 
 
@@ -83,13 +76,18 @@ Route::get('/jobseeker/viewinvitation', function () {
     return view('jobseekerViewinvitation');
 });
 
+
+////////////////////////////////////////////////COMPANY ROUTESSSSS START/////////////////////////////////////////////////
+
+
 Route::get('/company/dashboard', function () {
     return view('companydashboardnav');
 });
 
-Route::get('/company/main', function () {
-    return view('companymain');
-});
+Route::get('/company/main', 'CompanyController@home');
+//Route::get('/company/AddVacancy', 'CompanyController@check');
+
+
 
 
 Route::get('/company/searchresult', function () {
@@ -102,6 +100,8 @@ Route::get('/company/profile', function () {
 Route::get('/company/AddVacancy', function () {
     return view('AddVacancy');
 });
+Route::post('/company/AddVacancy','postvacancy@addvacancy');
+
 
 Route::get('/company/companyvacanncylist', function () {
     return view('companyvacancylist');
@@ -116,6 +116,65 @@ Route::get('/company/profile', function () {
     return view('companyprofile');
 });
 
-Route::post('/company/profile','companyprofile@cprofile');
+//Route::post('/company/profile','companyprofile@cprofile');
 
 
+
+
+////////////////////////////////////////////////COMPANY ROUTESSSSS END/////////////////////////////////////////////////
+
+
+
+
+Route::get('/submitfeedback', function(){
+    return view('submitfeedback');
+});
+
+Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
+
+
+/////////////////////////////////////////////////////AJAX ROUTES
+//Route::post('/ajax-upload-dp','AjaxCompanyProfile@uploadimage');
+
+//Route::post('/ajax-upload-personal','AjaxCompanyProfile@person');
+
+
+//Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::post('/login', 'logincontroller@login');
+
+////////////////////////////////////////////////admin data start///////////////////////////////////////
+
+Route::get('/Adminlogin', function () {
+    return view('/adminfrontend/Adminlogin');
+});
+
+Route::post('/Adminlogin','adminController@admin');
+
+
+Route::group(['middleware' => 'auth'],function(){
+
+//    Route::get('/profile','Pages@profile')->name('profile');
+
+    Route::get('/adminpanel','adminController@home');
+
+    //Admin
+
+
+});
+/*
+
+*/
+//Route::post('/adminpanel','adminOperation@check');
+
+//Route::get('adminpanel', function () {
+//    //whatever
+//})->middleware('auth');
+
+////////////////////////////////////////////////admin data end///////////////////////////////////////////

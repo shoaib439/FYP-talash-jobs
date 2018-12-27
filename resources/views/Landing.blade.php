@@ -8,8 +8,17 @@
 @extends('main')
 
 @section('loginlogout')
-    <a href="{{url('signup')}}">Signup</a> | <a href="{{url('login')}}" >Login</a>
-    @endsection
+    @guest
+        <a href="{{url('register')}}">Signup</a> | <a href="{{url('login')}}" >Login</a>
+    @elseif( Auth::guard() )
+        {{ Auth::user()->name }}
+        <a href="{{route('logout')}}"
+           onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>
+
+        <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none"> {{csrf_field()}} </form>
+
+    @endif
+@endsection
 @section('content')
 
 

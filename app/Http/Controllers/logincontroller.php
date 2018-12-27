@@ -6,11 +6,39 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Auth;
 use Illuminate\Http\Request;
 use App\User;
 class Logincontroller extends Controller
 {
 
+
+
+//    public function admin( Request $request){
+//
+//        if($request->isMethod('post')){
+//            $data=$request->input();
+//            $User = new User;
+//            if(auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
+//
+//                $verify = $User::where(['email' => $data['email']])->get()->first();
+//
+//                if($verify->role == '1'){
+//                    // Session::set('user_type', 'jobseeker');
+//                    return redirect('/adminpanel');
+//                }
+//                else{
+//                    // Session::set('user_type', 'company');
+//                    return redirect('/');
+//                }
+//            }
+//
+//
+//
+//        }
+//
+//        return redirect('/Adminlogin');
+//    }
 
     public function login (Request $request)
     {
@@ -19,32 +47,20 @@ class Logincontroller extends Controller
         $password =  $request->password;
 
         $User = new User;
-//        echo ($User::find(1))->display_name;
-//    return;
 
-        $verify = $User::where(['email' => $email, 'password' => $password])->first();
+        if(auth::attempt(['email'=>$email,'password'=>$password])):
+            $verify = $User::where(['email' => $email])->get()->first();
 
-        if(empty($verify->id)):
-            return redirect('/login');
+            if($verify->type == 'jobseeker' && $verify->role=='null'){
+                // Session::set('user_type', 'jobseeker');
+                return redirect('/jobseekerhome');
+            }
+            else{
+                // Session::set('user_type', 'company');
+                return redirect('/company/main');
+            }
         endif;
 
-        $type = $verify->type;
-
-        //Session::set('user_id', $verify->id);
-        //Session::set('user_display', $verify->display_name);
-        if($type == 'jobseeker'){
-           // Session::set('user_type', 'jobseeker');
-            return redirect('jobseekerhome');
-        }
-        else{
-           // Session::set('user_type', 'company');
-            return redirect('companyhome');
-        }
-
-
-
-       // $users = new User; //Creates new users class object. (it doesn't contain constructor.)
-
-
+        return redirect('/login')->withInput(['msg'=>'Invalid Username or Password']);
     }
 }

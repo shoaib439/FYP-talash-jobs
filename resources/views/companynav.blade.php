@@ -15,14 +15,17 @@
     <div class="container-fluid">
         <div class="btn-group dropdown-header">
             <button type="button" class="btn btn-secondary-me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Companyusername
+                {{ Auth::user()->display_name }}
             </button>
             <div class="dropdown-menu ">
                 <!-- Dropdown menu links -->
                 <a class="dropdown-item" href="{{url('company/profile')}}">Profile</a>
                 <a class="dropdown-item" href="#">Setting</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">logout</a>
+                <a class="dropdown-item" href="{{route('logout')}}"
+                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>
+
+                <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none"> {{csrf_field()}} </form>
             </div>
         </div>
 

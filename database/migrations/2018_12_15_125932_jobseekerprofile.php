@@ -13,11 +13,12 @@ class Jobseekerprofile extends Migration
      */
     public function up()
     {
-        Schema::create('jobseekerprofile', function (Blueprint $table) {
+        Schema::create('jobseekerprofiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('date_of_birth');
-            $table->string('age');
-            $table->string('country');
+            $table->integer('user_id');
+            $table->string('date_of_birth')->nullable();
+            $table->string('age')->nullable();
+            $table->string('country')->nullable();
             $table->timestamps();
         });
     }

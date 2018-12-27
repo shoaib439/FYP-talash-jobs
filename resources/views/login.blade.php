@@ -23,13 +23,15 @@
                             <a href="http://localhost:8000">Forgot Password?</a>
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-success btn-md"  id="Cbtn" >Login</button>
+                            <button type="submit" class="btn my-btn1 btn-md"  id="Cbtn" >Login</button>
                         </div>
                         {{csrf_field()}}
 
                     </form>
-
-                    <p class="text-muted">Don't have an account?<a href="signup"> Signup</a></p>
+                    @if( session('msg') )
+                        <p> {{ session('msg') }} </p>
+                    @endif
+                    <p class="text-muted justify-content-center">Don't have an account?<a href="{{url('/register')}}"> Signup</a></p>
 
 
                 </div>

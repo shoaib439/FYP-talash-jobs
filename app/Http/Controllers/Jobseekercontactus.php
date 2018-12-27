@@ -33,6 +33,7 @@ class Jobseekercontactus extends Controller
 
       $contactus->save(); //inserts into the database
 
+        return redirect('/');
 //         echo $request;
 }
 }

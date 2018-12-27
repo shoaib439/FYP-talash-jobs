@@ -3,6 +3,7 @@
 
     <div class="container">
 
+        <div class="pt-4 mybox-shadow1">
        <h1 class="text-center cv-heading pt-40 pb-40">Contact us</h1>
         <p  class="text-center text-info">Please fill out the form below to contact us with our team.</p>
         <div class="row" >
@@ -34,6 +35,7 @@
                 </form>
 
             </div>
+        </div>
         </div>
     </div>
 
