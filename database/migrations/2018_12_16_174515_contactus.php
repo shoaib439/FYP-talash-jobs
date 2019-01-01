@@ -19,7 +19,7 @@ class Contactus extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
-            $table->string('phoneno');
+            $table->string('phoneno')->nullable();
             $table->string('subject');
             $table->string('message');
 

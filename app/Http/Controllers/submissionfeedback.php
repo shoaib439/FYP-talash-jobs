@@ -31,6 +31,7 @@ class SubmissionFeedback extends Controller
 
         $feedback->save(); //inserts into the database
 
+        return redirect('/submitfeedback');
 //         echo $request;
 }
 }

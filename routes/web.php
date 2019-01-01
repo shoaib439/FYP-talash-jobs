@@ -46,11 +46,11 @@ Route::get('/dashboard', function () {
     return view('DashboardNav');
 });
 
-Route::get('/jobseeker/contactus', function () {
+Route::get('/user/contactus', function () {
     return view('contactus');
 });
 
-Route::post('/jobseekercontactus','jobseekercontactus@store');
+Route::post('/user/contactus','jobseekercontactus@store');
 
 
 
@@ -124,6 +124,20 @@ Route::get('/company/profile', function () {
 ////////////////////////////////////////////////COMPANY ROUTESSSSS END/////////////////////////////////////////////////
 
 
+////////////////////////////////////////////////COMMON ROUTESSSSS sTART/////////////////////////////////////////////////
+
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::post('/login', 'logincontroller@login');
+
+
+
+
+
+
 
 
 Route::get('/submitfeedback', function(){
@@ -131,6 +145,16 @@ Route::get('/submitfeedback', function(){
 });
 
 Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
+
+////////////////////////////////////////////////COMMON ROUTESSSSS END/////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
 
 /////////////////////////////////////////////////////AJAX ROUTES
@@ -143,11 +167,7 @@ Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
 
 
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
 
-Route::post('/login', 'logincontroller@login');
 
 ////////////////////////////////////////////////admin data start///////////////////////////////////////
 
@@ -176,5 +196,23 @@ Route::group(['middleware' => 'auth'],function(){
 //Route::get('adminpanel', function () {
 //    //whatever
 //})->middleware('auth');
+
+
+Route::get('/registeredUsers', function () {
+    return view('/adminfrontend.registeredUsers');
+});
+
+Route::get('/usersComplaints', function () {
+    return view('/adminfrontend.usersComplaints');
+});
+
+Route::get('/registeredUsers','adminController@showUsers');
+
+Route::get('/delete/{id}','adminController@deleteuser');
+
+Route::get('/usersComplaints','adminController@showComplaints');
+
+Route::get('/usersFeedback','adminController@showFeedback');
+
 
 ////////////////////////////////////////////////admin data end///////////////////////////////////////////

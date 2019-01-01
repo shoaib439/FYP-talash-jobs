@@ -370,3 +370,45 @@ body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
 }
+
+.bg-mybg {
+  background-color: #07b108 !important;
+}
+
+a.bg-mybg:hover, a.mybg:focus,
+button.bg-mybg:hover,
+button.bg-mybg:focus {
+  background-color: #07b108 !important;
+}
+
+.set-center{
+  justify-content: center;
+  /* align-items: center; */
+  display: flex;
+}
+
+.shadow-sms{
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+
+.applied-jobs-btns{
+  width: 100%;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.my-admin-btn{
+  width: 50%;
+  background-color: #07b108;
+  border-color: #07b108;
+  color: #fff;
+  border-radius: 0;
+  font-family: 'Helvetica' !important;
+}
+
+.set-this{
+  padding-right: 60px;
+  justify-content: flex-end;
+}

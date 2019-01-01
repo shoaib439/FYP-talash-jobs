@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\feedback;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use DB;
+use App\contactus;
 
 class adminController extends Controller
 {
@@ -63,4 +66,66 @@ class adminController extends Controller
 
         return view('adminpanel');
     }
+
+
+
+//    public function showComplaints(){
+//
+//        $complaintData=contactus::all();
+//
+//        return view('/adminfrontend.usersComplaints', compact('complaintData'));
+//
+//
+//
+//
+//    }//end of showComplaints
+
+
+    public function showUsers(){
+
+        $Users=User::all()->toArray();
+
+        return view('/adminfrontend.registeredUsers', compact('Users'));
+
+
+
+
+    }//end of showUsers
+
+
+    public function deleteuser($id){
+
+//        $Users=User->find
+//
+//       DB::table('users')->where('id','$id')->delete();
+
+        $user = User::find($id);
+        $user->delete();
+       return redirect('registeredUsers');
+
+
+
+
+    }//end of deleteuser
+
+
+    public function showComplaints(){
+
+
+        $complaints=contactus::all()->toArray();
+
+            return view('/adminfrontend.usersComplaints', compact('complaints'));
+
+    }
+
+
+    public function showFeedback(){
+
+
+        $feedback=feedback::all()->toArray();
+
+        return view('/adminfrontend.usersfeedback', compact('feedback'));
+
+    }
+
 }

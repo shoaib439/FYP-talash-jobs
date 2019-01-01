@@ -15,10 +15,11 @@ class Feedback extends Migration
     {
 
       Schema::create('feedback', function (Blueprint $table) {
+
           $table->increments('id');
           $table->string('name');
           $table->string('email');
-          $table->string('suggestion');
+          $table->longText('suggestion');
           $table->string('rating');
 
 
