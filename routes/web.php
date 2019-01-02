@@ -11,15 +11,7 @@
 |
 */
 
-Auth::routes();
-
-
-Route::get('/', function () {
-    return view('Landing');
-});
-
-
-
+////////////////////////////////////////////////JOBSEEKER ROUTESSSSS sTART /////////////////////////////////////////////////
 
 //for jobseeker signup form start
 Route::get('/jobseekersignup', function () {
@@ -31,6 +23,47 @@ Route::post('/jobseekersignup','signupjobseeker@submission')->name('jobseeker.si
 //job seeker signup controller start
 
 
+///
+///
+///
+Route::get('/jobseekerhome', 'jobseekerController@jshomeauth');
+Route::get('/jobseeker/buildcv', 'jobseekerController@jsbuildCVauth');
+Route::get('/jobseeker/appliedjobs', 'jobseekerController@jsappliedjobsauth');
+Route::get('/jobseeker/savedjobs', 'jobseekerController@jssavedjobsauth');
+Route::get('/jobseeker/viewinvitation', 'jobseekerController@jsviewinvitationauth');
+//Route::get('/jobseekerhome', function () {
+//    return view('jobseekerMainLayout');
+//});
+
+
+//Route::get('/jobseeker/buildcv', function () {
+//    return view('jobseekerbuildCV');
+//});
+
+
+//Route::get('/jobseeker/appliedjobs', function () {
+//    return view('jobseekerAppliedjob');
+//});
+
+//Route::get('/jobseeker/savedjobs', function () {
+//    return view('jobseekerSavedpost');
+//});
+//
+//Route::get('/jobseeker/viewinvitation', function () {
+//    return view('jobseekerViewinvitation');
+//});
+
+
+////////////////////////////////////////////////JOBSEEKER ROUTESSSSS  END/////////////////////////////////////////////////
+
+
+
+
+
+
+////////////////////////////////////////////////COMPANY ROUTESSSSS START/////////////////////////////////////////////////
+
+
 //for company signup form start
 Route::get('/companysignup', function () {
     return view('CompanySignup');
@@ -40,81 +73,38 @@ Route::post('/companysignup', 'signupcompany@submission');
 //for company signup form end
 
 
-
-
-Route::get('/dashboard', function () {
-    return view('DashboardNav');
-});
-
-Route::get('/user/contactus', function () {
-    return view('contactus');
-});
-
-Route::post('/user/contactus','jobseekercontactus@store');
-
-
-
-Route::get('/jobseekerhome', function () {
-    return view('jobseekerMainLayout');
-});
-
-
-Route::get('/jobseeker/buildcv', function () {
-    return view('jobseekerbuildCV');
-});
-
-
-Route::get('/jobseeker/appliedjobs', function () {
-    return view('jobseekerAppliedjob');
-});
-
-Route::get('/jobseeker/savedjobs', function () {
-    return view('jobseekerSavedpost');
-});
-
-Route::get('/jobseeker/viewinvitation', function () {
-    return view('jobseekerViewinvitation');
-});
-
-
-////////////////////////////////////////////////COMPANY ROUTESSSSS START/////////////////////////////////////////////////
-
-
-Route::get('/company/dashboard', function () {
-    return view('companydashboardnav');
-});
-
-Route::get('/company/main', 'CompanyController@home');
-//Route::get('/company/AddVacancy', 'CompanyController@check');
-
-
-
+Route::get('/company/main', 'CompanyController@homeauth');
+Route::get('/company/AddVacancy', 'CompanyController@vacancyauth');
+Route::get('/company/dashboard', 'CompanyController@companydashboardauth');
+Route::get('/company/profile', 'CompanyController@companyprofileauth');
+Route::get('/company/vacancylist', 'CompanyController@companyvacancylistauth');
+Route::get('/company/applicationslist', 'CompanyController@companyapplicationslistauth');
 
 Route::get('/company/searchresult', function () {
     return view('companysearch');
 });
-Route::get('/company/profile', function () {
-    return view('companyprofile');
-});
+//Route::get('/company/profile', function () {
+//    return view('companyprofile');////////////////////////////////////
+//});
 
-Route::get('/company/AddVacancy', function () {
-    return view('AddVacancy');
-});
+//Route::get('/company/AddVacancy', function () {
+//    return view('AddVacancy');
+//});
 Route::post('/company/AddVacancy','postvacancy@addvacancy');
 
 
-Route::get('/company/companyvacanncylist', function () {
-    return view('companyvacancylist');
-});
+//Route::get('/company/companyvacanncylist', function () {
+//    return view('companyvacancylist');
+//});
 
 
-Route::get('/company/companyapplicationslist', function () {
-    return view('companyapplications');
-});
+//Route::get('/company/applicationslist', function () {
+//    return view('companyapplications');
+//});
 
-Route::get('/company/profile', function () {
-    return view('companyprofile');
-});
+//Route::get('/company/profile', function () {
+//    return view('companyprofile');
+//});
 
 //Route::post('/company/profile','companyprofile@cprofile');
 
@@ -126,6 +116,11 @@ Route::get('/company/profile', function () {
 
 ////////////////////////////////////////////////COMMON ROUTESSSSS sTART/////////////////////////////////////////////////
 
+Auth::routes();
+
+Route::get('/', function () {
+    return view('Landing');
+});
 
 Route::get('/login', function () {
     return view('login');
@@ -133,9 +128,15 @@ Route::get('/login', function () {
 
 Route::post('/login', 'logincontroller@login');
 
+Route::get('/dashboard', function () {
+    return view('DashboardNav');
+});
 
+Route::get('/user/contactus', function () {
+    return view('contactus');
+});
 
-
+Route::post('/user/contactus','jobseekercontactus@store');
 
 
 

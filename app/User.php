@@ -31,4 +31,12 @@ class User extends Authenticatable
     public function isAdmin(){
         return ($this->role == '1');
     }
+
+    public function isCompany(){
+        return ($this->type == 'company');
+    }
+
+    public function isJobseeker(){
+        return ($this->type == 'jobseeker');
+    }
 }

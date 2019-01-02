@@ -50,7 +50,7 @@
                        </div>
                        <div class="mr-5">My Vacancies!</div>
                    </div>
-                   <a class="card-footer text-white clearfix small z-1" href="{{url('company/companyvacanncylist')}}">
+                   <a class="card-footer text-white clearfix small z-1" href="{{url('company/vacancylist')}}">
                        <span class="float-left">click here</span>
                        <span class="float-right">
                     <i class="fa fa-angle-right"></i>
@@ -66,7 +66,7 @@
                        </div>
                        <div class="mr-5">View Applications!</div>
                    </div>
-                   <a class="card-footer text-white clearfix small z-1" href="{{url('company/companyapplicationslist')}}">
+                   <a class="card-footer text-white clearfix small z-1" href="{{url('/company/applicationslist')}}">
                        <span class="float-left">click here</span>
                        <span class="float-right">
                     <i class="fa fa-angle-right"></i>
