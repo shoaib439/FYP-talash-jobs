@@ -26,11 +26,27 @@ Route::post('/jobseekersignup','signupjobseeker@submission')->name('jobseeker.si
 ///
 ///
 ///
-Route::get('/jobseekerhome', 'jobseekerController@jshomeauth');
+Route::get('/jobseekerhome', function(){
+    return \Illuminate\Support\Facades\App::make('\App\Http\Controllers\jobseekerController')->AuthCheck('jobseekerMainLayout');
+});
+Route::get('/jobseeker/buildcv', function(){
+    return \Illuminate\Support\Facades\App::make('\App\Http\Controllers\jobseekerController')->AuthCheck('jobseekerbuildCV');
+});
+Route::get('/jobseeker/appliedjobs', function(){
+    return \Illuminate\Support\Facades\App::make('\App\Http\Controllers\jobseekerController')->AuthCheck('jobseekerAppliedjob');
+});
+Route::get('/jobseeker/savedjobs', function(){
+    return \Illuminate\Support\Facades\App::make('\App\Http\Controllers\jobseekerController')->AuthCheck('jobseekerSavedpost');
+});
+Route::get('/jobseeker/viewinvitation', function(){
+    return \Illuminate\Support\Facades\App::make('\App\Http\Controllers\jobseekerController')->AuthCheck('jobseekerViewinvitation');
+});
+/*
 Route::get('/jobseeker/buildcv', 'jobseekerController@jsbuildCVauth');
 Route::get('/jobseeker/appliedjobs', 'jobseekerController@jsappliedjobsauth');
 Route::get('/jobseeker/savedjobs', 'jobseekerController@jssavedjobsauth');
 Route::get('/jobseeker/viewinvitation', 'jobseekerController@jsviewinvitationauth');
+*/
 //Route::get('/jobseekerhome', function () {
 //    return view('jobseekerMainLayout');
 //});
@@ -122,9 +138,7 @@ Route::get('/', function () {
     return view('Landing');
 });
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/login', 'logincontroller@index')->name('login');
 
 Route::post('/login', 'logincontroller@login');
 
@@ -158,10 +172,10 @@ Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
 
 
 
-/////////////////////////////////////////////////////AJAX ROUTES
-//Route::post('/ajax-upload-dp','AjaxCompanyProfile@uploadimage');
 
-//Route::post('/ajax-upload-personal','AjaxCompanyProfile@person');
+/////////////////////////////////////////////////////AJAX ROUTES
+Route::post('/ajax-upload-dp','AjaxCompanyProfile@uploadimage');
+Route::post('/ajax-upload-personal','AjaxCompanyProfile@personData');
 
 
 //Route::get('/home', 'HomeController@index')->name('home');
@@ -170,16 +184,15 @@ Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
 
 
 
+
 ////////////////////////////////////////////////admin data start///////////////////////////////////////
 
-Route::get('/Adminlogin', function () {
-    return view('/adminfrontend/Adminlogin');
-});
+Route::get('/Adminlogin', 'adminController@loginPage');
 
 Route::post('/Adminlogin','adminController@admin');
 
 
-Route::group(['middleware' => 'auth'],function(){
+Route::group(['middleware' => 'adminMiddleware'],function(){
 
 //    Route::get('/profile','Pages@profile')->name('profile');
 

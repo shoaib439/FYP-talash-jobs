@@ -613,3 +613,7 @@ card-header:first-child {
     margin-bottom: 10px;
 }
 
+.align-class{
+    justify-content: center;
+    display: flex;
+}

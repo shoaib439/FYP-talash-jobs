@@ -35,7 +35,8 @@ class adminController extends Controller
                 }
                 else{
                     // Session::set('user_type', 'company');
-                    return redirect('/');
+                    Auth::logout();
+                    return redirect('/login');
                 }
             }
 
@@ -54,6 +55,12 @@ class adminController extends Controller
 //        }
 
         return redirect('/Adminlogin');
+    }
+    public function loginPage(){
+        if(Auth::guard()->check()){
+            return redirect('/');
+        }
+        return view('/adminfrontend/Adminlogin');
     }
 
 

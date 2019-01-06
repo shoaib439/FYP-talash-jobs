@@ -22,7 +22,7 @@ $(document).ready(function(){
     });
 
     ///////////////////////////////
-    //user profile edit section start
+    //company profile edit section start
 
     // ye edit icon click krnay pe run hoga
 
@@ -82,17 +82,16 @@ $(document).ready(function(){
         var address = $('#address',form);
 
 
-
-        $.post( window.location.origin+"/ajax-upload-personal",
-            {
-                gendersent: gender.val(),
-                time: "2pm",
-                csrf_token: $('#ajax_csrf_token').val()
-            },
-            function(response){
-
-            }
-        );
+        // $.post( window.location.origin+"/ajax-upload-personal",
+        //     {
+        //         gendersent: gender.val(),
+        //         time: "2pm",
+        //         csrf_token: $('#ajax_csrf_token').val()
+        //     },
+        //     function(response){
+        //
+        //     }
+        // );
 
 
         var submission = $('#'+form.data('submission'));
@@ -105,6 +104,24 @@ $(document).ready(function(){
         var cnichtml = $('#company-personal-cnic',submission);
         var skypehtml = $('#company-personal-skype',submission);
         var addresshtml = $('#company-personal-address',submission);
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-personal',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
 
 
         genderhtml.html(gender.val()); //ye gender ki value ko update kr ra html main
@@ -569,86 +586,45 @@ $(document).ready(function(){
     //skills ended
 
 
-    //function to open image choose for company profile start
 
-    var Upload = function (file) {
-        this.file = file;
-    };
-
-    Upload.prototype.getType = function() {
-        return this.file.type;
-    };
-    Upload.prototype.getSize = function() {
-        return this.file.size;
-    };
-    Upload.prototype.getName = function() {
-        return this.file.name;
-    };
-    Upload.prototype.doUpload = function () {
-        var that = this;
-        var formData = new FormData();
-
-        // add assoc key values, this will be posts values
-        formData.append("file", this.file, this.getName());
-        formData.append("upload_file", true);
-
-
-
-        $.ajax({
-            type: "POST",
-            url: window.location.origin+"/ajax-upload-dp",
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) {
-                   // myXhr.upload.addEventListener('progress', that.progressHandling, false);
-                }
-                return myXhr;
-            },
-            success: function (data) {
-                alert('Ok');
-            },
-            error: function (error) {
-                alert('No');
-            },
-            async: true,
-            data: {},
-            cache: false,
-            contentType: false,
-            processData: false,
-            timeout: 60000
-        });
-    };
     var readURL = function(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
                 $('.profile-image-set').attr('src', e.target.result);
-                var file = $(input)[0].files[0];
-                var upload = new Upload(file);
+               // var file = $(input)[0].files[0];
+               // var upload = new Upload(file);
+
+                $('#dp-change-form').submit();
             }
 
             reader.readAsDataURL(input.files[0]);
 
-            $.ajax({
-                url: window.location.origin+"/ajax-dp-change",
-                type: "post",
-                data: {
-                    'url':'',
-                    'csrf':$('#dp_upload_csrf').val()
-                } ,
-                success: function (response) {
-                    // you will get response from your php page (what you echo or print)
-
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-
-
-            });
         }
     }
+
+    $('#dp-change-form').on('submit',function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-dp',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
+    });
 
 
     $(".file-upload").on('change', function(){
@@ -659,7 +635,15 @@ $(document).ready(function(){
         $(".file-upload").click();
     });
 
-    //function to open image choose for company profile end
+    ///////////////////function to open image choose for company profile endset company profile data start///////////////////
+    // $('#company-personal-form').on('submit',function (e) {
+    //     e.preventDefault();
+    //
+    //
+    // });
+
+
+    ///////////////////function to open image choose for company profile endset company profile data endd///////////////////
 
 //for rating start
     $(".btnrating").on('click',(function(e) {

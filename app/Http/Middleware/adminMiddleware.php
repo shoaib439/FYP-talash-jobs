@@ -17,15 +17,20 @@ class adminMiddleware
     public function handle($request, Closure $next)
     {
 
-        if(Auth::guard()->check()){
+        if(Auth::guard()->check() ){
 
-            return redirect('adminpanel');
+            if(Auth::user()->isAdmin()){
+               // return redirect('adminpanel');
+                return $next($request);
+            }
+            else{
+                return redirect('/');
+            }
         }
         else{
             return redirect('Adminlogin');
         }
 
-
-
+        return $next($request);
     }
 }

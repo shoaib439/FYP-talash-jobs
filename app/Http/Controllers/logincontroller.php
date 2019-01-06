@@ -39,9 +39,20 @@ class Logincontroller extends Controller
 //
 //        return redirect('/Adminlogin');
 //    }
+    public function index(){
+
+        if(Auth::guard()->check()){
+            return redirect('/');
+        }
+
+        return view('login');
+    }
 
     public function login (Request $request)
     {
+        if(Auth::guard()->check()){
+            return redirect('/');
+        }
 
         $email =  $request->email;
         $password =  $request->password;
@@ -51,11 +62,11 @@ class Logincontroller extends Controller
         if(auth::attempt(['email'=>$email,'password'=>$password])):
             $verify = $User::where(['email' => $email])->get()->first();
 
-            if($verify->type == 'jobseeker' && $verify->role=='null'){
+            if($verify->type == 'jobseeker' && !$verify->isAdmin()){
                 // Session::set('user_type', 'jobseeker');
                 return redirect('/jobseekerhome');
             }
-            else{
+            elseif(!$verify->isAdmin()){
                 // Session::set('user_type', 'company');
                 return redirect('/company/main');
             }

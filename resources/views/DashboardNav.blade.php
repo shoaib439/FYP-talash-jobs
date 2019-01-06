@@ -7,7 +7,26 @@ search-nav-brand
     @guest
 
     @elseif( Auth::guard() )
-        {{ Auth::user()->name }}
+
+    <div class="btn-group dropdown-header">
+        <button type="button" class="btn btn-secondary-me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ Auth::user()->display_name }}
+        </button>
+        <div class="dropdown-menu ">
+            <!-- Dropdown menu links -->
+            <a class="dropdown-item" href="{{url('jobseekerhome')}}">Profile</a>
+            <a class="dropdown-item" href="#">Setting</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{route('logout')}}"
+               onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>
+
+            <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none"> {{csrf_field()}} </form>
+        </div>
+    </div>
+
+
+
+
 
     @endif
 @endsection

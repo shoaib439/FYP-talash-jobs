@@ -12,120 +12,22 @@ use Auth;
 
 class JobseekerController extends Controller
 {
-    public function jshomeauth(){
+    public function AuthCheck($view = ''){
 
-        if(!Auth::guard()->check()){
+        if(empty($view)):
+            return redirect('/');
+        endif;
 
-
-
+        if(!Auth::guard()->check()):
             return redirect('/login');
-        }
-
-        else
-        {
+        else:
             if(Auth::user()->isJobseeker()){
-                return view('jobseekerMainLayout');
-
+                return view($view);
             }
-
-        }
-
+        endif;
         return redirect('/login');
-
     }
-//////////////////////////////////////////////////////////////////////////
 
-
-    public function jsbuildCVauth(){
-
-        if(!Auth::guard()->check()){
-
-
-
-            return redirect('/login');
-        }
-
-        else
-        {
-            if(Auth::user()->isJobseeker()){
-                return view('jobseekerbuildCV');
-
-            }
-
-        }
-
-        return redirect('/login');
-
-    }
-//////////////////////////////////////////////////////////////////////////
-
-    public function jsappliedjobsauth(){
-
-        if(!Auth::guard()->check()){
-
-
-
-            return redirect('/login');
-        }
-
-        else
-        {
-            if(Auth::user()->isJobseeker()){
-                return view('jobseekerAppliedjob');
-
-            }
-
-        }
-
-        return redirect('/login');
-
-    }
-//////////////////////////////////////////////////////////////////////////
-
-    public function jssavedjobsauth(){
-
-        if(!Auth::guard()->check()){
-
-
-
-            return redirect('/login');
-        }
-
-        else
-        {
-            if(Auth::user()->isJobseeker()){
-                return view('jobseekerSavedpost');
-
-            }
-
-        }
-
-        return redirect('/login');
-
-    }
-//////////////////////////////////////////////////////////////////////////
-
-    public function jsviewinvitationauth(){
-
-        if(!Auth::guard()->check()){
-
-
-
-            return redirect('/login');
-        }
-
-        else
-        {
-            if(Auth::user()->isJobseeker()){
-                return view('jobseekerViewinvitation');
-
-            }
-
-        }
-
-        return redirect('/login');
-
-    }
 //////////////////////////////////////////////////////////////////////////
 
 }//end of jobseekerController

@@ -13,7 +13,7 @@
 
 
         <span class="navbar-text">
-      <a href="#">@yield('usernameclass')</a> @yield('companydropdownclass')   <a href="#">   @yield('loginlogout')</a>
+      @yield('usernameclass') @yield('companydropdownclass')   <a href="#">   @yield('loginlogout')</a>
     </span>
 
 

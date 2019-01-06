@@ -9,8 +9,7 @@
 @extends('companydashboardnav')
 
 @section('headmeta')
-
-    <input type="hidden" id="ajax_csrf_token" value="{{csrf_field()}}">
+    <meta name="ajax_csrf_token" content="{{csrf_token()}}">
 @endsection
 
 
@@ -33,8 +32,10 @@
 
                                 <div class="jbs-edit">
                                     <i class="fa fa-camera upload-button"></i>
-                                    <input class="file-upload" type="file" accept="image/*"/>
-                                    <input type="hidden" id="dp_upload_csrf" value="{{csrf_field()}}">
+                                    <form id="dp-change-form" method="POST" enctype="multipart/form-data">
+                                        <input class="file-upload" name="dp_file" type="file" />
+                                        {{ csrf_field() }}
+                                    </form>
                                 </div>
                             </div>
 
@@ -59,19 +60,19 @@
 
             <div class="row mt-4">
                 <div class="col-sm-3">
-                    <p><i class="fa fa-user"aria-hidden="true"></i>  <span id="company-personal-gender"> Male</span></p>
-                    <p><i class="fa fa-envelope" aria-hidden="true"></i>  <span id="company-personal-email"> Email</span></p>
-                    <p><i class="fa fa-phone "aria-hidden="true"></i>  <span id="company-personal-phone"> 090078601</span></p>
-                    <p><i class="fa fa-building-o" aria-hidden="true"></i><span id="company-personal-city"> City</span></p>
+                    <p><i class="fa fa-user"aria-hidden="true"></i>  <span id="company-personal-gender">  </span></p>
+                    <p><i class="fa fa-envelope" aria-hidden="true"></i>  <span id="company-personal-email"> </span></p>
+                    <p><i class="fa fa-phone "aria-hidden="true"></i>  <span id="company-personal-phone"> </span></p>
+                    <p><i class="fa fa-building-o" aria-hidden="true"></i><span id="company-personal-city"> </span></p>
 
 
                 </div>
 
                 <div class="col-sm-3">
-                    <p><i class="fa fa-id-card"aria-hidden="true"></i> <span id="company-personal-cnic"> 3520220215151</span></p>
-                    <p><i class="fa fa-link"aria-hidden="true"></i> <span id="company-personal-website"> Website</span></p>
-                    <p><i class="fa fa-skype"aria-hidden="true"></i>  <span id="company-personal-skype"> Skype</span></p>
-                    <p><i class="fa fa-address-card" aria-hidden="true"></i>  <span id="company-personal-address"> Address</span></p>
+                    <p><i class="fa fa-id-card"aria-hidden="true"></i> <span id="company-personal-cnic"> </span></p>
+                    <p><i class="fa fa-link"aria-hidden="true"></i> <span id="company-personal-website"> </span></p>
+                    <p><i class="fa fa-skype"aria-hidden="true"></i>  <span id="company-personal-skype"> </span></p>
+                    <p><i class="fa fa-address-card" aria-hidden="true"></i>  <span id="company-personal-address"> </span></p>
 
                 </div>
 
@@ -106,13 +107,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" required aria-describedby="emailhelp" placeholder="Email">
+                                        <input type="email"   readonly="readonly" class="form-control" id="email"  required aria-describedby="emailhelp" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <input type="text" class="form-control" id="address" required aria-describedby="addresshelp" placeholder="address">
+                                        <input type="text" class="form-control" id="address" name="address" required aria-describedby="addresshelp" placeholder="address">
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +123,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="city">City</label>
-                                        <input type="text" class="form-control" id="city" required aria-describedby="cityhelp" placeholder="City">
+                                        <input type="text" class="form-control" id="city" name="city" required aria-describedby="cityhelp" placeholder="City">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -142,7 +143,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="age">Phone</label>
-                                        <input type="tel" class="form-control" id="phone" required aria-describedby="phonehelp" placeholder="Phone">
+                                        <input type="tel" class="form-control" id="phone" required aria-describedby="phonehelp" name="phone" placeholder="Phone">
                                     </div>
                                 </div>
 
@@ -166,7 +167,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="gender">Gender</label><br>
+                                        <label for="gender ">Gender</label><br>
 
                                             <input type="radio" required  value="male"  id="gender" name="gender"> Male
 
@@ -190,9 +191,9 @@
                     <div class="jbs-footer">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <input type="submit" class="form-control jbs-close" value="Save" />
+                                <div class="col-md-12">
+                                    <div class="form-group align-class">
+                                        <input type="submit" class="form-control jbs-close btn my-btn2" value="Save" />
                                     </div>
                                 </div>
                             </div>
