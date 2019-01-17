@@ -17,6 +17,9 @@ class Vacancy extends Migration
     {
         Schema::create('vacancy', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('title');
             $table->string('vacancy_type');
             $table->string('description');

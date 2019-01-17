@@ -16,8 +16,8 @@
         <div class="p-5 bg-dark">
             <div class=" card-container p-5">
 
-                <div class="card card-login mx-auto">
-                    <div class="card-header">Admin Login</div>
+                <div class="card card-login mx-auto p-5">
+                    <div class="card-header my-heading-text2 align-class">Admin Login</div>
                     <div class="card-body">
                         <form method="POST" action="{{url('Adminlogin') }}">
                             <div class="form-group">
@@ -51,7 +51,12 @@
                                     </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn my-btn btn-block align-class">Login</button>
+                                </div>
+                            </div>
+
                             {{csrf_field()}}
                         </form>
 

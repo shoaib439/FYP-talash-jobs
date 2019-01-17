@@ -43,6 +43,9 @@
 <script src="{{url('js/bootstrap.js')}}"></script>
 <script src="{{url('js/main.js')}}"></script>
 
+<script src="{{url('js/validation-plugin.js')}}"></script>
+<script src="{{url('js/rules.js')}}"></script>
+
 
 </body>
 </html>

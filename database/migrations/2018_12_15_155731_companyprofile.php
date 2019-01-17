@@ -19,11 +19,12 @@ class Companyprofile extends Migration
           $table->increments('id');
           $table->integer('user_id');
           $table->string('company_name');
-          $table->string('type');
+          $table->string('company_type');
           $table->string('address');
           $table->string('website');
           $table->string('cnic');
           $table->string('person_name');
+          $table->string('skype');
           $table->string('person_designation');
           $table->timestamps();
       });

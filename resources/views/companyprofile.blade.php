@@ -27,7 +27,7 @@
                         <div class="w-15">
                             <div class="jbs-logo-container">
                                 <div class="jbs-logo">
-                                    <img class="profile-image-set" src="{{asset('images/Profile.png')}}">
+                                    <img class="profile-image-set" src="{{ $profile['image'] }}">
                                 </div>
 
                                 <div class="jbs-edit">
@@ -45,7 +45,7 @@
                         <div class="w-85">
                             <div class="row jbs-username">
                                 <div class="col-md-12">
-                                    <b class="justify-content-center">Username</b>
+                                    <b class="justify-content-center">{{ Auth::user()->display_name }}</b>
                                 </div>
                             </div>
                         </div>
@@ -61,18 +61,18 @@
             <div class="row mt-4">
                 <div class="col-sm-3">
                     <p><i class="fa fa-user"aria-hidden="true"></i>  <span id="company-personal-gender">  </span></p>
-                    <p><i class="fa fa-envelope" aria-hidden="true"></i>  <span id="company-personal-email"> </span></p>
-                    <p><i class="fa fa-phone "aria-hidden="true"></i>  <span id="company-personal-phone"> </span></p>
-                    <p><i class="fa fa-building-o" aria-hidden="true"></i><span id="company-personal-city"> </span></p>
+                    <p><i class="fa fa-envelope" aria-hidden="true"></i>  <span id="company-personal-email">{{ Auth::user()->email }}</span></p>
+                    <p><i class="fa fa-phone "aria-hidden="true"></i>  <span id="company-personal-phone"> {{ Auth::user()->phoneno }} </span></p>
+                    <p><i class="fa fa-building-o" aria-hidden="true"></i><span id="company-personal-city"> {{ Auth::user()->city }}</span></p>
 
 
                 </div>
 
                 <div class="col-sm-3">
-                    <p><i class="fa fa-id-card"aria-hidden="true"></i> <span id="company-personal-cnic"> </span></p>
-                    <p><i class="fa fa-link"aria-hidden="true"></i> <span id="company-personal-website"> </span></p>
-                    <p><i class="fa fa-skype"aria-hidden="true"></i>  <span id="company-personal-skype"> </span></p>
-                    <p><i class="fa fa-address-card" aria-hidden="true"></i>  <span id="company-personal-address"> </span></p>
+                    <p><i class="fa fa-id-card"aria-hidden="true"></i> <span id="company-personal-cnic">{{ $profile['cnic'] }}</span></p>
+                    <p><i class="fa fa-link"aria-hidden="true"></i> <span id="company-personal-website">{{ $profile['website'] }}</span></p>
+                    <p><i class="fa fa-skype"aria-hidden="true"></i>  <span id="company-personal-skype">{{ $profile['skype'] }}</span></p>
+                    <p><i class="fa fa-address-card" aria-hidden="true"></i>  <span id="company-personal-address">{{ $profile['address'] }}</span></p>
 
                 </div>
 
@@ -93,7 +93,7 @@
             <div class="jbs-main">
                 <div class="jbs-header">
                     <div class="jbs-title">
-                        <h3>Personal Details</h3>
+                        <div class="my-heading-text">Personal Details</div>
                     </div>
                     <div class="jbs-close-container">
                         <i class="fa fa-close jbs-close"></i>
@@ -129,7 +129,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="website">Website</label>
-                                        <input type="url" class="form-control" id="website" required aria-describedby="websitehelp" placeholder="Website">
+                                        <input type="url" class="form-control" name="website" id="website" required aria-describedby="websitehelp" placeholder="Website">
                                     </div>
                                 </div>
 
@@ -150,7 +150,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="cnic">Cnic</label>
-                                        <input type="number" class="form-control" id="cnic" required aria-describedby="cnichelp" placeholder="Cnic">
+                                        <input type="number" class="form-control" name="cnic" id="cnic" required aria-describedby="cnichelp" placeholder="Cnic">
                                     </div>
                                 </div>
 
@@ -161,21 +161,10 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="skype">Skype</label>
-                                        <input type="text" class="form-control" id="skype" required aria-describedby="skypehelp" placeholder="Skype">
+                                        <input type="text" class="form-control" id="skype" name="skype" required aria-describedby="skypehelp" placeholder="Skype">
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="gender ">Gender</label><br>
-
-                                            <input type="radio" required  value="male"  id="gender" name="gender"> Male
-
-
-                                            <input type="radio" required value="female" id="gender" name="gender"> Female
-
-                                    </div>
-                                </div>
 
                             </div>
 

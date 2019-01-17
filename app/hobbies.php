@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class jobseekerprofile extends Model
+class hobbies extends Model
 {
+    protected $table = 'hobbies';
+
     protected $fillable = [
-        'user_id','date_of_birth' ,'js_address'
+        'user_id','hobbies'
     ];
 }

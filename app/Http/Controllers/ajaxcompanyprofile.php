@@ -46,14 +46,15 @@ class AjaxCompanyProfile extends Controller
             $image->move($path, $new_name);
 
             $user=(Auth::user());
-            $new_path=public_path('images/'.$new_name);
+            $new_path= 'images/'.$new_name;
 
-            $imagedata = file_get_contents(public_path('images/'.$new_name));
+            //NICE
+           // $imagedata = file_get_contents(public_path('images/'.$new_name));
             // alternatively specify an URL, if PHP settings allow
-           $base64 = base64_encode($imagedata);
+           //$base64 = base64_encode($imagedata);
           //echo $base64;
 //
-           $user->profile_pic = $base64;
+           $user->profile_pic = 'images/'.$new_name;
            $user->save();
 
             return response()->json([
@@ -126,71 +127,42 @@ class AjaxCompanyProfile extends Controller
 
         $validation = Validator::make($request->all(), [
             //'dp_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000'
+            //'address' => 'required',
+            //'address' => 'required', //aur kr lae
         ]);
+
+        echo 'A';
+
 
         if($validation->passes())
         {
 
-            $gender= $request->gender;
             $phone= $request->phone;
             $address= $request->address;
-            $city= $request->city;
+            $city = $request->city;
+            $cnic = $request->cnic;
+            $website = $request->website;
+            $skype = $request->skype;
 
 
-            $user = Auth::User();
+             $user = Auth::User();
              $userId = $user->id;
 
 
+             $user->phoneno =$phone;
 
-               $verify = $user::where(['id' =>$userId])->get()->first();
+             $user->city =$city;
 
+            $user->city = $city;
+             $user->save();
 
+             $comuser = companyprofile::where('user_id',$userId)->get()->first();
 
-            if($verify->phoneno==null){
-                $user->phoneno =$phone;
-
-                $user->save();
-            }
-            elseif($verify->phoneno!=null)
-            {
-                DB::table('users')
-                    ->where('id', $userId)
-                    ->update(['phoneno' => $phone]);
-                $user->save();
-            }
-
-
-
-            if($verify->address==null){
-                $user->address =$address;
-
-                $user->save();
-            }
-            elseif($verify->address!=null)
-            {
-                DB::table('users')
-                    ->where('id', $userId)
-                    ->update(['gender' => $address]);
-                $user->save();
-            }
-
-            if($verify->city==null){
-                $user->city =$city;
-
-                $user->save();
-            }
-            elseif($verify->city!=null)
-            {
-                DB::table('users')
-                    ->where('id', $userId)
-                    ->update(['gender' => $city]);
-                $user->save();
-            }
-
-
-
-
-
+            $comuser->address = $address;
+            $comuser->cnic = $cnic;
+            $comuser->website = $website;
+            $comuser->skype = $skype; // SKYPE KI FIELD PHLY DB MAIN PHR UNCOMMENT KR DE
+            $comuser->save();
 
 
 //

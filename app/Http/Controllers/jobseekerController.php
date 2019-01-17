@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\jobseekerprofile;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\contactus;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class JobseekerController extends Controller
 {
@@ -22,7 +23,21 @@ class JobseekerController extends Controller
             return redirect('/login');
         else:
             if(Auth::user()->isJobseeker()){
-                return view($view);
+
+                $user = Auth::user();
+
+                $jsuser = jobseekerprofile::where('user_id',$user->id)->get()->first();
+
+                $profile = [];
+
+                $profile['js_address'] = $jsuser->js_address;
+                $profile['date_of_birth'] = $jsuser->date_of_birth;
+//                $profile['cnic'] = $jsuser->cnic;
+
+
+
+                $profile['image'] = empty($user->profile_pic) ? 'images/Profile.png':$user->profile_pic;
+                return view($view,compact('profile'));
             }
         endif;
         return redirect('/login');

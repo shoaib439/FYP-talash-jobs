@@ -96,9 +96,18 @@ Route::get('/company/profile', 'CompanyController@companyprofileauth');
 Route::get('/company/vacancylist', 'CompanyController@companyvacancylistauth');
 Route::get('/company/applicationslist', 'CompanyController@companyapplicationslistauth');
 
+
+Route::post('/company/resetpasswordpage', 'CompanyController@companypassresetPage');
+
+Route::get('/company/resetpassword', 'CompanyController@companypassreset');
+
 Route::get('/company/searchresult', function () {
     return view('companysearch');
 });
+
+Route::get('/deletevacancy/{id}','CompanyController@deletevacancy');
+
+
 //Route::get('/company/profile', function () {
 //    return view('companyprofile');////////////////////////////////////
 //});
@@ -173,15 +182,29 @@ Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
 
 
 
-/////////////////////////////////////////////////////AJAX ROUTES
+/////////////////////////////////////////////////////AJAX ROUTES////////////////////////////
 Route::post('/ajax-upload-dp','AjaxCompanyProfile@uploadimage');
 Route::post('/ajax-upload-personal','AjaxCompanyProfile@personData');
+
+
+
 
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
 
+/////////////////////////////////////////////////////AJAX jobseeker  ROUTES////////////////////////////
+ Route::post('/ajax-upload-dp','AjaxJobSeekerProfile@uploadimage');
+Route::post('ajax-upload-exp','AjaxJobSeekerProfile@workexperience');
+Route::post('ajax-upload-edu','AjaxJobSeekerProfile@uploadeducation');
+Route::post('/ajax-upload-jspersonal','AjaxJobSeekerProfile@personData');
+Route::post('/ajax-upload-language','AjaxJobSeekerProfile@uploadlanguages');
 
+Route::post('/ajax-upload-hobby','AjaxJobSeekerProfile@uploadhobby');
+Route::post('/ajax-upload-skills','AjaxJobSeekerProfile@uploadskills');
+Route::post('/ajax-upload-prefferedcity','AjaxJobSeekerProfile@uploadprefferedcity');
+Route::post('/ajax-upload-fa','AjaxJobSeekerProfile@uploadfa');
+Route::post('/ajax-upload-jsproject','AjaxJobSeekerProfile@uploadjsproject');
 
 
 

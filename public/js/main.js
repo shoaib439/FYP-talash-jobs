@@ -42,7 +42,7 @@ $(document).ready(function(){
         }
 
         var openercontainer = $('#'+form.data('submission'));
-        var gender = openercontainer.find('#company-personal-gender');
+      //  var gender = openercontainer.find('#company-personal-gender');
         var phone = openercontainer.find('#company-personal-phone');
         var city = openercontainer.find('#company-personal-city');
         var email = openercontainer.find('#company-personal-email');
@@ -51,7 +51,7 @@ $(document).ready(function(){
         var skype = openercontainer.find('#company-personal-skype');
         var address = openercontainer.find('#company-personal-address');
 
-        container.find('#gender').val(gender.text());
+       // container.find('#gender').val(gender.text());
         container.find('#phone').val(phone.text());
 
         container.find('#city').val(city.text());
@@ -75,11 +75,29 @@ $(document).ready(function(){
         var gender = $('#gender',form);
         var phone = $('#phone',form);
         var city = $('#city',form);
-        var email = $('#email',form);
+       // var email = $('#email',form);
         var website = $('#website',form);
         var cnic = $('#cnic',form);
         var skype = $('#skype',form);
         var address = $('#address',form);
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-personal',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responseText);
+            }
+        });
 
 
         // $.post( window.location.origin+"/ajax-upload-personal",
@@ -96,7 +114,7 @@ $(document).ready(function(){
 
         var submission = $('#'+form.data('submission'));
 
-        var genderhtml = $('#company-personal-gender',submission);
+       // var genderhtml = $('#company-personal-gender',submission);
         var phonehtml = $('#company-personal-phone',submission);
         var cityhtml = $('#company-personal-city',submission);
         var emailhtml = $('#company-personal-email',submission);
@@ -105,26 +123,10 @@ $(document).ready(function(){
         var skypehtml = $('#company-personal-skype',submission);
         var addresshtml = $('#company-personal-address',submission);
 
-        $.ajax({
-            type:'POST',
-            url:  window.location.origin+'/ajax-upload-personal',
-            data: new FormData(this),
-            dataType:'JSON',
-            cache:false,
-            contentType: false,
-            processData: false,
-            success:function(data){
-                console.log("success");
-                console.log(data);
-            },
-            error: function(data){
-                console.log("error");
-                console.log(data);
-            }
-        });
 
 
-        genderhtml.html(gender.val()); //ye gender ki value ko update kr ra html main
+
+       // genderhtml.html(gender.val()); //ye gender ki value ko update kr ra html main
         phonehtml.html(phone.val()); //ye phone ki value ko update kr ra html main
 
         cityhtml.html(city.val());
@@ -174,11 +176,26 @@ $(document).ready(function(){
         }
 
         var openercontainer = $('#'+form.data('submission'));
-        var age = openercontainer.find('#personal-age');
+        var email = openercontainer.find('#personal-email');
         var phone = openercontainer.find('#personal-phone');
+        //var gender = openercontainer.find('#personal-gender');
+        var city = openercontainer.find('#personal-city');
+        var dob = openercontainer.find('#personal-dob');
+        var address = openercontainer.find('#personal-address');
 
-        container.find('#age').val(age.text());
+
+       // container.find('#gender').val(gender.text());
         container.find('#phone').val(phone.text());
+
+        container.find('#email').val(email.text());
+        container.find('#city').val(city.text());
+
+        container.find('#dob').val(dob.text());
+        container.find('#address').val(address.text());
+
+
+
+
     });
 
     //till open . open ho gya edit/ update k liye
@@ -189,17 +206,52 @@ $(document).ready(function(){
         e.preventDefault();
 
         var form = $(this);
-        var age = $('#age',form);
+        var email = $('#email',form);
         var phone = $('#phone',form);
+
+        var address = $('#address',form);
+        var city = $('#city',form);
+
+        var dob = $('#dob',form);
+
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-jspersonal',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responseText);
+            }
+        });
 
         var submission = $('#'+form.data('submission'));
 
-
-        var agehtml = $('#personal-age',submission);
+        var emailhtml = $('#personal-email',submission);
         var phonehtml = $('#personal-phone',submission);
+        //var gender = $('#personal-gender');
+        var cityhtml = $('#personal-city',submission);
+        var dobhtml = $('#personal-dob',submission);
+        var addresshtml = $('#personal-address',submission);
 
-        agehtml.html(age.val()); //ye age ki value ko update kr ra html main
+
+
+        emailhtml.html(email.val()); //ye age ki value ko update kr ra html main
         phonehtml.html(phone.val()); //ye phone ki value ko update kr ra html main
+        cityhtml.html(city.val()); //ye age ki value ko update kr ra html main
+        dobhtml.html(dob.val()); //ye age ki value ko update kr ra html main
+        addresshtml.html(address.val()); //ye phone ki value ko update kr ra html main
+
+
+       // $('.jbs-model').fadeOut();
 
 
     });
@@ -226,7 +278,6 @@ $(document).ready(function(){
 
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main-content',container).length;
-        console.log(curworking.val());
 
         var currworkhtml = '';
         if(curworking.is(':checked')){
@@ -236,16 +287,100 @@ $(document).ready(function(){
             currworkhtml =  `<i class="fa fa-close"></i>`;
         }
 
-        container.append(`<div class="jbs-main-content" id="functional-area-content-`+contentlength+`">
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-exp',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1'){
+
+                    container.append(`<div class="jbs-main-content" id="functional-area-content-` + contentlength + `">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="company-name">` + name.val() + `</p>
+                                <p class="company-loc">` + location.val() + `</p>
+                                <p class="company-pos">` + pos.val() + `</p>
+                                <p class="company-jobtype">` + jobtype.val() + `</p>
+                                <p class="company-startdate">` + startdate.val() + `</p>
+                                <p class="company-enddate">` + enddate.val() + `</p>
+                                <p class="company-currentlyworking">` + currworkhtml + `</p>
+                            </div>
+                                <div class="col-md-9 text-right">
+                                    <i class="fa fa-close red we-remove-btn"></i>
+                                </div>
+                            </div>
+                        </div>`);
+
+
+                        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
+
+                            var confirm = window.confirm('are you sure?');
+                            if (confirm) {
+                                $(this).parent().parent().parent().remove();
+                            }
+                        });
+
+                        $('.jbs-close').fadeOut();
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responsetext);
+            }
+        });
+
+
+
+    });
+
+    //experience end
+
+  ////////////////////////////////////////////////
+
+
+    $('#jbs-languages-form').submit(function(e){
+        e.preventDefault();
+
+        var form = $(this);
+        var languages = $('#languages',form);
+
+        var submission = $('#'+form.data('submission'));
+
+
+        var container = $('.jbs-main-content-container',submission);
+        var contentlength = $('.jbs-main--content',container).length;
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-language',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
+
+        container.append(`<div class="jbs-main-content" id="languages-content-`+contentlength+`">
                     <div class="row">
                         <div class="col-md-3">
-                            <p class="company-name">`+name.val()+`</p>
-                            <p class="company-loc">`+location.val()+`</p>
-                            <p class="company-pos">`+pos.val()+`</p>
-                            <p class="company-jobtype">`+jobtype.val()+`</p>
-                            <p class="company-startdate">`+startdate.val()+`</p>
-                            <p class="company-enddate">`+enddate.val()+`</p>
-                            <p class="company-currentlyworking">`+currworkhtml+`</p>
+                            <p class="languages">`+languages.val()+`</p>
+                           
                         </div>
                         <div class="col-md-9 text-right">
                             <i class="fa fa-close red we-remove-btn"></i>
@@ -263,9 +398,22 @@ $(document).ready(function(){
             }
         });
 
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("yahan error");
+                console.log(data.responsetext);
+            }
+        });
+
     });
 
-    //experience end
+    //skills ended
+
+    ////////////////////////////////////////////
 
 
     //for education start
@@ -287,15 +435,28 @@ $(document).ready(function(){
         var contentlength = $('.jbs-main-content',container).length;
 
 
-        container.append(`<div class="jbs-main-content" id="education-content-`+contentlength+`">
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-edu',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+                    container.append(`<div class="jbs-main-content" id="education-content-` + contentlength + `">
                     <div class="row">
                         <div class="col-md-3">
-                            <p class="degree-title">`+degreetitle.val()+`</p>
-                            <p class="degree-yearofcompletion">`+yearofcompletion.val()+`</p>
-                            <p class="degree-cgpa">`+cgpa.val()+`</p>
-                            <p class="degree-level">`+degreelevel.val()+`</p>
-                            <p class="institute">`+institute.val()+`</p>
-                            <p class="location">`+location.val()+`</p>
+                            <p class="degree-title">` + degreetitle.val() + `</p>
+                            <p class="degree-yearofcompletion">` + yearofcompletion.val() + `</p>
+                            <p class="degree-cgpa">` + cgpa.val() + `</p>
+                            <p class="degree-level">` + degreelevel.val() + `</p>
+                            <p class="institute">` + institute.val() + `</p>
+                            <p class="location">` + location.val() + `</p>
                             
                         </div>
                         <div class="col-md-9 text-right">
@@ -313,6 +474,17 @@ $(document).ready(function(){
                 $(this).parent().parent().parent().remove();
             }
         });
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responsetext);
+            }
+        });
+
 
     });
 
@@ -337,6 +509,20 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main-content',container).length;
 
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-jsproject',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
 
         container.append(`<div class="jbs-main-content" id="project-content-`+contentlength+`">
                     <div class="row">
@@ -355,16 +541,27 @@ $(document).ready(function(){
                 </div>`);
 
 
+                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
 
-        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-            var confirm = window.confirm('are you sure?');
-            if(confirm){
-                $(this).parent().parent().parent().remove();
+                        var confirm = window.confirm('are you sure?');
+                        if(confirm){
+                            $(this).parent().parent().parent().remove();
+                        }
+                    });
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responsetext);
             }
         });
 
+
     });
+
 
     //project end
 
@@ -384,6 +581,21 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main--content',container).length;
 
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-fa',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
         container.append(`<div class="jbs-main-content" id="work-experience-content-`+contentlength+`">
                     <div class="row">
                         <div class="col-md-3">
@@ -396,15 +608,24 @@ $(document).ready(function(){
                     </div>
                 </div>`);
 
+                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
 
-
-        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-            var confirm = window.confirm('are you sure?');
-            if(confirm){
-                $(this).parent().parent().parent().remove();
+                        var confirm = window.confirm('are you sure?');
+                        if(confirm){
+                            $(this).parent().parent().parent().remove();
+                        }
+                    });
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responsetext);
             }
         });
+
 
     });
 
@@ -428,6 +649,21 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main--content',container).length;
 
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-hobby',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
         container.append(`<div class="jbs-main-content" id="work-experience-content-`+contentlength+`">
                     <div class="row">
                         <div class="col-md-3">
@@ -442,13 +678,24 @@ $(document).ready(function(){
 
 
 
-        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
+                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
 
-            var confirm = window.confirm('are you sure?');
-            if(confirm){
-                $(this).parent().parent().parent().remove();
+                        var confirm = window.confirm('are you sure?');
+                        if(confirm){
+                            $(this).parent().parent().parent().remove();
+                        }
+                    });
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responsetext);
             }
         });
+
 
     });
 
@@ -473,6 +720,21 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main--content',container).length;
 
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-skills',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
         container.append(`<div class="jbs-main-content" id="work-experience-content-`+contentlength+`">
                     <div class="row">
                         <div class="col-md-3">
@@ -487,15 +749,27 @@ $(document).ready(function(){
 
 
 
-        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
+                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
 
-            var confirm = window.confirm('are you sure?');
-            if(confirm){
-                $(this).parent().parent().parent().remove();
+                        var confirm = window.confirm('are you sure?');
+                        if(confirm){
+                            $(this).parent().parent().parent().remove();
+                        }
+                    });
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responsetext);
             }
         });
 
+
     });
+
 
     //skills ended
 
@@ -517,6 +791,21 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main--content',container).length;
 
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-prefferedcity',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
         container.append(`<div class="jbs-main-content" id="jobcity-content-`+contentlength+`">
                     <div class="row">
                         <div class="col-md-3">
@@ -531,59 +820,32 @@ $(document).ready(function(){
 
 
 
-        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
 
-            var confirm = window.confirm('are you sure?');
-            if(confirm){
-                $(this).parent().parent().parent().remove();
+                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
+
+                        var confirm = window.confirm('are you sure?');
+                        if(confirm){
+                            $(this).parent().parent().parent().remove();
+                        }
+                    });
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responsetext);
             }
         });
+
 
     });
 
     //jobcity ended
 
 
-    //skills started
 
-
-    $('#jbs-languages-form').submit(function(e){
-        e.preventDefault();
-
-        var form = $(this);
-        var languages = $('#languages',form);
-
-        var submission = $('#'+form.data('submission'));
-
-
-        var container = $('.jbs-main-content-container',submission);
-        var contentlength = $('.jbs-main--content',container).length;
-
-        container.append(`<div class="jbs-main-content" id="work-experience-content-`+contentlength+`">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <p class="languages">`+languages.val()+`</p>
-                           
-                        </div>
-                        <div class="col-md-9 text-right">
-                            <i class="fa fa-close red we-remove-btn"></i>
-                        </div>
-                    </div>
-                </div>`);
-
-
-
-        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-            var confirm = window.confirm('are you sure?');
-            if(confirm){
-                $(this).parent().parent().parent().remove();
-            }
-        });
-
-    });
-
-    //skills ended
 
 
 

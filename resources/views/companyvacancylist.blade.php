@@ -38,28 +38,32 @@
                                 <th class="text-right">Actions</th>
                             </tr>
                             </thead>
+
                             <tbody>
+                            @foreach ($vacancylist as $vacancylists)
                             <tr>
-                                <td class="text-center">1</td>
-                                <td>Android Developer</td>
+                                <td class="text-center">{{$vacancylists['id']}}</td>
+                                <td>{{$vacancylists['title']}}</td>
                                 <td>12/12/12</td>
                                 <td>12/12/12</td>
                                 <td class="text-right">Active</td>
                                 <td class="td-actions text-right">
-                                    <button type="button" rel="tooltip" class="btn btn-dark  btn-sm" >
+                                   <button type="button" rel="tooltip" class="btn btn-dark  btn-sm" >
                                         <i class="fa fa-check-square-o"></i>
-                                    </button>
+                                        </button>
                                     <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" >
                                         <i class="fa fa-eye"></i>
                                     </button>
                                     <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" >
                                         <i class="fa fa-edit"></i>
                                     </button>
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" >
+                                    <a href={{url('/deletevacancy/'.$vacancylists['id'])}}><button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" >
                                         <i class="fa fa-remove"></i>
-                                    </button>
+                                        </button></a>
                                 </td>
                             </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

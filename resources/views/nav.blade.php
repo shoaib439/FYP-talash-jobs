@@ -5,8 +5,8 @@
 
         <div class="navbar-brand @yield('navbrandclass')">
             <a href="#">
-                <img src="{{asset('images/logo.png')}}" width="30" height="30" class="d-inline-block align-top" alt="Talash Jobs">
-                Talash Jobs
+                <img src="{{asset('images/aa.png')}}" width="100" height="50" class="d-inline-block align-top" alt="Talash Jobs">
+
             </a>
             @yield('afternavlogo') @yield('companysearchplace')
         </div>

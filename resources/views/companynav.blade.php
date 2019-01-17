@@ -20,7 +20,7 @@
             <div class="dropdown-menu ">
                 <!-- Dropdown menu links -->
                 <a class="dropdown-item" href="{{url('company/profile')}}">Profile</a>
-                <a class="dropdown-item" href="#">Setting</a>
+                <a class="dropdown-item" href="{{url('company/resetpassword')}}">Setting</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{route('logout')}}"
                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Jobseekerprofile extends Migration
+class Languages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class Jobseekerprofile extends Migration
      */
     public function up()
     {
-        Schema::create('jobseekerprofiles', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
+
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string('date_of_birth')->nullable();
-            $table->string('js_address')->nullable();
+            $table->unsignedInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('language');
+
 
             $table->timestamps();
         });
@@ -30,6 +33,6 @@ class Jobseekerprofile extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobseekerprofile');
+        Schema::dropIfExists('languages');
     }
 }

@@ -34,7 +34,7 @@ search-nav-brand
     <form action="" method="get">
         <input class="nav-search" type="text" />
         <i class="fa fa-search"></i>
-        <a href="#" id="nav-search-filters-btn">Filters</a>
+        <a href="#" id="nav-search-filters-btn">Advance Search</a>
     </form>
 @endsection
 

@@ -80,10 +80,10 @@
                     <div  class="mt-5 ">
                         <div class="form-group">
 
-                            <input type="text" required class="form-control curve-border" name="companytype" placeholder="Company Type">
-                            @if ($errors->has('companytype'))
+                            <input type="text" required class="form-control curve-border" name="company_type" placeholder="Company Type">
+                            @if ($errors->has('company_type'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('companytype') }}</strong>
+                                        <strong>{{ $errors->first('company_type') }}</strong>
                                     </span>
                             @endif
                         </div>

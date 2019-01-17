@@ -9,11 +9,12 @@
 
             <div class="row ">
                 <div class=" col-md-6 mb-5 curve-border offset-md-3 bg-light">
-                    <form  class="mt-5"  action="{{url('login')}}" method="post">
+                    <form  class="mt-5"   name="login-form"  action="{{url('login')}}" method="post">
                         <div class="form-group">
 
 
-                            <i class="fa fa-user-circle-o"></i> <input  type="email"  required class="form-control" id="email" name="email" placeholder="Enter Email">
+                            {{--<i class="fa fa-envelope"></i> --}}
+                            <input  type="email"  required class="form-control" id="email" name="email" placeholder="Enter Email">
                         </div>
                         <div class="form-group">
 

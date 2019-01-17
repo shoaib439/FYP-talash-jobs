@@ -26,12 +26,13 @@ class Signupcompany extends Controller
             'password' => 'required|string|min:6|confirmed',
             'phone' => 'required',
             'cnic'=> 'required',
-            'companytype' => 'required|string',
+            'company_type' => 'required|string',
             'address' => 'required|string',
             'city' => 'required|string',
             'industry' => 'required|string',
             'link' => 'required|string',
             'designation' => 'required|string',
+
 
         ]);
 
@@ -53,7 +54,7 @@ class Signupcompany extends Controller
         $companyuser = companyprofile::create([
             'user_id' => $user->id,
             'company_name' =>  $request->name,
-            'type' =>   $request->companytype,
+            'company_type' =>   $request->company_type,
             'address' =>  $request->address,
             'website' =>  $request->link,
             'cnic'=>  $request->cnic,

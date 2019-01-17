@@ -617,3 +617,18 @@ card-header:first-child {
     justify-content: center;
     display: flex;
 }
+
+.error{
+    color: red;
+}
+
+.fa-search {
+    color: #07b108;
+}
+.fa-edit {
+    color: #07b108;
+}
+.green-icon-set{
+    color: #07b108;
+
+}
