@@ -143,7 +143,24 @@
             </div>
 
             <div class="jbs-main-content-container">
+                @csrf
+                @foreach($functionalarea as $key => $fa)
+                    <div class="jbs-main-content" id="fa-content-{{ $key  }}" >
+                        <form class="fa-remove-form">
+                            @csrf
+                            <input type="hidden" name="functionalarea_id" value="{{ $fa->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $fa->functional_area  }}</p>
 
+                            </div>
+                            <div class="col-md-9 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
 
@@ -170,8 +187,28 @@
                 </div>
             </div>
 
+
+
             <div class="jbs-main-content-container">
 
+                @csrf
+                @foreach($skills as $key => $skill)
+                    <div class="jbs-main-content" id="skills-content-{{ $key  }}" >
+                        <form class="skills-remove-form">
+                            @csrf
+                            <input type="hidden" name="skills_id" value="{{ $skill->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-skills">{{ $skill->skills  }}</p>
+
+                            </div>
+                            <div class="col-md-9 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
 
@@ -200,8 +237,26 @@
             </div>
 
             <div class="jbs-main-content-container">
+                @csrf
+                @foreach($prefferedcity as $key => $city)
+                    <div class="jbs-main-content" id="prefferedcity-content-{{ $key  }}" >
+                        <form class="prefferedcity-remove-form">
+                            @csrf
+                            <input type="hidden" name="prefferedcity_id" value="{{ $city->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-prefferedcity">{{ $city->preffered_city  }}</p>
 
+                            </div>
+                            <div class="col-md-9 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
+
 
 
         </div>
@@ -263,6 +318,50 @@
 
             <div class="jbs-main-content-container">
 
+                @csrf
+                @foreach($jsproject as $key => $project)
+                    <div class="jbs-main-content" id="fa-content-{{ $key  }}" >
+                        <form class="fa-remove-form">
+                            @csrf
+                            <input type="hidden" name="jsproject_id" value="{{ $project->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $project->project_title  }}</p>
+
+                            </div>
+
+
+                            <div class="col-md-9 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $project->project_desc  }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $project->project_sd }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $project->project_ed  }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $project->project_url }}</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
 
 
@@ -290,6 +389,24 @@
             </div>
 
             <div class="jbs-main-content-container">
+                @csrf
+                @foreach($languages as $key => $language)
+                    <div class="jbs-main-content" id="language-content-{{ $key  }}" >
+                        <form class="language-remove-form">
+                            @csrf
+                            <input type="hidden" name="language_id" value="{{ $language->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-language">{{ $language->language  }}</p>
+
+                            </div>
+                            <div class="col-md-9 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
 
             </div>
 
@@ -318,6 +435,24 @@
             </div>
 
             <div class="jbs-main-content-container">
+                @csrf
+                @foreach($hobbies as $key => $hobby)
+                    <div class="jbs-main-content" id="hobby-content-{{ $key  }}" >
+                        <form class="hobby-remove-form">
+                            @csrf
+                            <input type="hidden" name="hobby_id" value="{{ $hobby->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-hobbies">{{ $hobby->hobbies  }}</p>
+
+                            </div>
+                            <div class="col-md-9 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
 
             </div>
 

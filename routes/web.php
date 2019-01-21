@@ -26,6 +26,7 @@ Route::post('/jobseekersignup','signupjobseeker@submission')->name('jobseeker.si
 ///
 ///
 ///
+/*
 Route::get('/jobseekerhome', function(){
     return \Illuminate\Support\Facades\App::make('\App\Http\Controllers\jobseekerController')->AuthCheck('jobseekerMainLayout');
 });
@@ -41,12 +42,14 @@ Route::get('/jobseeker/savedjobs', function(){
 Route::get('/jobseeker/viewinvitation', function(){
     return \Illuminate\Support\Facades\App::make('\App\Http\Controllers\jobseekerController')->AuthCheck('jobseekerViewinvitation');
 });
-/*
+*/
+
+Route::get('/jobseekerhome', 'jobseekerController@home');
 Route::get('/jobseeker/buildcv', 'jobseekerController@jsbuildCVauth');
 Route::get('/jobseeker/appliedjobs', 'jobseekerController@jsappliedjobsauth');
 Route::get('/jobseeker/savedjobs', 'jobseekerController@jssavedjobsauth');
 Route::get('/jobseeker/viewinvitation', 'jobseekerController@jsviewinvitationauth');
-*/
+
 //Route::get('/jobseekerhome', function () {
 //    return view('jobseekerMainLayout');
 //});
@@ -117,7 +120,17 @@ Route::get('/deletevacancy/{id}','CompanyController@deletevacancy');
 //});
 Route::post('/company/AddVacancy','postvacancy@addvacancy');
 
+Route::get('/company/hrPolicies','CompanyController@HRpolicies');
 
+Route::post('/ajax-upload-hr','CompanyController@submitHR');
+
+Route::post('/ajax-remove-hr','CompanyController@removeHR');
+
+Route::get('/view/jobseekerprofile','CompanyController@jsprofile');
+
+//Route::get('/company/comHRpolicies', function () {
+//    return view('companysearch');
+//    });
 //Route::get('/company/companyvacanncylist', function () {
 //    return view('companyvacancylist');
 //});
@@ -208,6 +221,19 @@ Route::post('/ajax-upload-jsproject','AjaxJobSeekerProfile@uploadjsproject');
 
 
 
+
+Route::post('/ajax-remove-hobby','AjaxJobSeekerProfile@removeHobby');
+
+Route::post('/ajax-remove-language','AjaxJobSeekerProfile@removeLanguages');
+
+Route::post('/ajax-remove-prefferedcity','AjaxJobSeekerProfile@removePrefferedcity');
+
+
+Route::post('/ajax-remove-skills','AjaxJobSeekerProfile@removeskills');
+
+Route::post('/ajax-remove-functionalarea','AjaxJobSeekerProfile@removefunctionalarea');
+
+Route::post('/ajax-remove-jsproject','AjaxJobSeekerProfile@removejsproject');
 ////////////////////////////////////////////////admin data start///////////////////////////////////////
 
 Route::get('/Adminlogin', 'adminController@loginPage');
@@ -253,3 +279,17 @@ Route::get('/usersFeedback','adminController@showFeedback');
 
 
 ////////////////////////////////////////////////admin data end///////////////////////////////////////////
+
+
+
+
+
+////////////////////////////////////////////////Search Route start///////////////////////////////////////////////
+
+
+Route::post('/search', 'searchController@searchVacancy');
+Route::post('/search/jobseeker', 'searchController@companySearchJs');
+Route::post('/search-advanced', 'searchController@searchVacancyfromLanding');
+
+
+////////////////////////////////////////////////Search Route end///////////////////////////////////////////////

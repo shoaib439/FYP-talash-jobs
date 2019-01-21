@@ -10,10 +10,7 @@ use Illuminate\Http\Request;
 use App\contactus;
 class Jobseekercontactus extends Controller
 {
-   public function jobseekercontactusmethod(){
-        echo 'A';
 
-   }
 
     public function store(Request $request)
     {

@@ -29,6 +29,7 @@
 @yield('company-section')
 @yield('admin-section')
 @yield('feedback')
+@yield('searchVacancySection')
 
 
 

@@ -27,35 +27,43 @@
             <div class="col-md-12 main-header">
                 <img src="{{asset('images/searchbgimage.jpg')}}"  class="header-background" alt="Responsive image">
                 <div class="row form-container">
+
+
+
+                    <form action="{{url('/search-advanced')}}" method="POST">
+                        @csrf
+
                     <div class="col-md-12">
                         <div class="form-group header-form" >
-                            <form>
+
 
                                 <div class="row">
 
                                     <div class="col-md-3 p-1">
 
-                                        <input type="text" required class="form-control square" id="searchid"  placeholder="SEARCH">
+                                        <input type="text" required class="form-control square" name ="userquery"  id="searchid"  placeholder="SEARCH">
 
                                     </div>
 
                                     <div class="col-md-3 p-1">
 
-                                        <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect">
-                                            <option selected>Search by Industry</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect" name="industrytype">
+                                            <option value="" selected>Search by Industry</option>
+
+                                            <option value="IT"> IT/Software Development</option>
+                                            <option value="Medical">Medical/Health</option>
+                                            <option value="Accounting"> Accounting</option>
+                                            <option value="Engineering"> Engineering</option>
                                         </select>
 
                                     </div>
 
                                     <div class="col-md-3 p-1">
 
-                                        <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect">
-                                            <option selected>Job/Internship</option>
-                                            <option value="1">Job</option>
-                                            <option value="2">Internship</option>
+                                        <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect" name="vacancytype">
+                                            <option  value="" selected>Job/Internship</option>
+                                            <option value="job">Job</option>
+                                            <option value="internship">Internship</option>
 
                                         </select>
 
@@ -63,21 +71,25 @@
 
                                     <div class="col-md-3 p-1">
 
-                                        <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect">
-                                            <option selected>Search by City</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect" name="cityname">
+                                            <option  value="" selected>Search by City</option>
+                                            <option value="lahore">Lahore</option>
+                                            <option value="islamabad">Isb</option>
+                                            <option value="karachi">karachi</option>
                                         </select>
 
                                     </div>
 
                                 </div>
 
-                            </form>
+
 
                         </div>
                     </div>
+
+
+
+
                     <div class="col-md-12 submit-btn-container">
                         <div class="row w-100 flex-center">
                             <div class="col-md-3">
@@ -85,7 +97,13 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
+
+
+
+
+
             </div>
         </div>
     </div>

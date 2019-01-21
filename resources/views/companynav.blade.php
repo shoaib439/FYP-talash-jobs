@@ -33,9 +33,13 @@
     </div>
 @endsection
 @section('companysearchplace')
-    <form action="" method="get">
-        <input class="company-nav-search" type="text" placeholder="search by skills" />
-        <i class="fa fa-search"></i>
+    <form action="{{url('/search/jobseeker')}}" method="POST">
+        @csrf
+        <input class="company-nav-search" type="text"  name= "companyQuery" placeholder="search by skills" />
+
+        <button type="submit" rel="tooltip" class="btn  btn-secondary-me" >
+            <i class="fa fa-search"></i>
+        </button>
 
     </form>
 @endsection
@@ -45,6 +49,10 @@
 
     @yield('company-search')
     @yield('company-dashboard')
+    @yield('searchResult')
+    @yield('HRpolicies')
+    @yield('jsprofile')
+
 
 
 

@@ -346,73 +346,6 @@ $(document).ready(function(){
 
     //experience end
 
-  ////////////////////////////////////////////////
-
-
-    $('#jbs-languages-form').submit(function(e){
-        e.preventDefault();
-
-        var form = $(this);
-        var languages = $('#languages',form);
-
-        var submission = $('#'+form.data('submission'));
-
-
-        var container = $('.jbs-main-content-container',submission);
-        var contentlength = $('.jbs-main--content',container).length;
-
-        $.ajax({
-            type:'POST',
-            url:  window.location.origin+'/ajax-upload-language',
-            data: new FormData(this),
-            dataType:'JSON',
-            cache:false,
-            contentType: false,
-            processData: false,
-            success:function(data) {
-
-                console.log(data);
-
-                if(data.success == '1') {
-
-
-        container.append(`<div class="jbs-main-content" id="languages-content-`+contentlength+`">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <p class="languages">`+languages.val()+`</p>
-                           
-                        </div>
-                        <div class="col-md-9 text-right">
-                            <i class="fa fa-close red we-remove-btn"></i>
-                        </div>
-                    </div>
-                </div>`);
-
-
-
-        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-            var confirm = window.confirm('are you sure?');
-            if(confirm){
-                $(this).parent().parent().parent().remove();
-            }
-        });
-
-                }
-                else{
-                    alert(data.message);
-                }
-            },
-            error: function(data){
-                console.log("yahan error");
-                console.log(data.responsetext);
-            }
-        });
-
-    });
-
-    //skills ended
-
     ////////////////////////////////////////////
 
 
@@ -509,6 +442,8 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main-content',container).length;
 
+        var token = $('#container-projects .jbs-main-content-container > input').val();
+
         $.ajax({
             type:'POST',
             url:  window.location.origin+'/ajax-upload-jsproject',
@@ -525,6 +460,10 @@ $(document).ready(function(){
 
 
         container.append(`<div class="jbs-main-content" id="project-content-`+contentlength+`">
+ <form class="jsproject-remove-form">
+                        <input type="hidden" name="_token" value="`+token+`">
+                        <input type="hidden" name="jsproject_id" value="`+data.jsproject_id+`" />
+                    </form>
                     <div class="row">
                         <div class="col-md-3">
                             <p class="project-title">`+projecttitle.val()+`</p>
@@ -541,13 +480,7 @@ $(document).ready(function(){
                 </div>`);
 
 
-                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-                        var confirm = window.confirm('are you sure?');
-                        if(confirm){
-                            $(this).parent().parent().parent().remove();
-                        }
-                    });
+                    $('#container-projects .jbs-main-content:last-of-type .we-remove-btn').click(removejsproject);
                 }
                 else{
                     alert(data.message);
@@ -555,13 +488,16 @@ $(document).ready(function(){
             },
             error: function(data){
                 console.log("error");
-                console.log(data.responsetext);
+                console.log(data.responseText);
             }
         });
 
 
     });
 
+    //fa ended
+
+    $('#container-projects .we-remove-btn').click(removejsproject);
 
     //project end
 
@@ -581,6 +517,7 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main--content',container).length;
 
+        var token = $('#container-functional-area .jbs-main-content-container > input').val();
 
         $.ajax({
             type:'POST',
@@ -597,6 +534,11 @@ $(document).ready(function(){
                 if(data.success == '1') {
 
         container.append(`<div class="jbs-main-content" id="work-experience-content-`+contentlength+`">
+
+                 <form class="functionalarea-remove-form">
+                        <input type="hidden" name="_token" value="`+token+`">
+                        <input type="hidden" name="hr_id" value="`+data.functionalarea_id+`" />
+                    </form>
                     <div class="row">
                         <div class="col-md-3">
                             <p class="functional-area">`+faname.val()+`</p>
@@ -608,13 +550,7 @@ $(document).ready(function(){
                     </div>
                 </div>`);
 
-                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-                        var confirm = window.confirm('are you sure?');
-                        if(confirm){
-                            $(this).parent().parent().parent().remove();
-                        }
-                    });
+                    $('#container-functional-area .jbs-main-content:last-of-type .we-remove-btn').click(removefunctionalarea);
                 }
                 else{
                     alert(data.message);
@@ -622,7 +558,7 @@ $(document).ready(function(){
             },
             error: function(data){
                 console.log("error");
-                console.log(data.responsetext);
+                console.log(data.responseText);
             }
         });
 
@@ -631,7 +567,7 @@ $(document).ready(function(){
 
     //fa ended
 
-
+    $('#container-functional-area .we-remove-btn').click(removefunctionalarea);
 
 
     //hobbies started
@@ -650,6 +586,7 @@ $(document).ready(function(){
         var contentlength = $('.jbs-main--content',container).length;
 
 
+        var token = $('#container-hobbies .jbs-main-content-container > input').val();
         $.ajax({
             type:'POST',
             url:  window.location.origin+'/ajax-upload-hobby',
@@ -664,7 +601,11 @@ $(document).ready(function(){
 
                 if(data.success == '1') {
 
-        container.append(`<div class="jbs-main-content" id="work-experience-content-`+contentlength+`">
+        container.append(`<div class="jbs-main-content" id="hobby-content-`+contentlength+`">
+                    <form class="hobby-remove-form">
+                         <input type="hidden" name="_token" value="`+token+`" />
+                        <input type="hidden" name="hobby_id" value="`+data.hobby_id+`" />
+                    </form>
                     <div class="row">
                         <div class="col-md-3">
                             <p class="my-hobbies">`+hobby.val()+`</p>
@@ -676,15 +617,7 @@ $(document).ready(function(){
                     </div>
                 </div>`);
 
-
-
-                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-                        var confirm = window.confirm('are you sure?');
-                        if(confirm){
-                            $(this).parent().parent().parent().remove();
-                        }
-                    });
+                    $('#container-hobbies .jbs-main-content:last-of-type .we-remove-btn').click(removeHobbies);
                 }
                 else{
                     alert(data.message);
@@ -692,27 +625,26 @@ $(document).ready(function(){
             },
             error: function(data){
                 console.log("error");
-                console.log(data.responsetext);
+                console.log(data.responseText);
             }
         });
 
 
     });
 
+    $('#container-hobbies .we-remove-btn').click(removeHobbies);
+
     //hobbies ended
 
 
+    ////////////////////////////////////////////////
 
 
-
-    //skills started
-
-
-    $('#jbs-skills-form').submit(function(e){
+    $('#jbs-languages-form').submit(function(e){
         e.preventDefault();
 
         var form = $(this);
-        var skills = $('#skills',form);
+        var languages = $('#languages',form);
 
         var submission = $('#'+form.data('submission'));
 
@@ -720,10 +652,11 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main--content',container).length;
 
+        var token = $('#container-languages .jbs-main-content-container >input').val();
 
         $.ajax({
             type:'POST',
-            url:  window.location.origin+'/ajax-upload-skills',
+            url:  window.location.origin+'/ajax-upload-language',
             data: new FormData(this),
             dataType:'JSON',
             cache:false,
@@ -735,10 +668,15 @@ $(document).ready(function(){
 
                 if(data.success == '1') {
 
-        container.append(`<div class="jbs-main-content" id="work-experience-content-`+contentlength+`">
+
+                    container.append(`<div class="jbs-main-content" id="languages-content-`+contentlength+`">
+                        <form class="language-remove-form">
+                            <input type="hidden" name="_token" value="`+token+`" />
+                            <input type="hidden" name="language_id" value="`+data.language_id+`" />
+                        </form>
                     <div class="row">
                         <div class="col-md-3">
-                            <p classskills">`+skills.val()+`</p>
+                            <p class="languages">`+languages.val()+`</p>
                            
                         </div>
                         <div class="col-md-9 text-right">
@@ -747,15 +685,7 @@ $(document).ready(function(){
                     </div>
                 </div>`);
 
-
-
-                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-                        var confirm = window.confirm('are you sure?');
-                        if(confirm){
-                            $(this).parent().parent().parent().remove();
-                        }
-                    });
+                    $('#container-languages .jbs-main-content:last-of-type .we-remove-btn').click(removeLanguages);
                 }
                 else{
                     alert(data.message);
@@ -763,17 +693,15 @@ $(document).ready(function(){
             },
             error: function(data){
                 console.log("error");
-                console.log(data.responsetext);
+                console.log(data.responseText);
             }
         });
 
 
     });
 
-
-    //skills ended
-
-
+    $('#container-languages .we-remove-btn').click(removeLanguages);
+    //languages ended
 
 
     //jobcity  started
@@ -791,6 +719,8 @@ $(document).ready(function(){
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main--content',container).length;
 
+        var token = $('#container-prefferedcity .jbs-main-content-container >input').val();
+
 
         $.ajax({
             type:'POST',
@@ -806,7 +736,13 @@ $(document).ready(function(){
 
                 if(data.success == '1') {
 
-        container.append(`<div class="jbs-main-content" id="jobcity-content-`+contentlength+`">
+                    container.append(`<div class="jbs-main-content" id="prefferedcity-content-`+contentlength+`">
+                             
+                        <form class="prefferedcity-remove-form">
+                         <input type="hidden" name="_token" value="`+token+`" />
+                           <input type="hidden" name="prefferedcity_id" value="`+data.prefferedcity_id+`" />
+                        </form>
+                        
                     <div class="row">
                         <div class="col-md-3">
                             <p class="jobcity">`+jobcity.val()+`</p>
@@ -818,16 +754,158 @@ $(document).ready(function(){
                     </div>
                 </div>`);
 
+                    $('#container-jobcity .jbs-main-content:last-of-type .we-remove-btn').click(removeprefferedcity);
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responseText);
+            }
+        });
+
+
+    });
+
+    $('#container-jobcity .we-remove-btn').click(removeprefferedcity);
+
+    //jobcity ended
+
+    ///////////////////////////////////
+
+
+    //skills started
+
+
+    $('#jbs-skills-form').submit(function(e){
+        e.preventDefault();
+
+        var form = $(this);
+        var skills = $('#skills',form);
+
+        var submission = $('#'+form.data('submission'));
+
+
+        var container = $('.jbs-main-content-container',submission);
+        var contentlength = $('.jbs-main--content',container).length;
+
+        var token = $('#container-skills .jbs-main-content-container >input').val();
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-skills',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
+        container.append(`<div class="jbs-main-content" id="work-experience-content-`+contentlength+`">
+                         <form class="skills-remove-form">
+                         <input type="hidden" name="_token" value="`+token+`" />
+                           <input type="hidden" name="skills_id" value="`+data.skills_id+`" />
+                        </form>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p class="skills">`+skills.val()+`</p>
+                           
+                        </div>
+                        <div class="col-md-9 text-right">
+                            <i class="fa fa-close red we-remove-btn"></i>
+                        </div>
+                    </div>
+                </div>`);
 
 
 
-                    $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
+                    $('#container-skills .jbs-main-content:last-of-type .we-remove-btn').click(removeskills);
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responseText);
+            }
+        });
 
-                        var confirm = window.confirm('are you sure?');
-                        if(confirm){
-                            $(this).parent().parent().parent().remove();
-                        }
-                    });
+
+    });
+
+    $('#container-skills .we-remove-btn').click(removeskills);
+
+
+    //skills ended
+
+
+
+
+
+    //HR policy started
+
+
+    $('#jbs-hr-form').submit(function(e){
+        e.preventDefault();
+
+        var form = $(this);
+        var hr1 = $('#hr1',form);
+        var hr2 = $('#hr2',form);
+
+        var submission = $('#'+form.data('submission'));
+
+
+        var container = $('.jbs-main-content-container',submission);
+        var contentlength = $('.jbs-main-content',container).length;
+
+        var token = $('.jbs-main-content-container > input').val();
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-hr',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
+                    container.append(`<div class="jbs-main-content" id="hr-policy-content-`+contentlength+`">
+                    <form class="hr-remove-form">
+                        <input type="hidden" name="_token" value="`+token+`">
+                        <input type="hidden" name="hr_id" value="`+data.hr_id+`" />
+                    </form>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p class="hr1">`+hr1.val()+`</p>
+                           
+                        </div>
+                      
+                        <div class="col-md-2 text-right">
+                            <i class="fa fa-close red we-remove-btn hr_policy_remove"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                               <div class="col-md-8">
+                            <p class="hr2">`+hr2.val()+`</p>
+                           
+                        </div>
+                     </div>
+                </div>`);
+
+
+
+                    $('.jbs-main-content:last-of-type .we-remove-btn').click(removeHRPolicy);
                 }
                 else{
                     alert(data.message);
@@ -842,7 +920,14 @@ $(document).ready(function(){
 
     });
 
-    //jobcity ended
+    $('.hr_policy_remove').click(removeHRPolicy);
+
+
+
+    //HR policy ended
+
+
+    ////////////
 
 
 
@@ -933,6 +1018,265 @@ $(document).ready(function(){
 
 });
 
+
+function removeHRPolicy(e) {
+        e.preventDefault();
+
+        var container = $(this).parents('.jbs-main-content');
+
+        var confirm = window.confirm('are you sure?');
+        if(!confirm){
+            return false;
+        }
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-remove-hr',
+            data: new FormData($('form',container)[0]),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data) {
+
+                console.log(data);
+
+                if(data.success == '1') {
+
+                    container.remove();
+                }
+                else{
+                    alert(data.message);
+                }
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responsetext);
+            }
+        });
+}
+
+
+function removeHobbies(e) {
+    e.preventDefault();
+
+    var container = $(this).parents('.jbs-main-content');
+
+    var confirm = window.confirm('are you sure?');
+    if(!confirm){
+        return false;
+    }
+    $.ajax({
+        type:'POST',
+        url:  window.location.origin+'/ajax-remove-hobby',
+        data: new FormData($('form',container)[0]),
+        dataType:'JSON',
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data) {
+
+            console.log(data);
+
+            if(data.success == '1') {
+
+                container.remove();
+            }
+            else{
+                alert(data.message);
+            }
+        },
+        error: function(data){
+            console.log("error");
+            console.log(data.responseText);
+        }
+    });
+}
+///////////////////////////////////////////////////////
+
+function removeLanguages(e) {
+    e.preventDefault();
+
+    var container = $(this).parents('.jbs-main-content');
+
+    var confirm = window.confirm('are you sure?');
+    if(!confirm){
+        return false;
+    }
+    $.ajax({
+        type:'POST',
+        url:  window.location.origin+'/ajax-remove-language',
+        data: new FormData($('form',container)[0]),
+        dataType:'JSON',
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data) {
+
+            console.log(data);
+
+            if(data.success == '1') {
+
+                container.remove();
+            }
+            else{
+                alert(data.message);
+            }
+        },
+        error: function(data){
+            console.log("error");
+            console.log(data.responseText);
+        }
+    });
+}
+
+
+function removeprefferedcity(e) {
+    e.preventDefault();
+
+    var container = $(this).parents('.jbs-main-content');
+
+    var confirm = window.confirm('are you sure?');
+    if(!confirm){
+        return false;
+    }
+    $.ajax({
+        type:'POST',
+        url:  window.location.origin+'/ajax-remove-prefferedcity',
+        data: new FormData($('form',container)[0]),
+        dataType:'JSON',
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data) {
+
+            console.log(data);
+
+            if(data.success == '1') {
+
+                container.remove();
+            }
+            else{
+                alert(data.message);
+            }
+        },
+        error: function(data){
+            console.log("error");
+            console.log(data.responseText);
+        }
+    });
+}
+
+
+
+function removefunctionalarea(e) {
+    e.preventDefault();
+
+    var container = $(this).parents('.jbs-main-content');
+
+    var confirm = window.confirm('are you sure?');
+    if(!confirm){
+        return false;
+    }
+    $.ajax({
+        type:'POST',
+        url:  window.location.origin+'/ajax-remove-functionalarea',
+        data: new FormData($('form',container)[0]),
+        dataType:'JSON',
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data) {
+
+            console.log(data);
+
+            if(data.success == '1') {
+
+                container.remove();
+            }
+            else{
+                alert(data.message);
+            }
+        },
+        error: function(data){
+            console.log("error");
+            console.log(data.responseText);
+        }
+    });
+}
+
+
+
+function removeskills(e) {
+    e.preventDefault();
+
+    var container = $(this).parents('.jbs-main-content');
+
+    var confirm = window.confirm('are you sure?');
+    if(!confirm){
+        return false;
+    }
+    $.ajax({
+        type:'POST',
+        url:  window.location.origin+'/ajax-remove-skills',
+        data: new FormData($('form',container)[0]),
+        dataType:'JSON',
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data) {
+
+            console.log(data);
+
+            if(data.success == '1') {
+
+                container.remove();
+            }
+            else{
+                alert(data.message);
+            }
+        },
+        error: function(data){
+            console.log("error");
+            console.log(data.responseText);
+        }
+    });
+}
+
+function removejsproject(e) {
+    e.preventDefault();
+
+    var container = $(this).parents('.jbs-main-content');
+
+    var confirm = window.confirm('are you sure?');
+    if(!confirm){
+        return false;
+    }
+    $.ajax({
+        type:'POST',
+        url:  window.location.origin+'/ajax-remove-jsproject',
+        data: new FormData($('form',container)[0]),
+        dataType:'JSON',
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data) {
+
+            console.log(data);
+
+            if(data.success == '1') {
+
+                container.remove();
+            }
+            else{
+                alert(data.message);
+            }
+        },
+        error: function(data){
+            console.log("error");
+            console.log(data.responseText);
+        }
+    });
+}
 
 function openJBSModel(containerid){
     var container = $('#'+containerid);

@@ -255,6 +255,7 @@ class AjaxJobSeekerProfile extends Controller
             $edu = education::Create([
                 'user_id'=>$user->id,
                 'degree_title' => $request->degreetitle,
+                'year_of_completion' => $request->yearofcompletion,
                 'cgpa' => $request->yearofcompletion,
                 'degree_level' => $request->cgpa,
                 'institite' => $request->degreelevel,
@@ -348,7 +349,8 @@ class AjaxJobSeekerProfile extends Controller
                 return response()->json([
                     'success' => '1',
                     'message'   => 'Added',
-                    'class_name'  => 'alert-success'
+                    'class_name'  => 'alert-success',
+                    'language_id' => $language->id
                 ]);
             else:
                 return response()->json([
@@ -405,7 +407,7 @@ class AjaxJobSeekerProfile extends Controller
 
             $hobby = hobbies::Create([
                 'user_id'=>$user->id,
-                'hobbies' => $request->hobbies,
+                'hobbies' => $request->hobby,
 
 
             ]);
@@ -414,7 +416,8 @@ class AjaxJobSeekerProfile extends Controller
                 return response()->json([
                     'success' => '1',
                     'message'   => 'Added',
-                    'class_name'  => 'alert-success'
+                    'class_name'  => 'alert-success',
+                    'hobby_id'=> $hobby->id
                 ]);
             else:
                 return response()->json([
@@ -438,6 +441,104 @@ class AjaxJobSeekerProfile extends Controller
     }////////////////////////
     ///
 
+    public function removeHobby(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'hobby_id' => 'required|int',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = hobbies::where('id' , $request->hobby_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+    }
+    ///////////////////////////////
+    public function removeLanguages(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'language_id' => 'required',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = languages::where('id' , $request->language_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+    }
+    ////////////////////////////
     public  function uploadprefferedcity(Request $request){
 
 
@@ -570,9 +671,159 @@ class AjaxJobSeekerProfile extends Controller
         }
 
     }////////////////////////
-    ///
+
+    public function removefunctionalarea(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'functionalarea_id' => 'required',
+
+        ]);
+
+        if($validation->passes())
+        {
 
 
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = functionalarea::where('id' , $request->functionalarea_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+    }
+    ////////////////////////////
+
+
+    public function removeskills(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'skills_id' => 'required',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = skill::where('id' , $request->skills_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+    }
+    ////////////////////////////
+
+
+    public function removePrefferedcity(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'prefferedcity_id' => 'required',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = prefferedcity::where('id' , $request->prefferedcity_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+    }
+    ////////////////////////////
+///////////////////////////////////
     public  function uploadfa(Request $request){
 
 
@@ -713,5 +964,54 @@ class AjaxJobSeekerProfile extends Controller
     }////////////////////////
     ///
 
+    public function removejsproject(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'jsproject_id' => 'required',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = jsProject::where('id' , $request->jsproject_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+    }
+    ////////////////////////////
 
 }//end

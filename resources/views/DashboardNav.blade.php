@@ -31,10 +31,14 @@ search-nav-brand
     @endif
 @endsection
 @section('afternavlogo')
-    <form action="" method="get">
-        <input class="nav-search" type="text" />
-        <i class="fa fa-search"></i>
-        <a href="#" id="nav-search-filters-btn">Advance Search</a>
+    <form action="{{url('/search')}}" method="POST">
+        @csrf
+        <input class="nav-search" type="text" name="userquery" />
+
+        <button type="submit" rel="tooltip" class="btn  btn-secondary-me" >
+            <i class="fa fa-search"></i>
+        </button>
+        <a href="/" >Advance Search</a>
     </form>
 @endsection
 

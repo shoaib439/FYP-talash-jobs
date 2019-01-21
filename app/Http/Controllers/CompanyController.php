@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\hrpolicy;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -140,6 +141,74 @@ class CompanyController extends Controller
 
         }
         return redirect('/login');
+    }
+
+    public function HRpolicies(){
+
+        if(!Auth::guard()->check()){
+            return redirect('/login');
+        }
+
+        else
+        {
+            if(Auth::user()->isCompany()){
+
+
+                $hrpolicies = hrpolicy::where('user_id',Auth::user()->id)->get();
+                return view('companyHRpolicies',compact('hrpolicies'));
+            }
+
+        }
+        return redirect('/login');
+    }
+
+    public function removeHR(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'hr_id' => 'required|int',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = hrpolicy::where('id' , $request->hr_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
     }
 
     public function companypassresetPage(Request $request)
@@ -289,6 +358,83 @@ if($newpassword==$confirmpassword){
 
 
     }//end of deleteuser
+
+    public function submitHR(Request $request){
+
+        $validation = Validator::make($request->all(), [
+
+            'hr1' => 'required',
+            'hr2' => 'required',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user=Auth::user();
+
+            $interviewnumber = hrpolicy::Create([
+                'user_id'=>$user->id,
+                'no_of_interview' => $request->hr1,
+                'procedure' => $request->hr2,
+
+            ]);
+
+
+//            $interviewnumber= $request->hr1;
+//            $procedure= $request->hr2;
+//
+//            $policy=new hrpolicy();
+//
+//            $policy->no_of_interview=$interviewnumber;
+//            $policy->procedure=$procedure;
+//
+//
+//            $policy->save();
+
+            if($interviewnumber):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success',
+                    'hr_id'=> $interviewnumber->id,
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+
+
+    }
+
+    public function jsprofile(){
+
+        if(!Auth::guard()->check()){
+            return redirect('/login');
+        }
+
+
+        if(!Auth::user()->isCompany()){
+            return view('/');
+        }
+
+        return view('jobseekerDisplayProfile');
+    }
 
 
 }//end of companyController

@@ -58,14 +58,17 @@
      background-color: rgba(255,255,255,0.2);
  }
  .form-container{
-     width: 80%;
+     width: 100%;
+
+     justify-content: center;
+
  }
  .form-container .submit-btn-container{
      z-index: 2;
      display: flex;
      align-items: center;
      justify-content: center;
-     margin-top: 40px;
+     margin-top: 60px;
  }
 
 .form-container .header-form-btn{
@@ -307,6 +310,7 @@ box-shadow: 20px 20px;
     height: 120px;
     display: block;
     border-radius: 1000px !important;
+
 
 }
 .my-btn{
