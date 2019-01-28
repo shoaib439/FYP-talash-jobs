@@ -12,25 +12,24 @@
 @endsection
 @section('companydropdownclass')
 
-    <div class="container-fluid">
-        <div class="btn-group dropdown-header">
-            <button type="button" class="btn btn-secondary-me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ Auth::user()->display_name }}
-            </button>
-            <div class="dropdown-menu ">
-                <!-- Dropdown menu links -->
-                <a class="dropdown-item" href="{{url('company/profile')}}">Profile</a>
-                <a class="dropdown-item" href="{{url('company/resetpassword')}}">Setting</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{route('logout')}}"
-                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>
+    {{--<div class="container-fluid">--}}
+        {{--<div class="btn-group dropdown-header">--}}
+            {{--<button type="button" class="btn btn-secondary-me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                {{--{{ Auth::user()->display_name }}--}}
+            {{--</button>--}}
+            {{--<div class="dropdown-menu ">--}}
+                {{--<!-- Dropdown menu links -->--}}
+                {{--<a class="dropdown-item" href="{{url('company/profile')}}">Profile</a>--}}
+                {{--<a class="dropdown-item" href="{{url('user/resetpassword')}}">Reset Password</a>--}}
+                {{--<div class="dropdown-divider"></div>--}}
+                {{--<a class="dropdown-item" href="{{route('logout')}}"--}}
+                   {{--onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>--}}
 
-                <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none"> {{csrf_field()}} </form>
-            </div>
-        </div>
+                {{--<form id="logout-form" action="{{route('logout')}}" method="post" style="display: none"> {{csrf_field()}} </form>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
-
-    </div>
+    {{--</div>--}}
 @endsection
 @section('companysearchplace')
     <form action="{{url('/search/jobseeker')}}" method="POST">
@@ -51,7 +50,9 @@
     @yield('company-dashboard')
     @yield('searchResult')
     @yield('HRpolicies')
-    @yield('jsprofile')
+    @yield('jsprofilee')
+
+
 
 
 

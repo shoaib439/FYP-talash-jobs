@@ -6,8 +6,10 @@ use App\feedback;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\contactus;
+use Illuminate\Support\Facades\Validator;
+use App\notification;
 
 class adminController extends Controller
 {
@@ -90,7 +92,10 @@ class adminController extends Controller
 
     public function showUsers(){
 
-        $Users=User::all()->toArray();
+      //  $Users=User::all()->toArray();
+
+        $adminrole=null;
+        $Users=User::where(['role'=>$adminrole])->get()->toArray();
 
         return view('/adminfrontend.registeredUsers', compact('Users'));
 
@@ -121,7 +126,10 @@ class adminController extends Controller
 
         $complaints=contactus::all()->toArray();
 
-            return view('/adminfrontend.usersComplaints', compact('complaints'));
+
+
+
+        return view('/adminfrontend.usersComplaints', compact('complaints'));
 
     }
 
@@ -135,4 +143,76 @@ class adminController extends Controller
 
     }
 
+
+    public function complaintResponse(Request $request){
+
+        if (!Auth()->guard()->check()) {
+            return redirect('/');
+        } else {
+            if (Auth::user()->isAdmin()) {
+
+
+                $validation=Validator::make($request->all(),[
+
+                    'user_email'=>'required|email',
+                    'complaint_id'=>'required|int',
+                ]);
+
+                if($validation->passes())
+                {
+                    $complaint=contactus::where(['id'=>$request->complaint_id,'email'=>$request->user_email])->get()->first();
+
+                    $user=User::where('email',$request->user_email)->get()->first();
+
+//                  var_dump($complaint);
+//                  die();
+                    $html = <<<HTML
+Your Complaint related to Subject <strong> '{$complaint->subject}'</strong>is resolved.
+HTML;
+                    $s='solved';
+
+                    if($complaint){
+
+                        DB::update("UPDATE `contactus` SET `solve`='{$s}' WHERE `id`='{$request->complaint_id}'");
+
+                        notification::create([
+                            'user_id'=> $user->id,
+                            'message'=>$html,
+                            'type'=> 'Customer Support',
+                            'viewed'=> '0',
+                        ]);
+
+
+
+                    }
+
+
+                    return redirect('/usersComplaints');
+
+                }
+                else
+                {
+                    return response()->json([
+                        'success' => '0',
+                        'message'   => $validation->errors()->all(),
+                        'class_name'  => 'alert-danger'
+                    ]);
+                }
+
+            }
+        }
+
+
+
+    }
+
+
+
+    public function deletecomplaint($id){
+
+        $c = contactus::find($id);
+        $c->delete();
+        return redirect('/usersComplaints');
+
+    }//end of deleteuser
 }

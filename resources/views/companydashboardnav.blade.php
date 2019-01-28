@@ -101,6 +101,8 @@
     @yield('companydashboardnav')
     @yield('companyapplication')
     @yield('company-profile')
+    @yield('listApplication')
+    @yield('statuspage')
 
 
 

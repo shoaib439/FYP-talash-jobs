@@ -31,6 +31,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+        <a href="{{ url('buildCV/user/'.Auth::user()->id.'/CV/1') }}" class="btn my-btn2">Build CV</a>
     </div>
 
 

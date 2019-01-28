@@ -32,31 +32,34 @@
                             <tr>
                                 <th class="text-center">#</th>
                                 <th>Job Title</th>
-                                <th>Created</th>
-                                <th>Last Updated</th>
-                                <th class="text-right">Status</th>
+                                <th>Type</th>
+                                <th>Positions</th>
+                                <th class="text-right">Created on</th>
                                 <th class="text-right">Actions</th>
                             </tr>
                             </thead>
 
                             <tbody>
+                            <?php  $i=1;  ?>
                             @foreach ($vacancylist as $vacancylists)
+
+
                             <tr>
-                                <td class="text-center">{{$vacancylists['id']}}</td>
+                                <td class="text-center"><?php echo  $i++ ?></td>
                                 <td>{{$vacancylists['title']}}</td>
-                                <td>12/12/12</td>
-                                <td>12/12/12</td>
+                                <td>{{$vacancylists['vacancy_type']}}</td>
+                                <td class="justify-content-center">{{$vacancylists['no_of_position']}}</td>
                                 <td class="text-right">Active</td>
                                 <td class="td-actions text-right">
-                                   <button type="button" rel="tooltip" class="btn btn-dark  btn-sm" >
-                                        <i class="fa fa-check-square-o"></i>
-                                        </button>
-                                    <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" >
+                                   {{--<button type="button" rel="tooltip" class="btn btn-dark  btn-sm" >--}}
+                                        {{--<i class="fa fa-check-square-o"></i>--}}
+                                        {{--</button>--}}
+                                    <a  href="{{url('/view/vacancy/'.$vacancylists['id'])}}" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" >
                                         <i class="fa fa-eye"></i>
-                                    </button>
-                                    <button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" >
-                                        <i class="fa fa-edit"></i>
-                                    </button>
+                                    </a>
+                                    {{--<button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" >--}}
+                                        {{--<i class="fa fa-edit" style="color: #ffffff"></i>--}}
+                                    {{--</button>--}}
                                     <a href={{url('/deletevacancy/'.$vacancylists['id'])}}><button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" >
                                         <i class="fa fa-remove"></i>
                                         </button></a>

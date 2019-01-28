@@ -6,6 +6,23 @@ $(document).ready(function(){
         $('.jbs-model').fadeOut();
     });
 
+    $('.check-status-btn').click(function (e) {
+
+        var container = $(this).data('container');
+
+        $('#'+container).fadeIn();
+
+    });
+
+
+    $('.call-for-interview-btn').click(function () {
+
+        var container = $(this).data('container');
+
+        $('#'+container).fadeIn();
+
+    });
+
 
 
 
@@ -287,6 +304,7 @@ $(document).ready(function(){
             currworkhtml =  `<i class="fa fa-close"></i>`;
         }
 
+        var token = $('#container-work-experience .jbs-main-content-container > input').val();
 
         $.ajax({
             type:'POST',
@@ -302,7 +320,11 @@ $(document).ready(function(){
 
                 if(data.success == '1'){
 
-                    container.append(`<div class="jbs-main-content" id="functional-area-content-` + contentlength + `">
+                    container.append(`<div class="jbs-main-content" id="work-experience-content-` + contentlength + `">
+                     <form class="workexp-remove-form">
+                        <input type="hidden" name="_token" value="`+token+`">
+                        <input type="hidden" name="workexp_id" value="`+data.workexp_id+`" />
+                    </form>
                         <div class="row">
                             <div class="col-md-3">
                                 <p class="company-name">` + name.val() + `</p>
@@ -320,15 +342,8 @@ $(document).ready(function(){
                         </div>`);
 
 
-                        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
 
-                            var confirm = window.confirm('are you sure?');
-                            if (confirm) {
-                                $(this).parent().parent().parent().remove();
-                            }
-                        });
-
-                        $('.jbs-close').fadeOut();
+                    $('#container-work-experience .jbs-main-content:last-of-type .we-remove-btn').click(removeworkexp);
                 }
                 else{
                     alert(data.message);
@@ -336,13 +351,15 @@ $(document).ready(function(){
             },
             error: function(data){
                 console.log("error");
-                console.log(data.responsetext);
+                console.log(data.responseText);
             }
         });
 
 
-
     });
+
+    $('#container-work-experience .we-remove-btn').click(removeworkexp);
+
 
     //experience end
 
@@ -364,10 +381,11 @@ $(document).ready(function(){
         var submission = $('#'+form.data('submission'));
 
 
+
         var container = $('.jbs-main-content-container',submission);
         var contentlength = $('.jbs-main-content',container).length;
 
-
+        var token = $('#container-education .jbs-main-content-container > input').val();
         $.ajax({
             type:'POST',
             url:  window.location.origin+'/ajax-upload-edu',
@@ -382,6 +400,10 @@ $(document).ready(function(){
 
                 if(data.success == '1') {
                     container.append(`<div class="jbs-main-content" id="education-content-` + contentlength + `">
+                    <form class="education-remove-form">
+                        <input type="hidden" name="_token" value="`+token+`">
+                        <input type="hidden" name="education_id" value="`+data.education_id+`" />
+                    </form>
                     <div class="row">
                         <div class="col-md-3">
                             <p class="degree-title">` + degreetitle.val() + `</p>
@@ -399,14 +421,7 @@ $(document).ready(function(){
                 </div>`);
 
 
-
-        $('.jbs-main-content:last-of-type .we-remove-btn').click(function () {
-
-            var confirm = window.confirm('are you sure?');
-            if(confirm){
-                $(this).parent().parent().parent().remove();
-            }
-        });
+                    $('#container-education .jbs-main-content:last-of-type .we-remove-btn').click(removeeducation);
                 }
                 else{
                     alert(data.message);
@@ -414,12 +429,14 @@ $(document).ready(function(){
             },
             error: function(data){
                 console.log("error");
-                console.log(data.responsetext);
+                console.log(data.responseText);
             }
         });
 
 
     });
+
+    $('#container-education .we-remove-btn').click(removeeducation);
 
     //eductaion end
 
@@ -1016,6 +1033,59 @@ $(document).ready(function(){
     }));
     //for raring end
 
+
+
+
+
+    //CV BUILD
+    $('.buildCV-btn').click(function(e){
+        e.preventDefault();
+
+        var user_id = $(this).attr('href');
+
+
+        $.get( window.location.origin+'/ajax-get-cv/1', function( data ) {
+
+            var html = $('<div></div>').append(data);
+
+
+            console.log(html.text());
+
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                type:'POST',
+                url:  window.location.origin+'/ajax-current-user-data',
+                data: {
+                    _token:token,
+                    user_id:user_id
+                },
+                dataType:'JSON',
+                success:function(data) {
+
+                    console.log(data);
+
+                    if(data.success == '1') {
+
+                        var jobseekerdata = data.data.jobseeker;
+                        var userdata = data.data.user;
+
+                        html.find('#jobseeker_name').html(html);
+                        console.log(html.html());
+                    }
+                    else{
+                        alert(data.message);
+                    }
+                },
+                error: function(data){
+                    console.log("error");
+                    console.log(data);
+                }
+            });
+
+        });
+    });
+
 });
 
 
@@ -1277,6 +1347,91 @@ function removejsproject(e) {
         }
     });
 }
+
+
+
+
+
+function removeeducation(e) {
+    e.preventDefault();
+
+    var container = $(this).parents('.jbs-main-content');
+
+    var confirm = window.confirm('are you sure?');
+    if(!confirm){
+        return false;
+    }
+    $.ajax({
+        type:'POST',
+        url:  window.location.origin+'/ajax-remove-education',
+        data: new FormData($('form',container)[0]),
+        dataType:'JSON',
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data) {
+
+            console.log(data);
+
+            if(data.success == '1') {
+
+                container.remove();
+            }
+            else{
+                alert(data.message);
+            }
+        },
+        error: function(data){
+            console.log("error");
+            console.log(data.responseText);
+        }
+    });
+}
+
+
+
+
+function removeworkexp(e) {
+    e.preventDefault();
+
+    var container = $(this).parents('.jbs-main-content');
+
+    var confirm = window.confirm('are you sure?');
+    if(!confirm){
+        return false;
+    }
+    $.ajax({
+        type:'POST',
+        url:  window.location.origin+'/ajax-remove-workexp',
+        data: new FormData($('form',container)[0]),
+        dataType:'JSON',
+        cache:false,
+        contentType: false,
+        processData: false,
+        success:function(data) {
+
+            console.log(data);
+
+            if(data.success == '1') {
+
+                container.remove();
+            }
+            else{
+                alert(data.message);
+            }
+        },
+        error: function(data){
+            console.log("error");
+            console.log(data.responseText);
+        }
+    });
+
+
+
+
+}
+
+
 
 function openJBSModel(containerid){
     var container = $('#'+containerid);

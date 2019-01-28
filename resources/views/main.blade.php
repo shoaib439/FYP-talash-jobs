@@ -10,6 +10,8 @@
     {{--<link rel="stylesheet" href="{{url('fontawesome/fontawesome.min.css')}}">--}}
     <link rel="stylesheet" href="{{url('font-awesome-4.7.0/css/font-awesome.min.css')}}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
 
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
@@ -30,7 +32,10 @@
 @yield('admin-section')
 @yield('feedback')
 @yield('searchVacancySection')
-
+@yield('showNotificationPage')
+@yield('vacancyDisplayPage')
+@yield('InvitationAcceptedPage')
+@yield('jsprofile')
 
 
 

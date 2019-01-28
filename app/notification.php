@@ -4,11 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class feedback extends Model
+class notification extends Model
 {
-    protected $table = 'feedback';
-
     protected $fillable = [
-        'name','suggestion','rating'
+        'user_id' ,'message','type','viewed'
     ];
 }

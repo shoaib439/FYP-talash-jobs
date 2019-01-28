@@ -50,6 +50,25 @@ Route::get('/jobseeker/appliedjobs', 'jobseekerController@jsappliedjobsauth');
 Route::get('/jobseeker/savedjobs', 'jobseekerController@jssavedjobsauth');
 Route::get('/jobseeker/viewinvitation', 'jobseekerController@jsviewinvitationauth');
 
+Route::get('/jobseeker/viewnotification', 'jobseekerController@showNotification');
+
+Route::get('/vacancy/save/{id}','jobseekerController@vacancysave');
+
+Route::get('/view/vacancy/{id}','jobseekerController@vacancyview');
+
+Route::get('/apply/vacancy/{id}','jobseekerController@vacancyapply');
+
+Route::get('vacancy/withdraw/{id}','jobseekerController@withdrawvacancy');
+
+Route::get('vacancy/removesaved/{id}','jobseekerController@removesavedvacancy');
+
+Route::get('/reject/invite/{id}','jobseekerController@rejectInvite');
+
+Route::get('/accept/invite/{vid}/{cid}','jobseekerController@acceptInvite');
+
+
+
+
 //Route::get('/jobseekerhome', function () {
 //    return view('jobseekerMainLayout');
 //});
@@ -98,17 +117,28 @@ Route::get('/company/dashboard', 'CompanyController@companydashboardauth');
 Route::get('/company/profile', 'CompanyController@companyprofileauth');
 Route::get('/company/vacancylist', 'CompanyController@companyvacancylistauth');
 Route::get('/company/applicationslist', 'CompanyController@companyapplicationslistauth');
+Route::post('/company/showapplicationslist', 'CompanyController@showcompanyapplicationslist');
 
+Route::post('/user/resetpasswordpage', 'CompanyController@companypassresetPage');
 
-Route::post('/company/resetpasswordpage', 'CompanyController@companypassresetPage');
-
-Route::get('/company/resetpassword', 'CompanyController@companypassreset');
+Route::get('/user/resetpassword', 'CompanyController@companypassreset');
 
 Route::get('/company/searchresult', function () {
     return view('companysearch');
 });
 
 Route::get('/deletevacancy/{id}','CompanyController@deletevacancy');
+
+
+
+Route::post('/update/status/','CompanyController@updateStatus');
+
+Route::post('/updateStatus','CompanyController@updateStatuspage');
+
+
+
+
+
 
 
 //Route::get('/company/profile', function () {
@@ -118,7 +148,7 @@ Route::get('/deletevacancy/{id}','CompanyController@deletevacancy');
 //Route::get('/company/AddVacancy', function () {
 //    return view('AddVacancy');
 //});
-Route::post('/company/AddVacancy','postvacancy@addvacancy');
+Route::post('/company/AddVacancy/','postvacancy@addvacancy');
 
 Route::get('/company/hrPolicies','CompanyController@HRpolicies');
 
@@ -128,6 +158,23 @@ Route::post('/ajax-remove-hr','CompanyController@removeHR');
 
 Route::get('/view/jobseekerprofile','CompanyController@jsprofile');
 
+
+
+
+
+
+
+
+
+
+Route::get('/profile/{id}','CompanyController@jobseekerprofile');
+Route::get('/invite/{id}','CompanyController@jobseekerInvite');
+
+Route::post('/invite','CompanyController@jobseekerInviteSubmit'); //->where('id');
+
+
+
+Route::post('/callforinterview','CompanyController@Callforinterview');
 //Route::get('/company/comHRpolicies', function () {
 //    return view('companysearch');
 //    });
@@ -156,9 +203,7 @@ Route::get('/view/jobseekerprofile','CompanyController@jsprofile');
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('Landing');
-});
+Route::get('/','jobseekerController@landingjobs');
 
 Route::get('/login', 'logincontroller@index')->name('login');
 
@@ -168,20 +213,21 @@ Route::get('/dashboard', function () {
     return view('DashboardNav');
 });
 
-Route::get('/user/contactus', function () {
-    return view('contactus');
-});
+
+
+Route::get('/user/contactus','jobseekercontactus@contactus');
 
 Route::post('/user/contactus','jobseekercontactus@store');
 
 
 
 
-Route::get('/submitfeedback', function(){
-    return view('submitfeedback');
-});
+Route::get('/submitfeedback','SubmissionFeedback@feedback');
 
 Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
+
+
+
 
 ////////////////////////////////////////////////COMMON ROUTESSSSS END/////////////////////////////////////////////////
 
@@ -234,6 +280,26 @@ Route::post('/ajax-remove-skills','AjaxJobSeekerProfile@removeskills');
 Route::post('/ajax-remove-functionalarea','AjaxJobSeekerProfile@removefunctionalarea');
 
 Route::post('/ajax-remove-jsproject','AjaxJobSeekerProfile@removejsproject');
+
+
+
+Route::post('/ajax-remove-education','AjaxJobSeekerProfile@removeeducation');
+
+
+
+Route::post('/ajax-remove-workexp','AjaxJobSeekerProfile@removeworkexp');
+
+
+
+
+Route::get('/ajax-get-cv/{id}','AjaxCV@getCVHTML');
+
+
+Route::get('buildCV/CV/{$id}','AjaxCV@buildCV');
+
+
+Route::post('/ajax-current-user-data','AjaxCV@getUserData');
+
 ////////////////////////////////////////////////admin data start///////////////////////////////////////
 
 Route::get('/Adminlogin', 'adminController@loginPage');
@@ -276,6 +342,12 @@ Route::get('/delete/{id}','adminController@deleteuser');
 Route::get('/usersComplaints','adminController@showComplaints');
 
 Route::get('/usersFeedback','adminController@showFeedback');
+
+Route::post('/markAsSolve','adminController@complaintResponse');
+
+
+Route::get('/delete/complaint/{id}','adminController@deletecomplaint');
+
 
 
 ////////////////////////////////////////////////admin data end///////////////////////////////////////////

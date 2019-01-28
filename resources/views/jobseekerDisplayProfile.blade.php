@@ -6,7 +6,7 @@
  {{--* Time: 2:37 AM--}}
  {{--*/--}}
 
-@extends('companynav')
+@extends('main')
 
 @section('jsprofile')
 
@@ -18,7 +18,7 @@
                 <div class="w-15">
                     <div class="jbs-logo-container">
                         <div class="jbs-logo">
-                            <img class="profile-image-set " src="{{ 'images/Profile.png' }}">
+                            <img class="profile-image-set " src="{{ (empty($user->profile_pic)) ? 'images/Profile.png':$user->profile_pic }}">
                         </div>
 
                     </div>
@@ -28,10 +28,14 @@
                 <div class="w-85">
                     <div class="row jbs-username">
                         <div class="col-md-8">
-                            <b class="justify-content-center">username</b>
+                            <b class="justify-content-center">{{ $user->display_name }}</b>
                         </div>
                         <div class="col-md-3">
-                            <a href="" class="btn my-btn">invite on job post</a>
+                            @if($invitelink == 'invited')
+                                <a href="#" onclick="return false;" class="btn my-btn disabled">Invited</a>
+                            @elseif($invitelink)
+                                <a href="{{ $invitelink }}" class="btn my-btn">Invite this user</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -44,31 +48,34 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <strong>Android Developer</strong>
+            @foreach($workexp as $exp)
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>{{ $exp->company_position }}</strong>
+                    </div>
+
+
                 </div>
 
+                <div class="row">
+                    <div class="col-md-2">
+                        <p>{{ $exp->company_name }}</p>
+                    </div>
 
-            </div>
-
-            <div class="row">
-                <div class="col-md-2">
-                    <p>company Name</p>
+                    <div class="col-md-2">
+                        <p>{{ $exp->job_type }}</p>
+                    </div>
                 </div>
 
-                <div class="col-md-2">
-                    <p>your position</p>
+                <div class="row">
+                    <div class="col-md-2">
+                        <p>{{ $exp->start_date.'/'.$exp->end_date }}</p>
+                    </div>
+
+
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-2">
-                    <p>start date-end date</p>
-                </div>
-
-
-            </div>
+            @endforeach
             <hr>
 
 
@@ -78,9 +85,10 @@
                 </div>
             </div>
 
+            @foreach($education as $edu)
             <div class="row">
                 <div class="col-md-6">
-                    <strong>DEGREE title</strong>
+                    <strong>{{ $edu->degree_title }}</strong>
                 </div>
 
 
@@ -88,18 +96,20 @@
 
 
             <div class="row">
-                <div class="col-md-2">
-                    <p>Institute , Location</p>
+                <div class="col-md-4">
+                    <p>{{ $edu->institute }} </p> <p>, {{ $edu->city }}</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-2">
-                    <p>Year of completion</p>
+                    <p>{{ $edu->year_of_completion }}</p>
                 </div>
 
 
             </div>
+
+            @endforeach
             <hr>
 
 
@@ -112,7 +122,7 @@
 
             <div class="row">
                 <div class="col-md-2">
-                    skill1,skill2,skill3
+                    {{ implode(', ',$skillarray)  }}
                 </div>
             </div>
 
@@ -126,7 +136,7 @@
 
             <div class="row">
                 <div class="col-md-2">
-                    city1,city2,city3
+                    {{ implode(', ',$cityarray)  }}
                 </div>
             </div>
 
@@ -140,7 +150,7 @@
 
             <div class="row">
                 <div class="col-md-2">
-                    Languages1,Languages2,Languages3
+                   {{ implode(', ',$langarray)  }}
                 </div>
             </div>
 

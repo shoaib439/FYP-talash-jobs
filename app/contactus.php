@@ -10,6 +10,6 @@ class contactus extends Model
     protected $table = 'contactus';
 
     protected $fillable = [
-        'name','email','phoneno','subject','message'
+        'name','email','type','subject','message','solve'
     ];
 }

@@ -1013,5 +1013,107 @@ class AjaxJobSeekerProfile extends Controller
         }
     }
     ////////////////////////////
+    ///
+
+
+    public function removeeducation(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'education_id' => 'required',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = education::where('id' , $request->education_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+    }
+
+    public function removeworkexp(Request $request){
+        $validation = Validator::make($request->all(), [
+
+            'workexp_id' => 'required',
+
+        ]);
+
+        if($validation->passes())
+        {
+
+
+            $user = Auth::user();
+
+            if(!$user):
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'You\'re not logged in.',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+            $removed = workexperience::where('id' , $request->workexp_id)->delete();
+
+            if($removed):
+                return response()->json([
+                    'success' => '1',
+                    'message'   => 'Added',
+                    'class_name'  => 'alert-success'
+                ]);
+            else:
+                return response()->json([
+                    'success' => '0',
+                    'message'   => 'No',
+                    'class_name'  => 'alert-success'
+                ]);
+            endif;
+
+        }
+        else
+        {
+            return response()->json([
+                'success' => '0',
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+    }
+
+
 
 }//end

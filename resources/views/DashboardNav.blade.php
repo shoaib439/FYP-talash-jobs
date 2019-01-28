@@ -15,7 +15,7 @@ search-nav-brand
         <div class="dropdown-menu ">
             <!-- Dropdown menu links -->
             <a class="dropdown-item" href="{{url('jobseekerhome')}}">Profile</a>
-            <a class="dropdown-item" href="#">Setting</a>
+            <a class="dropdown-item"  href="{{url('user/resetpassword')}}">Reset Password</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{route('logout')}}"
                onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>

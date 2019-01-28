@@ -22,10 +22,6 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email">
-                    </div>
-
-                    <div class="form-group">
                         <textarea class="form-control" rows="5" id="suggestion"  name="suggestion"  placeholder="Your Suggestion"></textarea>
                     </div>
                     <div class="form-group" id="rating-ability-wrapper">

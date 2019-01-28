@@ -412,3 +412,16 @@ button.bg-mybg:focus {
   padding-right: 60px;
   justify-content: flex-end;
 }
+
+.my-abtn{
+
+  background-color: #07b108;
+  border-color: #07b108;
+  color: #fff;
+  border-radius: 0;
+  font-family: 'Helvetica' !important;
+}
+h6{
+
+
+}

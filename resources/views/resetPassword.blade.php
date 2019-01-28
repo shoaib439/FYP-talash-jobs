@@ -16,7 +16,7 @@
                     <div class="card-header">{{ __('Reset Password') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{url('company/resetpasswordpage')}}">
+                        <form method="POST" action="{{url('user/resetpasswordpage')}}">
                             @csrf
 
                             <div class="form-group row">

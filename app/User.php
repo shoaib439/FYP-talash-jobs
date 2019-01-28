@@ -39,4 +39,15 @@ class User extends Authenticatable
     public function isJobseeker(){
         return ($this->type == 'jobseeker');
     }
+
+    public function notifications($all = false){
+        if($all):
+            $notifications = notification::where('user_id',$this->id)->get();
+        else:
+            $notifications = notification::where(['user_id'=>$this->id,'viewed'=>'0'])->get();
+        endif;
+
+        return $notifications;
+
+    }
 }

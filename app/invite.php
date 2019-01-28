@@ -4,11 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class feedback extends Model
+class invite extends Model
 {
-    protected $table = 'feedback';
-
     protected $fillable = [
-        'name','suggestion','rating'
+        'jobseeker_id','company_id' ,'vacancy_id','invite_accept'
     ];
 }

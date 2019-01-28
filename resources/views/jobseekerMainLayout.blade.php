@@ -90,6 +90,59 @@
 
             <div class="jbs-main-content-container">
 
+
+                @csrf
+                @foreach($workexp as $key => $exp)
+                    <div class="jbs-main-content" id="education-content-{{ $key  }}" >
+                        <form class="fa-remove-form">
+                            @csrf
+                            <input type="hidden" name="workexp_id" value="{{ $exp->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $exp->company_name  }}</p>
+
+                            </div>
+
+
+                            <div class="col-md-9 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $exp->company_position  }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $exp->company_location }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $exp->job_type  }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $exp->currently_working }}</p>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>{{ $exp->start_date }}</p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>{{ $exp->end_date }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
 
@@ -116,6 +169,50 @@
 
             <div class="jbs-main-content-container">
 
+
+                @csrf
+                @foreach($education as $key => $edu)
+                    <div class="jbs-main-content" id="education-content-{{ $key  }}" >
+                        <form class="fa-remove-form">
+                            @csrf
+                            <input type="hidden" name="education_id" value="{{ $edu->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $edu->degree_title  }}</p>
+
+                            </div>
+
+
+                            <div class="col-md-9 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $edu->year_of_completion  }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $edu->degree_level }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $edu->institute  }}</p>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="my-fa">{{ $edu->city }}</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
 

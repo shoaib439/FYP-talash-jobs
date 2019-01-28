@@ -21,10 +21,10 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
+                    <th>User id</th>
                     <th>Name</th>
-                    <th>Type</th>
-                    <th>Jobs Posted</th>
-                    <th>Account Status</th>
+                    <th>Email</th>
+                    <th>User Type</th>
                     <th>Action</th>
 
                 </tr>
@@ -35,19 +35,18 @@
 
                 <tr>
 
-                    <td>{{$User['display_name']}}</td>
-                    <td>{{$User['type']}}</td>
                     <td>{{$User['id']}}</td>
-                    <td>Active</td>
+                    <td>{{$User['display_name']}}</td>
+                    <td>{{$User['email']}}</td>
+                    <td>{{$User['type']}}</td>
+
                     {{--url('/delete/{{$User['id']')}}--}}
 
                     {{--{{url('/delete/'$User['id'])}}--}}
                     <td class="set-center"> <a href={{url('/delete/'.$User['id'])}}><button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm"  >
                             <i class="fas fa-user-minus ju"></i>
                         </button> </a>
-                        <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" >
-                            <i class="fas fa-eye "></i>
-                        </button>
+
                     </td>
 
                 </tr>

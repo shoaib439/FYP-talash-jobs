@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\companyprofile;
+use App\hrpolicy;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -25,6 +26,10 @@ class Postvacancy extends Controller
                 'class_name'  => 'alert-danger'
             ]);
         endif;
+
+
+        $myHR=hrpolicy::where('id',$request->choose_hr)->get()->first();
+
         $vacancytitle =  $request->vacancytitle;
         $type =  $request->type;
         $vacancydescription =  $request->vacancydescription;
@@ -64,6 +69,12 @@ class Postvacancy extends Controller
         $vacancy->age_range = $vacancyAge;
         $vacancy->working_hours = $vacancyworkinghours;
         $vacancy->last_date =  $vacancylastdate;
+        $vacancy->hr_id =  $myHR->id;
+        $vacancy->hr_no_of_interview =  $myHR->no_of_interview;
+        $vacancy->hr_procedure =  $myHR->procedure;
+
+
+
 
 
       $vacancy->save(); //inserts into the database

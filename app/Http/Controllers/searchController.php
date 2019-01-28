@@ -122,54 +122,54 @@ class SearchController extends Controller
 
                 if ($q != "") {
 
-                    $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '".$q."%'");
+                    $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%'");
 
 
                     if($querytype && empty($querycity) && empty($queryindustry))
                     {
 
-                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '".$q."%' AND `vacancy_type`='".$querytype."'");
+                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `vacancy_type`='".$querytype."'");
 
                     }
 
                     if($querycity && empty($querytype) && empty($queryindustry))
                     {
 
-                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '".$q."%' AND `job_city`='".$querycity."'");
+                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `job_city`='".$querycity."'");
 
                     }
 
                     if($queryindustry && empty($querytype) && empty($querycity))
                     {
-                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '".$q."%' AND `industry`='".$queryindustry."'");
+                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `industry`='".$queryindustry."'");
 
                     }
 
                     if($querytype && $querycity && empty($queryindustry)  )
                     {
 
-                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '".$q."%' AND `vacancy_type`='".$querytype ."' AND `job_city`='".$querycity."'");
+                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `vacancy_type`='".$querytype ."' AND `job_city`='".$querycity."'");
 
                     }
 
                     if($querytype && $queryindustry && empty($querycity)  )
                     {
 
-                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '".$q."%' AND `vacancy_type`='".$querytype ."' AND `industry`='".$queryindustry."'");
+                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `vacancy_type`='".$querytype ."' AND `industry`='".$queryindustry."'");
 
                     }
 
                     if($querycity && $queryindustry && empty($querytype))
                     {
 
-                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '".$q."%' AND `job_city`='".$querycity ."' AND `industry`='".$queryindustry."'");
+                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `job_city`='".$querycity ."' AND `industry`='".$queryindustry."'");
 
                     }
 
                     if($querycity && $querycity && $queryindustry)
                     {
 
-                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '".$q."%' AND `job_city`='".$querycity ."' AND `industry`='".$queryindustry."' AND `vacancy_type`='".$querytype."'");
+                        $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `job_city`='".$querycity ."' AND `industry`='".$queryindustry."' AND `vacancy_type`='".$querytype."'");
 
                     }
 

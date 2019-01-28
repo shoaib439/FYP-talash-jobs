@@ -36,6 +36,13 @@ class Vacancy extends Migration
             $table->string('age_range');
             $table->string('working_hours');
             $table->string('last_date');
+
+            $table->unsignedInteger('hr_id');
+
+            $table->foreign('hr_id')->references('id')->on('hrpolicy');
+            $table->string('hr_no_of_interview');
+            $table->string('hr_procedure');
+
             $table->timestamps();
         });
     }

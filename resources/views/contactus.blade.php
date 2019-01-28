@@ -1,22 +1,18 @@
 @extends('main')
+
+@yield('loginlogout')
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid ">
 
-        <div class="pt-4 mybox-shadow1">
-       <h1 class="text-center my-heading-text pt-40 pb-40">Contact us</h1>
-        <p  class="text-center text-info">Please fill out the form below and sunmit your Complaint.</p>
+        <div class="container shadow-sms p-3 mb-5 mt-4 bg-white rounded ">
+
+        <h1 class="text-center my-heading-text pt-40 pb-20">Contact us</h1>
+        <p  class="text-center text-info  my-heading-text2">Please fill out the form below and submit your Complaint.</p>
         <div class="row" >
             <div class="col-md-6 offset-md-3"  >
 
                 <form class="pb-40" action="{{url('/user/contactus')}}" method="POST">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="Cname" name="Cname"  placeholder="Enter Name" >
-                    </div>
-
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="Cemail" name="Cemail" placeholder="Enter Email">
-                    </div>
 
                     <div class="form-group">
                         <input type="text" class="form-control" id="Csubject" name="Csubject"  placeholder="Enter Subject" >

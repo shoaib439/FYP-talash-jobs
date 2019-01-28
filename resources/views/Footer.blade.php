@@ -112,7 +112,7 @@
         <a class="text-light" href="#">About Us</a>
     </li>
     <li>
-        <a class="text-light" href="#">Contact Us</a>
+        <a class="text-light" href="{{'/user/contactus'}}">Contact Us</a>
     </li>
     <li>
         <a class="text-light" href="#">Privacy Policy</a>
@@ -121,7 +121,7 @@
         <a class="text-light" href="#">Terms of use</a>
     </li>
     <li>
-        <a class="text-light" href="#">FAQ's</a>
+        <a class="text-light" href="{{url('/submitfeedback')}}">Feedback</a>
     </li>
 
 

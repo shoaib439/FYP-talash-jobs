@@ -2,7 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\appliedvacancy;
+use App\education;
 use App\hrpolicy;
+use App\jobseekerprofile;
+use App\languages;
+use App\notification;
+use App\prefferedcity;
+use App\savedvacancy;
+use App\skill;
+use App\workexperience;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -10,10 +19,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\companyprofile;
 use App\vacancy;
+use App\invite;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+
+use App\User;
 
 
 class CompanyController extends Controller
@@ -31,6 +43,8 @@ class CompanyController extends Controller
         else
         {
             if(Auth::user()->isCompany()){
+
+                $notifications = Auth::user()->notifications();
                 return view('companymain');
 
             }
@@ -50,10 +64,16 @@ class CompanyController extends Controller
         else
         {
             if(Auth::user()->isCompany()){
-                return view('AddVacancy');
+
+
+                $user=Auth::User();
+                $customHR=hrpolicy::where('user_id',$user->id)->get();
+
+                return view('AddVacancy',compact('customHR'));
             }
 
         }
+
         return redirect('/login');
     }
 
@@ -67,6 +87,7 @@ class CompanyController extends Controller
         else
         {
             if(Auth::user()->isCompany()){
+
                 return view('companydashboardnav');
             }
 
@@ -133,14 +154,154 @@ class CompanyController extends Controller
             return redirect('/login');
         }
 
-        else
-        {
-            if(Auth::user()->isCompany()){
-                return view('companyapplications');
+
+            if(!Auth::user()->isCompany()){
+                return redirect('/login');
             }
 
+
+            $user = Auth::user();
+
+
+            $getVacancy=vacancy::where('user_fk',$user->id)->get();
+
+        return view('companyapplications',compact('getVacancy'));
+    }
+
+    public function showcompanyapplicationslist(Request $request){
+
+        $validation = Validator::make($request->all(), [
+
+            'choose_vacancy' => 'required|int',
+
+        ]);
+
+        if($validation->passes()) {
+
+
+
+            $vacancy= appliedvacancy::where(['vacancy_id'=>$request->choose_vacancy])->get();
+
+            $appliedUsers=[];
+
+
+
+            foreach ($vacancy as $key => $vac):
+
+                $appliedUsers[$key]=[];
+            $Users= User::where(['id'=>$vac->jobseeker_id])->get();
+                $vacancy= vacancy::where(['id'=>$request->choose_vacancy])->get();
+
+                $status= appliedvacancy::where(['status'=>$vac->status])->get();
+
+                $appliedUsers[$key]['Users']=$Users->first();
+                $appliedUsers[$key]['vacancy']=$vacancy->first();
+                $appliedUsers[$key]['status']=$status->first();
+
+
+
+            endforeach;
+
+//
+//            var_dump($vacancy);
+//            die();
+            return view('companyselectedapplication',compact('appliedUsers'));
+        }
+
+
+    }
+
+    public function updateStatus(Request $request)
+    {
+
+        if (!Auth()->guard()->check()) {
+            return redirect('/login');
+        } else {
+            if (Auth::user()->isCompany()) {
+
+
+                $validation=Validator::make($request->all(),[
+
+                    'status'=>'required',
+                    'vacancy_id'=>'required|int',
+                ]);
+
+                if($validation->passes())
+                {
+
+                    $statusUpdate=appliedvacancy::where('id',$request->vacancy_id)->get()->first();
+
+                    DB::update("UPDATE `appliedvacancies` SET `status`='{$request->status}' WHERE `id`='{$request->vacancy_id}'");
+
+
+
+
+//                  var_dump($statusUpdate);
+//                  die();
+
+                    return redirect('company/profile');
+
+                }
+                else
+                {
+                    return response()->json([
+                        'success' => '0',
+                        'message'   => $validation->errors()->all(),
+                        'uploaded_image' => '',
+                        'class_name'  => 'alert-danger'
+                    ]);
+                }
+
+            }
+        }
+
+    }
+
+
+
+    public function updateStatuspage(Request $request)
+    {
+
+        if (!Auth()->guard()->check()) {
+
+            return redirect('/login');
+        }
+        else {
+
+            if (Auth::user()->isCompany()) {
+
+                $validation=Validator::make($request->all(),[
+
+                    'updatestatus'=>'required|int',
+                    ]);
+
+                if($validation->passes())
+                {
+
+
+                  $vacancyupdate=$request->updatestatus;
+
+//                  var_dump($vacancyupdate);
+//                  die();
+
+                  return view('updateStatusPage',compact('vacancyupdate'));
+
+                }
+                else
+                {
+                    return response()->json([
+                        'success' => '0',
+                        'message'   => $validation->errors()->all(),
+                        'uploaded_image' => '',
+                        'class_name'  => 'alert-danger'
+                    ]);
+                }
+
+
+            }
         }
         return redirect('/login');
+
     }
 
     public function HRpolicies(){
@@ -213,6 +374,7 @@ class CompanyController extends Controller
 
     public function companypassresetPage(Request $request)
     {
+
 
 
 //        if(!Auth::guard()->check()){
@@ -298,23 +460,34 @@ class CompanyController extends Controller
 
        // die();
 
-if($newpassword==$confirmpassword){
-
-    $newpassword = Hash::make($newpassword);
-
-    if (!Hash::check($newpassword, $userpassword)):
-        return redirect('/company/resetpassword');
-    endif;
+            if($newpassword==$confirmpassword){
 
 
-   // $newpassword = Hash::make($newpassword);
-
-    $user->password = $newpassword;
-
-    $user->save();
 
 
-    return view('resetPassword');
+               // $newpassword = Hash::make($newpassword);
+
+                if (!Hash::check($oldpassword, $userpassword)):
+            //        echo $userpassword.'......';
+            //
+
+                    return redirect('/user/resetpassword');
+                endif;
+
+//                        echo "ho gya";
+//                        die();
+
+
+               $newpassword = Hash::make($newpassword);
+
+                $user->password = $newpassword;
+
+                $user->save();
+
+
+
+
+    return redirect('/');
 }
 
 
@@ -330,10 +503,10 @@ if($newpassword==$confirmpassword){
         }
 
 
-        if(!Auth::user()->isCompany()){
-
-            return view('/');
-        }
+//        if(!Auth::user()->isCompany() ){
+//
+//            return view('/');
+//        }
 
         return view('resetPassword');
 
@@ -434,6 +607,203 @@ if($newpassword==$confirmpassword){
         }
 
         return view('jobseekerDisplayProfile');
+    }
+
+
+    public function jobseekerprofile($id){
+
+        $user = User::where(['id'=>$id,'type'=>'jobseeker'])->get();
+
+        if(!$user || $user->isEmpty()){
+            return redirect('/');
+        }
+
+        $user = $user->first();
+        $jobseekerdata = jobseekerprofile::where('user_id',$user->id)->get()->first();
+
+
+        $workexp = workexperience::where('user_id',$user->id)->get();
+        $education = education::where('user_id',$user->id)->get();
+        $skills=skill::where('user_id',$user->id)->get();
+        $Pcity=prefferedcity::where('user_id',$user->id)->get();
+
+        //var_dump(languages::where('user_id',$user->id)->get()->toArray());
+        //die();
+        $langs = languages::where('user_id',$user->id)->get();
+
+        $langarray = [];
+        foreach ($langs as $lang):
+            $langarray[] = $lang->language;
+        endforeach;
+
+        $cityarray = [];
+        foreach ($Pcity as $city):
+            $cityarray[] = $city->preffered_city;
+        endforeach;
+
+        $skillarray = [];
+        foreach ($skills as $skill):
+            $skillarray[] = $skill->skills;
+        endforeach;
+
+        $invitelink = 'invited';
+
+        $invited = invite::where('jobseeker_id',$user->id)->get();
+
+        if(!$invited || $invited->isEmpty()){
+            $invitelink = url('/invite/'.$user->id);
+        }
+
+
+
+
+
+        return view('jobseekerDisplayProfile',compact('user','jobseekerdata','workexp','langarray','invitelink','education','cityarray','skillarray'));
+
+    }
+
+    public function Callforinterview(Request $request){
+
+        if(!Auth::guard()->check()){
+            return redirect('/login');
+        }
+
+
+        if (Auth::user()->isCompany()) {
+
+            $validation=Validator::make($request->all(),[
+
+                'user_id'=>'required|int',
+                 'vacancy_id'=>'required|int',
+            ]);
+
+            if($validation->passes())
+            {
+
+                $companyid=Auth::user();
+
+                $getuser=User::where('id',$request->user_id)->get()->first();
+
+                $vacancyname=vacancy::where('id',$request->vacancy_id)->get()->first();
+
+
+                $url = url('view/vacancy/'.$request->vacancy_id);
+                $html = <<<HTML
+The Company '{$companyid->display_name}' Called you for interview on  '<a href="{$url}">{$vacancyname->title}</a>' vacancy.
+HTML;
+
+                if($getuser){
+
+                    notification::create([
+                        'user_id'=> $getuser->id,
+                        'message'=>$html,
+                        'type'=> 'call for interview',
+                        'viewed'=> '0',
+                    ]);
+                    return redirect('/company/applicationslist');
+                }
+
+//                  var_dump($getuser->id);
+//                  die();
+
+//                return view('companyvacancylist');
+
+            }
+            else
+            {
+                return response()->json([
+                    'success' => '0',
+                    'message'   => $validation->errors()->all(),
+                    'uploaded_image' => '',
+                    'class_name'  => 'alert-danger'
+                ]);
+            }
+
+
+        }
+        return redirect('/login');
+
+
+
+
+    }
+
+    public function jobseekerInvite($id){
+
+
+        if(!Auth::guard()->check()){
+            return redirect('/');
+        }
+        $companyuser = Auth::user();
+        if(!$companyuser->isCompany()){
+            return redirect('/');
+        }
+
+        $user = User::where(['id'=> $id, 'type'=>'jobseeker'])->get();
+
+        if(!$user){
+            return redirect('/');
+        }
+
+        $user = $user->first();
+
+
+        $vacancy = vacancy::where('user_fk',$companyuser->id)->get();
+
+        return view('jobseekerinvite',compact('id','user','vacancy'));
+    }
+
+    public function jobseekerInviteSubmit(Request $req){
+
+        $validation = Validator::make($req->all(), [
+
+            'invite_vacancy' => 'required',
+            'jobseeker_id' => 'required',
+
+        ]);
+
+        if(!Auth::guard()->check()){
+            return redirect('/');
+        }
+        $companyuser = Auth::user();
+        if(!$companyuser->isCompany()){
+            return redirect('/');
+        }
+
+
+        $user = User::where(['id'=> $req->jobseeker_id, 'type'=>'jobseeker'])->get();
+
+        if(!$user){
+            return redirect('/');
+        }
+
+
+        $invite = invite::create([
+            'jobseeker_id'=> $req->jobseeker_id,
+            'company_id'=> $companyuser->id,
+            'vacancy_id'=> $req->invite_vacancy,
+            'invite_accept'=> "0",
+        ]);
+
+
+        $vacancydata = vacancy::where('id',$req->invite_vacancy)->get()->first();
+        $url = url('view/vacancy/'.$req->invite_vacancy);
+        $html = <<<HTML
+The Company '{$companyuser->display_name}' has invited you to '<a href="{$url}">{$vacancydata->title}</a>' vacancy.
+HTML;
+
+        if($invite){
+
+            notification::create([
+                'user_id'=> $req->jobseeker_id,
+                'message'=>$html,
+                'type'=> 'invite',
+                'viewed'=> '0',
+            ]);
+            return redirect('/profile/'.$req->jobseeker_id);
+        }
+
+        return redirect()->back()->withInput($req->only(['invite_vacancy']));
     }
 
 

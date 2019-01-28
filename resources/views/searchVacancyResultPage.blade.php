@@ -148,7 +148,7 @@
                         <div class="col-md-4">
 
 
-                            <button type="submit" class="btn my-btn">View</button>
+                            <a href="{{ url('/view/vacancy/'.$data->id)  }}"  type="submit" class="btn my-btn">View</a>
                         </div>
 
                     </div>
