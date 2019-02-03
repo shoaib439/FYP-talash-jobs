@@ -8,6 +8,13 @@
 
 @extends('adminfrontend.adminpanel')
 @section('usersfeedback')
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Users Feedback</a>
+        </li>
+
+    </ol>
 
     <div class="container-fluid ">
 
@@ -17,19 +24,16 @@
 
             <div class="row">
                 <div class="col-md-8">
-                   <p class="feedbackname"><b>name:</b>  {{$values['name']}}</p>
-                    <p class="feedbacksuggession"><b>Suggession:</b>  <i>{{$values['suggestion']}}</i></p>
+
+                    <a class=" feedbackname my-heading-text3">Name: </a>   <a class="my-text-font">{{$values['name']}}</a></p>
+
+
+                    <a class=" feedbacksuggession my-heading-text3">Suggession: </a>   <a class="my-text-font">{{$values['suggestion']}}</a></p>
                 </div>
                 <div class="col-md-4 d-flex set-this">
                     <p class="getrating"> <b>rating:</b>   {{$values['rating']}}/5</p>
                 </div>
-
-
-
-
             </div>
-
-            <hr>
 
                 @endforeach
         </div>

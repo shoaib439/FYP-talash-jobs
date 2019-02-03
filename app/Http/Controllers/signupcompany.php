@@ -19,18 +19,19 @@ class Signupcompany extends Controller
     {
 
 
+
         $this->validate($request, [
             'name' => 'required|string',
             'username' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'phone' => 'required',
-            'cnic'=> 'required',
+            'password' => 'required|string|min:6|max:50|confirmed',
+            'phone' => 'required|min:11|max:13',
+            'cnic'=> 'required|min:12|max:18',
             'company_type' => 'required|string',
             'address' => 'required|string',
             'city' => 'required|string',
             'industry' => 'required|string',
-            'link' => 'required|string',
+            'link' => 'required|string|url',
             'designation' => 'required|string',
 
 
@@ -40,7 +41,7 @@ class Signupcompany extends Controller
 
         $user = User::create([
 
-            'name' => strtolower( $request->name),
+            'name' => strtolower( $request->username),
             'display_name' =>  $request->name,
             'email' =>   $request->email,
             'password' =>  Hash::make( $request->password),

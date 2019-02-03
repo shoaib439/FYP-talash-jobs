@@ -14,7 +14,7 @@
                 <div class="col-md-4 mx-auto">
 
                     <!-- Content -->
-                    <h5 class="font-weight-bold text-light text-uppercase mt-3 mb-4">Talash Jobs</h5>
+                    <h2 class="font-weight-bold text-light text-uppercase mt-3 mb-4">Talash Jobs</h2>
                     <p class="text-light">Here is description of talash jobs</p>
 
                 </div>
@@ -26,33 +26,31 @@
 
                     <ul class="list-unstyled text-light">
                         <li>
-                            <a class="text-light" href="#">IT/Software Development</a>
+                            <a class="text-light" href="{{ '/search/industry/IT' }}">IT/Software Development</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Medical/Health</a>
+                            <a class="text-light" href="{{ '/search/industry/Medical' }}">Medical/Health</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Accounting</a>
+                            <a class="text-light" href="{{ '/search/industry/Accounting' }}">Accounting</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Engineering</a>
+                            <a class="text-light" href="{{ '/search/industry/Engineering' }}">Engineering</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Pharmaceutical</a>
+                            <a class="text-light" href="{{ '/search/industry/Banking-Financial' }}">Banking-Financial</a>
                         </li>
+
                         <li>
-                            <a class="text-light" href="#">Banking</a>
-                        </li>
-                        <li>
-                            <a class="text-light" href="#">Customer Care</a>
+                            <a class="text-light" href="{{ '/search/industry/Customer Care' }}">Customer Care</a>
                         </li>  <li>
-                            <a class="text-light" href="#">Call Center</a>
+                            <a class="text-light" href="{{ '/search/industry/Call Center' }}">Call Center</a>
                         </li>  <li>
-                            <a class="text-light" href="#">Consultants </a>
+                            <a class="text-light" href="{{ '/search/industry/Consultants' }}">Consultants </a>
                         </li>  <li>
-                            <a class="text-light" href="#">Education/Training</a>
+                            <a class="text-light" href="{{ '/search/industry/Education/Training' }}">Education/Training</a>
                         </li>  <li>
-                            <a class="text-light" href="#">Banking</a>
+                            <a class="text-light" href="{{ '/search/industry/Advertising' }}">Advertising</a>
                         </li>
 
                     </ul>
@@ -68,31 +66,31 @@
 
                     <ul class="list-unstyled text-light">
                         <li>
-                            <a class="text-light" href="#">Lahore</a>
+                            <a class="text-light" href="{{ '/search/city/Lahore' }}">Lahore</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Karachi</a>
+                            <a class="text-light" href="{{ '/search/city/Karachi' }}">Karachi</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Islamabad</a>
+                            <a class="text-light" href="{{ '/search/city/Islamabad' }}">Islamabad</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Multan</a>
+                            <a class="text-light" href="{{ '/search/city/Multan' }}">Multan</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Queetta</a>
+                            <a class="text-light" href="{{ '/search/city/Queetta' }}">Queetta</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Peshawar</a>
+                            <a class="text-light" href="{{ '/search/city/Peshawar' }}">Peshawar</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Gujranwala</a>
+                            <a class="text-light" href="{{ '/search/city/Gujranwala' }}">Gujranwala</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">peshawar</a>
+                            <a class="text-light" href="{{ '/search/city/peshawar' }}">peshawar</a>
                         </li>
                         <li>
-                            <a class="text-light" href="#">Silakot</a>
+                            <a class="text-light" href="{{ '/search/city/Silakot' }}">Silakot</a>
                         </li>
 
                     </ul>
@@ -200,7 +198,7 @@
 <hr>
 
 <!-- Copyright -->
-<div class="footer-copyright text-center py-3"> <a class="text-light"> © 2018 Copyright</a>
+<div class="footer-copyright text-center py-3"> <a class="text-light"> © 2019 Copyright</a>
     <a class="text-light" href="#"> Talashjobs.pk</a>
 </div>
 <!-- Copyright -->

@@ -112,7 +112,7 @@ class AjaxJobSeekerProfile extends Controller
 
         $path = public_path('images');
         $validation = Validator::make($request->all(), [
-            'dp_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000'
+            'dp_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:1000'
         ]);
 
         if ($validation->passes()) {
@@ -135,17 +135,23 @@ class AjaxJobSeekerProfile extends Controller
             return response()->json([
                 'message' => 'Image Upload Successfully',
                 'uploaded_image' => '<img src="/images/' . $new_name . '" class="img-thumbnail" width="300" />',
-                'class_name' => 'alert-success'
+                'class_name' => 'alert-success',
+                'success' => '1',
             ]);
 
 
         } else {
             return response()->json([
-                'message' => $validation->errors()->all(),
+                'errors' => $validation->errors()->all(),
                 'uploaded_image' => '',
+                'success' => '0',
                 'class_name' => 'alert-danger'
             ]);
         }
+
+//        if ($validator->fails()) {
+//            return redirect('youFormPage')->withErrors($validator)->withInput();
+//        }
 
     }//end of upload image
 
@@ -159,7 +165,6 @@ class AjaxJobSeekerProfile extends Controller
             //'address' => 'required', //aur kr lae
         ]);
 
-        echo 'A';
 
 
         if($validation->passes())
@@ -378,7 +383,7 @@ class AjaxJobSeekerProfile extends Controller
 
 
         $validation = Validator::make($request->all(), [
-            'hobbies' => 'required',
+            'hobbies' => 'required|string|min:4',
 
         ]);
 
@@ -407,10 +412,14 @@ class AjaxJobSeekerProfile extends Controller
 
             $hobby = hobbies::Create([
                 'user_id'=>$user->id,
-                'hobbies' => $request->hobby,
+                'hobbies' => $request->hobbies,
+
 
 
             ]);
+
+//            var_dump($request->hobbies);
+//            die();
 
             if($hobby):
                 return response()->json([

@@ -22,6 +22,12 @@
                                     <i class="fa fa-camera upload-button"></i>
                                     <form id="dp-change-form" method="POST" enctype="multipart/form-data">
                                         <input class="file-upload" name="dp_file" type="file" />
+
+                                        @if ($errors->has('dp_file'))
+                                            <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('dp_file') }}</strong>
+                                    </span>
+                                        @endif
                                         {{ csrf_field() }}
                                     </form>
                                 </div>
@@ -47,18 +53,21 @@
 
             <div class="row mt-4">
                 <div class="col-sm-3">
-                    <p><i class="fa fa-mars"></i>  <span id="personal-gender">{{ Auth::user()->gender }}</span></p>
-                    <p ><i class="fa fa-calendar" aria-hidden="true"></i>  <span id="personal-dob">{{$profile['date_of_birth']}}</span></p>
-                    <p><i class="fa fa-address-card" aria-hidden="true"></i>  <span id="personal-address"> {{$profile['js_address']}}</span></p>
-                    <p><i class="fa fa-building-o" aria-hidden="true"></i>  <span id="personal-city"> {{ Auth::user()->city }}</span></p>
+                    <p><i class="fa fa-envelope"></i>  <span id="personal-email" class="my-text-font"> {{ Auth::user()->email }}</span></p>
+                    <p><i class="fa fa-phone"></i>  <span id="personal-phone" class="my-text-font"> {{ Auth::user()->phoneno }}</span></p>
+
+                    <p><i class="fa fa-address-card" aria-hidden="true"></i>  <span id="personal-address"class="my-text-font">  {{$profile['js_address']}}</span></p>
+                    <p><i class="fa fa-building-o" aria-hidden="true"></i>  <span id="personal-city"class="my-text-font">  {{ Auth::user()->city }}</span></p>
 
 
                 </div>
 
                 <div class="col-sm-3">
-                    <p><i class="fa fa-phone"></i>  <span id="personal-phone">{{ Auth::user()->phoneno }}</span></p>
-                    <p><i class="fa fa-envelope"></i>  <span id="personal-email">{{ Auth::user()->email }}</span></p>
 
+
+                    <p><i class="fa fa-mars"></i>  <span id="personal-gender" class="my-text-font">{{ Auth::user()->gender }}</span></p>
+
+                    <p ><i class="fa fa-calendar" aria-hidden="true"></i>  <span id="personal-dob" class="my-text-font"> {{$profile['date_of_birth']}}</span></p>
 
                 </div>
 
@@ -77,7 +86,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h5>Work Experience</h5>
+                            <h2 class="my-heading-text">Work Experience</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -100,7 +109,9 @@
                         </form>
                         <div class="row">
                             <div class="col-md-3">
-                                <p class="my-fa">{{ $exp->company_name  }}</p>
+                                <p >  <a class="my-heading-text3 my-fa">Position: </a>   <a class="my-text-font">{{ $exp->company_position }}</a></p>
+
+
 
                             </div>
 
@@ -112,34 +123,34 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <p class="my-fa">{{ $exp->company_position  }}</p>
+                                <p >     <a class="my-heading-text3 my-fa">Company name: </a>   <a class="my-text-font">{{ $exp->company_name }}</a></p>
 
                             </div>
 
                             <div class="col-md-3">
-                                <p class="my-fa">{{ $exp->company_location }}</p>
+                                <p><a class="my-heading-text3 my-fa">Job Type: </a><a class="my-text-font">{{ $exp->job_type }}</a></p>
+
 
                             </div>
 
                             <div class="col-md-3">
-                                <p class="my-fa">{{ $exp->job_type  }}</p>
+                                <p><a class="my-heading-text3 my-fa">Currently Working: </a><a class="my-text-font ">{{ $exp->currently_working }}</a></p>
 
-                            </div>
-
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $exp->currently_working }}</p>
 
                             </div>
 
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <p>{{ $exp->start_date }}</p>
+                            <div class="col-md-3">
+                                <p><a class="my-heading-text3 my-fa">Start Date: </a><a class="my-text-font ">{{ $exp->start_date }}</a></p>
+
                             </div>
 
-                            <div class="col-md-6">
-                                <p>{{ $exp->end_date }}</p>
+                            @if( !$exp->currently_working=='yes' )
+                            <div class="col-md-3">
+                                <p><a class="my-heading-text3 my-fa">End Date: </a><a class="my-text-font ">{{ $exp->end_date }}</a></p>
                             </div>
+                                @endif
                         </div>
                     </div>
                 @endforeach
@@ -156,7 +167,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h5>Education</h5>
+                            <h2 class="my-heading-text">Education</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -178,35 +189,41 @@
                             <input type="hidden" name="education_id" value="{{ $edu->id }}" />
                         </form>
                         <div class="row">
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $edu->degree_title  }}</p>
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Degree Title: </a><a class="my-text-font my-fa">{{ $edu->degree_title  }}</a></p>
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Degree Level: </a><a class="my-text-font my-fa">{{ $edu->degree_level  }}</a></p>
+
 
                             </div>
 
 
-                            <div class="col-md-9 text-right">
+                            <div class="col-md-2 text-right">
                                 <i class="fa fa-close red we-remove-btn"></i>
                             </div>
                         </div>
 
                         <div class="row">
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Institute: </a><a class="my-text-font my-fa">{{ $edu->institite  }}</a></p>
+
+                            </div>
+
+
                             <div class="col-md-3">
-                                <p class="my-fa">{{ $edu->year_of_completion  }}</p>
+
+                                <p><a class="my-heading-text3 ">City: </a><a class="my-text-font ">{{ $edu->city  }}</a></p>
+
 
                             </div>
 
                             <div class="col-md-3">
-                                <p class="my-fa">{{ $edu->degree_level }}</p>
+                                <p><a class="my-heading-text3 ">Year of Completion: </a><a class="my-text-font my-fa">{{ $edu->year_of_completion  }}</a></p>
 
-                            </div>
 
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $edu->institute  }}</p>
-
-                            </div>
-
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $edu->city }}</p>
 
                             </div>
 
@@ -228,7 +245,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h5>Functional Area</h5>
+                            <h2 class="my-heading-text">Functional Area</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -273,7 +290,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h5>Skills</h5>
+                            <h2 class="my-heading-text">Skills</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -322,7 +339,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h5>Preffered Job City</h5>
+                            <h2 class="my-heading-text">Preffered Job City</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -402,7 +419,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h5>Projects</h5>
+                            <h2 class="my-heading-text">Projects</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -423,39 +440,51 @@
                             <input type="hidden" name="jsproject_id" value="{{ $project->id }}" />
                         </form>
                         <div class="row">
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $project->project_title  }}</p>
+                            <div class="col-md-4">
+
+                                <p><a class="my-heading-text3 ">Project Title: </a><a class="my-text-font my-fa">{{ $project->project_title   }}</a></p>
 
                             </div>
 
 
-                            <div class="col-md-9 text-right">
+                            <div class="col-md-8 text-right">
                                 <i class="fa fa-close red we-remove-btn"></i>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $project->project_desc  }}</p>
+                            <div class="col-md-7">
+
+                                <p><a class="my-heading-text3 ">Description: </a><a class="my-text-font my-fa">{{ $project->project_desc   }}</a></p>
 
                             </div>
 
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $project->project_sd }}</p>
-
-                            </div>
-
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $project->project_ed  }}</p>
-
-                            </div>
-
-                            <div class="col-md-3">
-                                <p class="my-fa">{{ $project->project_url }}</p>
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Url: </a><a class="my-text-font my-fa">{{ $project->project_url   }}</a></p>
 
                             </div>
 
                         </div>
+
+                        <div class="row">
+
+                            <div class="col-md-7">
+                                <p><a class="my-heading-text3">Start Date: </a><a class="my-text-font  my-fa">{{ $project->project_sd   }}</a></p>
+
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3">End Date: </a><a class="my-text-font  my-fa">{{ $project->project_ed   }}</a></p>
+
+                        </div>
+
+
+
+
+                            </div>
+
+
                     </div>
                 @endforeach
 
@@ -474,7 +503,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h5>Languages</h5>
+                            <h2 class="my-heading-text">Languages</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -520,7 +549,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h5>Hobbies</h5>
+                            <h2 class="my-heading-text">Hobbies</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -538,6 +567,8 @@
                         <form class="hobby-remove-form">
                             @csrf
                             <input type="hidden" name="hobby_id" value="{{ $hobby->id }}" />
+
+
                         </form>
                         <div class="row">
                             <div class="col-md-3">
@@ -642,7 +673,7 @@
                            <div class="col-md-12">
                                <div class="form-group align-class">
                                    @csrf
-                                   <input type="submit" class="form-control jbs-close btn my-btn1" value="Save" />
+                                   <input type="submit" class="form-control btn my-btn1" value="Save" />
                                </div>
                            </div>
                        </div>
@@ -726,7 +757,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group align-class">
-                                        <input type="submit" class="form-control jbs-close btn my-btn1" value="Save" />
+                                        <input type="submit" class="form-control btn my-btn1" value="Save" />
                                     </div>
                                 </div>
                             </div>
@@ -778,7 +809,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group align-class">
-                                            <input type="submit" class="form-control jbs-close btn my-btn2" value="Save" />
+                                            <input type="submit" class="form-control btn my-btn2" value="Save" />
                                         </div>
                                     </div>
 
@@ -821,6 +852,11 @@
                                     <div class="form-group">
                                         <label for="hobbies">Hobbies</label>
                                         <input type="text" class="form-control" id="hobbies"  name="hobbies" required aria-describedby="hobbieshelp" placeholder="Hobbies">
+                                        @if ($errors->has('hobbies'))
+                                            <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('hobbies') }}</strong>
+                                    </span>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -834,7 +870,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group align-class">
-                                            <input type="submit" class="form-control jbs-close btn my-btn1" value="Save" />
+                                            <input type="submit" class="form-control btn my-btn1" value="Save" />
                                         </div>
                                     </div>
 
@@ -889,7 +925,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group align-class">
-                                        <input type="submit" class="form-control jbs-close btn my-btn1" value="Save" />
+                                        <input type="submit" class="form-control btn my-btn1" value="Save" />
                                     </div>
                                 </div>
                             </div>
@@ -943,7 +979,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group align-class">
-                                        <input type="submit" class="form-control jbs-close btn my-btn1" value="Save" />
+                                        <input type="submit" class="form-control btn my-btn1" value="Save" />
                                     </div>
                                 </div>
                             </div>
@@ -1024,7 +1060,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group align-class">
-                                        <input type="submit" class="form-control jbs-close btn my-btn1" value="Save" />
+                                        <input type="submit" class="form-control btn my-btn1" value="Save" />
                                     </div>
                                 </div>
                             </div>
@@ -1076,7 +1112,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group align-class">
-                                        <input type="submit" class="form-control jbs-close btn my-btn2" value="Save" />
+                                        <input type="submit" class="form-control btn my-btn2" value="Save" />
                                     </div>
                                 </div>
                             </div>
@@ -1171,7 +1207,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group align-class">
-                                        <input type="submit" class="form-control jbs-close btn my-btn1" value="Save" />
+                                        <input type="submit" class="form-control btn my-btn1" value="Save" />
                                     </div>
                                 </div>
                             </div>

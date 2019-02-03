@@ -13,12 +13,13 @@ class Skill extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('skill', function (Blueprint $table) {
 
             $table->increments('id');
             $table->unsignedInteger('user_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('skills');
 
 

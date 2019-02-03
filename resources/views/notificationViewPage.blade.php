@@ -9,6 +9,24 @@
 
 @extends('main')
 
+@section('navbrandclass')
+    search-nav-brand
+@endsection
+
+
+@section('afternavlogo')
+    <form action="{{url('/search')}}" method="POST">
+        @csrf
+        <input class="nav-search" type="text" name="userquery" />
+
+        <button type="submit" rel="tooltip" class="btn  btn-secondary-me" >
+            <i class="fa fa-search"></i>
+        </button>
+        <a href="/" >Advance Search</a>
+    </form>
+@endsection
+
+
 @section('showNotificationPage')
 
     <div class="container-fluid ">
@@ -21,10 +39,15 @@
                     {{$noti->type}}
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-8">
                     {!! $noti->message !!}
                 </div>
+                <div class="col-md-2 text-right">
+                    <a   href="{{ url('/delete/notification/'.$noti->id)  }}"  class="fa fa-remove red " ></a>
+                </div>
+
             </div>
+                <hr>
 
 
                 @endforeach

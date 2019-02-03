@@ -7,6 +7,7 @@
     <base href="{{URL::asset ('/')}}" >
     <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('css/main.css')}}">
+    <link rel="fo" href="{{url('fonts/raleway')}}">
     {{--<link rel="stylesheet" href="{{url('fontawesome/fontawesome.min.css')}}">--}}
     <link rel="stylesheet" href="{{url('font-awesome-4.7.0/css/font-awesome.min.css')}}">
 
@@ -36,6 +37,8 @@
 @yield('vacancyDisplayPage')
 @yield('InvitationAcceptedPage')
 @yield('jsprofile')
+@yield('searchVacancySectionforAll')
+
 
 
 

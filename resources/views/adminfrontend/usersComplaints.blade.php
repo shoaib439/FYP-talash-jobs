@@ -9,27 +9,25 @@
 @extends('adminfrontend.adminpanel')
 
 @section('userscomplaints')
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a >Complaints</a>
+        </li>
 
+    </ol>
     <div class="container-fluid ">
 
 
             <div class="container shadow-sms p-3 mb-5 bg-white rounded ">
                 @foreach ($complaints as $complaint)
                 <div class="row d-flex">
-                    <div class="col-md-2">
-                        <h6>Name    :</h6>
-                        <h6>User Type    :</h6>
-                        <h6>Email   :</h6>
-                        <h6>Subject :</h6>
-                        <h6>Message :</h6>
-                    </div>
-
-                    <div class="col-md-8">
-                        <p>{{$complaint['name']}}</p>
-                        <p>{{$complaint['type']}}</p>
-                        <p>{{$complaint['email']}}</p>
-                        <p>{{$complaint['subject']}}</p>
-                        <p>{{$complaint['message']}}</p>
+                    <div class="col-md-10">
+                        <a class="my-heading-text3">Name: </a>   <a class="my-text-font">{{$complaint['name']}}</a></p>
+                        <a class="my-heading-text3">User Type: </a>   <a class="my-text-font">{{$complaint['type']}}</a></p>
+                        <a class="my-heading-text3">Email: </a>   <a class="my-text-font">{{$complaint['email']}}</a></p>
+                        <a class="my-heading-text3">Subject: </a>   <a class="my-text-font">{{$complaint['subject']}}</a></p>
+                        <a class="my-heading-text3">Message: </a>   <a class="my-text-font">{{$complaint['message']}}</a></p>
 
                     </div>
 
@@ -73,7 +71,7 @@
                         </div>
                     </div>
                 </div>
-                    <hr>
+
                 @endforeach
             </div>
 

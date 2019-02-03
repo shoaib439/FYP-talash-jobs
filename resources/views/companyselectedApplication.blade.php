@@ -101,7 +101,7 @@
                 @foreach($appliedUsers as $key=> $data)
                 <div class="jbs-model" id="jbs-call-container-{{ $key }}">
                     <div class="jbs-model-background jbs-close"></div>
-                    <div class="jbs-status-container">
+                    <div class="jbs-call-container">
 
                         <form method="post" action="{{url('/callforinterview')}}">
                         <div class="jbs-main">
@@ -111,6 +111,18 @@
                                 </div>
                                 <div class="jbs-close-container">
                                     <i class="fa fa-close jbs-close"></i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="datetime">Please choose Date</label>
+                                    <input type="date" class="form-control" name="date"required aria-describedby="datehelp" >
+
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="datetime">Please choose Time</label>
+                                    <input type="time" class="form-control" name="time"required aria-describedby="timehelp" >
+
                                 </div>
                             </div>
 

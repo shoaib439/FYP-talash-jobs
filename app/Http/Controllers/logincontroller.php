@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Auth;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Validator;
 class Logincontroller extends Controller
 {
 
@@ -50,28 +51,40 @@ class Logincontroller extends Controller
 
     public function login (Request $request)
     {
-        if(Auth::guard()->check()){
-            return redirect('/');
-        }
 
-        $email =  $request->email;
-        $password =  $request->password;
+        $this->validate($request, [
 
-        $User = new User;
+            'email' => 'required|email',
+            'password' => 'required|string',
 
-        if(auth::attempt(['email'=>$email,'password'=>$password])):
-            $verify = $User::where(['email' => $email])->get()->first();
+        ]);
 
-            if($verify->type == 'jobseeker' && !$verify->isAdmin()){
-                // Session::set('user_type', 'jobseeker');
-                return redirect('/jobseekerhome');
+            if(Auth::guard()->check()){
+                return redirect('/');
             }
-            elseif(!$verify->isAdmin()){
-                // Session::set('user_type', 'company');
-                return redirect('/company/main');
-            }
-        endif;
 
-        return redirect('/login')->withInput(['msg'=>'Invalid Username or Password']);
+            $email =  $request->email;
+            $password =  $request->password;
+
+            $User = new User;
+
+            if(auth::attempt(['email'=>$email,'password'=>$password])):
+                $verify = $User::where(['email' => $email])->get()->first();
+
+                if($verify->type == 'jobseeker' && !$verify->isAdmin()){
+                    // Session::set('user_type', 'jobseeker');
+                    return redirect('/jobseekerhome');
+                }
+                elseif(!$verify->isAdmin()){
+                    // Session::set('user_type', 'company');
+                    return redirect('/company/main');
+                }
+            endif;
+
+            return redirect('/login')->withInput(['msg'=>'Invalid Username or Password']);
+
+
+
+
     }
 }

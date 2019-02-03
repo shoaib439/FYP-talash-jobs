@@ -12,6 +12,7 @@
         <a href="{{url('register')}}">Signup</a> | <a href="{{url('login')}}" >Login</a>
     @elseif( Auth::guard() )
 
+
         @if(Auth::user()->isJobseeker())
 
 
@@ -45,6 +46,26 @@
                         <!-- Dropdown menu links -->
                         <a class="dropdown-item" href="{{url('company/profile')}}">Profile</a>
                         <a class="dropdown-item" href="{{url('user/resetpassword')}}">Reset Password</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{route('logout')}}"
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>
+
+                        <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none"> {{csrf_field()}} </form>
+                    </div>
+                </div>
+
+            </div>
+        @endif
+
+        @if(Auth::user()->isAdmin())
+            <div class="container-fluid">
+                <div class="btn-group dropdown-header">
+                    <button type="button" class="btn btn-secondary-me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->display_name }}
+                    </button>
+                    <div class="dropdown-menu ">
+                        <!-- Dropdown menu links -->
+                        <a class="dropdown-item" href="{{url('/adminpanel')}}">Dashboard</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{route('logout')}}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>
@@ -333,7 +354,7 @@
                     <div class="col-md-12">
                         <div class="myCV">
                             <div class="text-center pt-lg-4">
-                                <div class ="cv-heading "><b>BUILT OR UPLOAD YOUR CV</b></div>
+                                <div class ="my-heading-text "><b>BUILT OR UPLOAD YOUR CV</b></div>
                                 <div class="cv-para text-uppercase pt-1">Choose the best template enter your information and build your appeling CV.</div>
 
 
@@ -367,17 +388,22 @@
 
             {{--</div>--}}
             <div class="col-md-12 section-interviews">
-                <div class ="cv-heading text-center mb-4"><b>LATEST JOBS</b></div>
-                <div class="row">
+                <div class ="cv-heading text-center mb-4"><h2 class="green-icon-set">LATEST JOBS</h2></div>
+                <div class="row ">
 
-                    @foreach($jobslist as $job)
+                     @foreach($jobslist as $job)
                         <div class="col-md-4 ">
-                            <div class="block-interview">
+                            <div class="block-interview shadow-sms bg-white ">
+
                                 <div class="interview-logo">
+                                    @if(!empty(($job['user']->profile_pic)))
                                     <img src="{{asset($job['user']->profile_pic)}}" />
+                                    @else
+                                        <img src="{{asset('images/company_default.png')}}" />
+                                    @endif
                                 </div>
                                 <div class="interview-description">
-                                    <a href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h4>{{$job['vacancy']->title}}</h4></a>
+                                    <a href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5 class="green-icon-set">{{$job['vacancy']->title}}</h5></a>
                                     <p>{{$job['company']->company_name}}</p>
                                 </div>
                             </div>
@@ -388,94 +414,6 @@
             </div>
         </div>
 
-
-
-        <div class="row">
-
-            <div class="col-md-12 section-interviews">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="row">
-
-            <div class="col-md-12 section-interviews">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     {{--latest jobs section ended--}}
 
@@ -484,7 +422,7 @@
 
     {{--latest internships section started--}}
 
-
+<hr>
     <div class="container-fluid">
 
         <div class="row ">
@@ -492,135 +430,31 @@
 
             {{--</div>--}}
             <div class="col-md-12 section-interviews ">
-                <div class ="cv-heading text-center mb-4 "><b>LATEST INTERNSHIPS</b></div>
+                <div class ="cv-heading text-center mb-4 "><h2 class="green-icon-set">LATEST INTERNSHIPS</h2></div>
                 <div class="row">
 
-                    <div class="col-md-4 ">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
+
+                        @foreach($internshiplist as $job)
+                            <div class="col-md-4 ">
+                                <div class="block-interview shadow-sms bg-white">
+                                    <div class="interview-logo">
+                                        <img src="{{asset($job['user']->profile_pic)}}" />
+                                    </div>
+                                    <div class="interview-description">
+                                        <a href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5>{{$job['vacancy']->title}}</h5></a>
+                                        <p>{{$job['company']->company_name}}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-
-            <div class="col-md-12 section-interviews">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
 
 
 
-        <div class="row">
-
-            <div class="col-md-12 section-interviews">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="block-interview">
-                            <div class="interview-logo">
-                                <img src="{{asset('images/int-logo.png')}}" />
-                            </div>
-                            <div class="interview-description">
-                                <a href="#"><h4>Test Interview</h4></a>
-                                <p>Silverow (Pvt) Ltd</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 

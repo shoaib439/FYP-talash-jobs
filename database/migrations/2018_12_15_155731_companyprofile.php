@@ -14,17 +14,19 @@ class Companyprofile extends Migration
     public function up()
     {
 
-
+        Schema::enableForeignKeyConstraints();
       Schema::create('companyprofiles', function (Blueprint $table) {
           $table->increments('id');
-          $table->integer('user_id');
+          $table->unsignedInteger('user_id');
+
+          $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
           $table->string('company_name');
-          $table->string('company_type');
+          $table->string('company_type')->nullable();
           $table->string('address');
           $table->string('website');
           $table->string('cnic');
           $table->string('person_name');
-          $table->string('skype');
+          $table->string('skype')->nullable();
           $table->string('person_designation');
           $table->timestamps();
       });

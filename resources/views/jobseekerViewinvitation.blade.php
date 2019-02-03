@@ -24,7 +24,9 @@
 
             <div class="row">
                 <div class="col-md-10">
-                    <h5>Type :</h5><strong>{{$vacancys['vacancy']->vacancy_type}}</strong>
+
+                    <p> <a class="my-heading-text3">Type: </a>   <a class="my-text-font">{{$vacancys['vacancy']->vacancy_type}}</a></p>
+
                 </div>
 
 
@@ -37,11 +39,12 @@
 
 
             <div class="row mt-4">
-                <div class="col-sm-3">
-                    <p> Title: {{$vacancys['vacancy']->title}}</p>
-                    <p> company Name    :{{$vacancys['company']->company_name}}</p>
-                    <p> Description    :{{$vacancys['vacancy']->description}}</p>
-                    <p> Date    :{{$vacancys['vacancy']->last_date}}</p>
+                <div class="col-md-8">
+                    <p> <a class="my-heading-text3">Title: </a>   <a class="my-text-font">   {{$vacancys['vacancy']->title}}</a></p>
+                    <p> <a class="my-heading-text3">company Name: </a>   <a class="my-text-font">   {{$vacancys['company']->company_name}}</a></p>
+                    <p> <a class="my-heading-text3">Description: </a>   <a class="my-text-font">   {{$vacancys['vacancy']->description}}</a></p>
+                    <p> <a class="my-heading-text3">Date: </a>   <a class="my-text-font">{{$vacancys['vacancy']->last_date}}</a></p>
+
 
                 </div>
 

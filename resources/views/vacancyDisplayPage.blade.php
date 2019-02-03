@@ -34,17 +34,15 @@
 
     <div class="container-fluid ">
 
-        <div class="container shadow-sms p-3 mt-3  bg-white rounded ">
+        <div class="container shadow-sms p-3 mt-3 mb-4 bg-white rounded ">
 
 
             <div class="row mt-3">
                 <div class="col-md-10">
-                    <div class="my-heading-text">Title:  {{  $vacancy->title  }}</div>
+                    <div ><p><b class="my-heading-text2">Title:</b> <a class="my-heading-text2">{{  $vacancy->title  }}</a></p></div>
                 </div>
 
-                @guest
-
-                @elseif( Auth::User()->isJobseeker() )
+                @if( Auth::guard()->check() && Auth::User()->isJobseeker() )
 
                 <div class="col-md-2">
 
@@ -64,33 +62,33 @@
 
             <div class="row mt-sm-1">
                 <div class="col-md-3">
-                    <p> <b>Type:</b> <i> {{  $vacancy->vacancy_type  }}</i></p>
+                    <p> <b>Type:</b> <a class="my-text-font"> {{  $vacancy->vacancy_type  }}</a></p>
                 </div>
             </div>
 
             <div class="row">
-                <p style="margin-left: 16px">Description  :</p>
+                <b style="margin-left: 16px">Description  :</b>
                 <div class="col-md-6">
-                    <p>{{  $vacancy->description  }}</p>
+                    <a class="my-text-font">{{  $vacancy->description  }}</a>
                 </div>
             </div>
 
             <hr>
             <div class="row">
                 <div class="col-md-3">
-                    <p>Industry: {{  $vacancy->industry  }} </p>
+                    <p><b >Industry:</b> <a class="my-text-font">{{  $vacancy->industry  }} </a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <p>Positions: {{  $vacancy->no_of_position }} </p>
+                    <p>Positions: <a class="my-text-font">{{    $vacancy->no_of_position  }} </a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <p>Job Type: {{  $vacancy->job_type  }} </p>
+                    <p>Job Type: <a class="my-text-font">{{     $vacancy->job_type   }} </a></p>
                 </div>
 
                 <div class="col-md-3">
-                    <p>Job Shift: {{  $vacancy->job_shift  }} </p>
+                    <p>Job Shift:    <a class="my-text-font">{{     $vacancy->job_shift   }} </a></p>
                 </div>
             </div>
 
@@ -98,15 +96,15 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <p>Experience Required: {{  $vacancy->experience  }} </p>
+                    <p>Experience Required: <a class="my-text-font">{{     $vacancy->experience   }} </a></p>
                 </div>
 
                 <div class="col-md-4">
-                    <p>Degree Level: {{  $vacancy->degree_level }} </p>
+                    <p>Degree Level:    <a class="my-text-font">{{     $vacancy->degree_level   }} </a></p>
                 </div>
 
                 <div class="col-md-4">
-                    <p>Carrier Level: {{  $vacancy->carrier_level  }} </p>
+                    <p>Carrier Level: <a class="my-text-font">{{     $vacancy->carrier_level   }} </a></p>
                 </div>
             </div>
 
@@ -114,15 +112,15 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <p>Skills Required: {{  $vacancy->skill_required  }} </p>
+                        <p>Skills Required:  <a class="my-text-font">{{     $vacancy->skill_required   }} </a></p>
                     </div>
 
                     <div class="col-md-4">
-                        <p>Age Range: {{  $vacancy->age_range }} </p>
+                        <p>Age Range:  <a class="my-text-font">{{     $vacancy->age_range   }} </a></p>
                     </div>
 
                     <div class="col-md-4">
-                        <p>Working Hours: {{  $vacancy->working_hours  }} </p>
+                        <p>Working Hours:   <a class="my-text-font">{{     $vacancy->working_hours   }} </a></p>
                     </div>
                 </div>
 
@@ -131,15 +129,15 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <p>Job City: {{  $vacancy->job_city  }} </p>
+                    <p>Job City:  <a class="my-text-font">{{     $vacancy->job_city   }} </a></p>
                 </div>
 
                 <div class="col-md-4">
-                    <p>Salary: {{  $vacancy->salary }} </p>
+                    <p>Salary:  <a class="my-text-font">{{     $vacancy->salary   }} </a></p>
                 </div>
 
                 <div class="col-md-4">
-                    <p>Last Date to Apply: {{  $vacancy->last_date  }} </p>
+                    <p>Last Date to Apply:  <a class="my-text-font">{{     $vacancy->last_date   }} </a></p>
                 </div>
             </div>
 
@@ -155,31 +153,32 @@
 
             <hr>
 
-            <div class="row ">
-                <div class="col-md-12">
-                    <div ><strong >No of Interview:</strong> {{  $vacancy->hr_no_of_interview  }} </div>
+            <div class="row  ">
+                <div class="col-md-12 mt-2">
+                    <div ><strong >No of Interview:</strong><a class="my-text-font"> {{  $vacancy->hr_no_of_interview  }}</a>  </div>
                 </div>
 
             </div>
 
-            <div class="row ">
+            <div class="row mt-2 ">
                 <div class="col-md-12">
-                    <div><strong >Procedure:</strong>  {{  $vacancy->hr_procedure  }} </div>
+                    <div><strong >Procedure:</strong> <a class="my-text-font">  {{  $vacancy->hr_procedure  }} </a> </div>
                 </div>
 
             </div>
 
-            @if( Auth::User()->isJobseeker() )
+            @if( Auth::guard()->check() && Auth::User()->isJobseeker() )
 
             <div class="row mt-5">
                 <div class="col-md-12 text-center">
 
-                    @if($appliedcheck == 'Applied')
 
-                        <a href="#" onclick="return false;" class="btn my-btn2 disabled">Applied</a>
-                    @elseif($appliedcheck)
-                        <a href="{{ $appliedcheck }}" class="btn my-btn2">Apply Now</a>
-                    @endif
+                        @if($appliedcheck == 'Applied')
+
+                            <a href="#" onclick="return false;" class="btn my-btn2 disabled">Applied</a>
+                        @elseif($appliedcheck)
+                            <a href="{{ $appliedcheck }}" class="btn my-btn2">Apply Now</a>
+                        @endif
                 </div>
             </div>
             @endif

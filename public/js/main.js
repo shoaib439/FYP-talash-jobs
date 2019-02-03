@@ -134,7 +134,7 @@ $(document).ready(function(){
        // var genderhtml = $('#company-personal-gender',submission);
         var phonehtml = $('#company-personal-phone',submission);
         var cityhtml = $('#company-personal-city',submission);
-        var emailhtml = $('#company-personal-email',submission);
+       // var emailhtml = $('#company-personal-email',submission);
         var websitehtml = $('#company-personal-website',submission);
         var cnichtml = $('#company-personal-cnic',submission);
         var skypehtml = $('#company-personal-skype',submission);
@@ -147,7 +147,7 @@ $(document).ready(function(){
         phonehtml.html(phone.val()); //ye phone ki value ko update kr ra html main
 
         cityhtml.html(city.val());
-        emailhtml.html(email.val());
+        //emailhtml.html(email.val());
         websitehtml.html(website.val());
         cnichtml.html(cnic.val());
         skypehtml.html(skype.val());
@@ -241,12 +241,17 @@ $(document).ready(function(){
             contentType: false,
             processData: false,
             success:function(data){
-                console.log("success");
-                console.log(data);
+                console.log(data);//ye line hr jagha dalni
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
+                if(data.success == '1'){
+
+                    console.log("success");
+                }
             },
             error: function(data){
                 console.log("error");
                 console.log(data.responseText);
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
             }
         });
 
@@ -344,12 +349,14 @@ $(document).ready(function(){
 
 
                     $('#container-work-experience .jbs-main-content:last-of-type .we-remove-btn').click(removeworkexp);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responseText);
             }
@@ -422,12 +429,14 @@ $(document).ready(function(){
 
 
                     $('#container-education .jbs-main-content:last-of-type .we-remove-btn').click(removeeducation);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responseText);
             }
@@ -498,12 +507,14 @@ $(document).ready(function(){
 
 
                     $('#container-projects .jbs-main-content:last-of-type .we-remove-btn').click(removejsproject);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responseText);
             }
@@ -568,12 +579,14 @@ $(document).ready(function(){
                 </div>`);
 
                     $('#container-functional-area .jbs-main-content:last-of-type .we-remove-btn').click(removefunctionalarea);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responseText);
             }
@@ -635,12 +648,14 @@ $(document).ready(function(){
                 </div>`);
 
                     $('#container-hobbies .jbs-main-content:last-of-type .we-remove-btn').click(removeHobbies);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responseText);
             }
@@ -703,12 +718,14 @@ $(document).ready(function(){
                 </div>`);
 
                     $('#container-languages .jbs-main-content:last-of-type .we-remove-btn').click(removeLanguages);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responseText);
             }
@@ -772,12 +789,14 @@ $(document).ready(function(){
                 </div>`);
 
                     $('#container-jobcity .jbs-main-content:last-of-type .we-remove-btn').click(removeprefferedcity);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responseText);
             }
@@ -842,12 +861,14 @@ $(document).ready(function(){
 
 
                     $('#container-skills .jbs-main-content:last-of-type .we-remove-btn').click(removeskills);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responseText);
             }
@@ -923,12 +944,14 @@ $(document).ready(function(){
 
 
                     $('.jbs-main-content:last-of-type .we-remove-btn').click(removeHRPolicy);
+                    form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 }
                 else{
                     alert(data.message);
                 }
             },
             error: function(data){
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
                 console.log("error");
                 console.log(data.responsetext);
             }
@@ -982,6 +1005,14 @@ $(document).ready(function(){
             success:function(data){
                 console.log("success");
                 console.log(data);
+                if(data.success =='0'){
+                    msg = '';
+                    data.errors.forEach(function(val,index){
+                        msg += val+'\n';
+                    });
+                    alert(msg);
+                }
+
             },
             error: function(data){
                 console.log("error");
@@ -1442,3 +1473,4 @@ function openJBSModel(containerid){
 $('#myCarousel').on('slide.bs.carousel', function () {
     // do something…
 })
+

@@ -33,10 +33,10 @@ class SearchController extends Controller
 
 
        if (!Auth::guard()->check()):
-           return redirect('/login');
-       else:
-           if (Auth::user()->isJobseeker()) {
 
+           var_dump('C');die();
+           return redirect('/login');
+       elseif(Auth::user()->isJobseeker()):
                if ($q != "") {
 
                    $searchVacancy = vacancy::where('title', 'LIKE', '%' . $q . '%')->get();
@@ -44,6 +44,7 @@ class SearchController extends Controller
 
 
 
+                   $users = [];
                    if (count($searchVacancy) > 0) {
 
 //                      $searchData=[];
@@ -63,7 +64,6 @@ class SearchController extends Controller
                            $searchVacancy->merge($industry_result);
                        }
 
-                       $users = [];
                        foreach ($searchVacancy as $vacancy):
 
                            $user = user::where('id',$vacancy->user_fk)->get()->first();
@@ -72,12 +72,15 @@ class SearchController extends Controller
 
                        endforeach;
 
+//                       dd($users);
+//                       die();
 
 
 
-                       return view('searchVacancyResultPage', compact('searchVacancy','users'));
+
                        // return view('searchVacancyResultPage')->withDetails($searchVacancy)->withQuery($q);
                    }
+                   return view('searchVacancyResultPage', compact('searchVacancy','users'));
 
 
                }
@@ -86,11 +89,12 @@ class SearchController extends Controller
 
                else {
 
+                   var_dump('B');die();
                    return "no vacancy found";
                }
 
 
-           }
+
        endif;
 
        return redirect('/login');

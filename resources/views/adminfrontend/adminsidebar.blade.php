@@ -24,7 +24,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <h6 class="dropdown-header">Actions:</h6>
             <a class="dropdown-item" href="{{url('registeredUsers')}}">Registered Users</a>
-            <a class="dropdown-item" href="blank.html">Manage posts</a>
+            <a class="dropdown-item" href="{{url('managePosts')}}">Manage posts</a>
         </div>
     </li>
     <li class="nav-item">

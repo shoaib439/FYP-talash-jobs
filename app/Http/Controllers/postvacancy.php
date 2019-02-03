@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\vacancy;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class Postvacancy extends Controller
 {
@@ -28,7 +29,31 @@ class Postvacancy extends Controller
         endif;
 
 
+
+        $this->validate($request, [
+            'vacancytitle' => 'required|string|min:4',
+            'type' => 'required|string',
+            'vacancydescription' => 'required|string',
+            'vacancyPos' => 'required|int',
+            'vacancyindustry' => 'required|string',
+            'vacancycity' => 'required|string',
+            'vacancytype' => 'required|string',
+            'vacancyshift' => 'required|string',
+            'vacancydegreelevel' => 'required|string',
+            'vacancySkills' => 'required|string|min:3',
+            'vacancySalary' => 'required|string',
+            'vacancyExperience' => 'required|string|int',
+            'vacancyAge' => 'required|string',
+            'vacancyworkinghours' => 'required|string',
+            'vacancylastdate' => 'required|string|date',
+        ]);
+
+
+
         $myHR=hrpolicy::where('id',$request->choose_hr)->get()->first();
+
+//        var_dump($myHR);
+//        die();
 
         $vacancytitle =  $request->vacancytitle;
         $type =  $request->type;

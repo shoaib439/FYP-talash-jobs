@@ -10,7 +10,7 @@
 
 @section('HRpolicies')
 
-    <div class="container shadow-sms p-3 mb-5 bg-white rounded" id="container-hr">
+    <div class="container shadow-sms p-3 mt-5 mb-5 bg-white rounded" id="container-hr">
 
         <div class="row">
             <div class="col-md-12">
@@ -39,8 +39,11 @@
                         <input type="hidden" name="hr_id" value="{{ $hrpolicy->id }}" />
                     </form>
                     <div class="row">
-                        <div class="col-md-2">
-                            <p class="hr1">{{ $hrpolicy->no_of_interview  }}</p>
+                        <div class="col-md-10">
+
+                            <a class="my-heading-text3">No of Interview: </a>   <a class="hr1 my-text-font">{{ $hrpolicy->no_of_interview  }}</a>
+
+
                         </div>
 
                         <div class="col-md-2 text-right">
@@ -49,7 +52,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            <p class="hr2">{{ $hrpolicy->procedure  }}</p>
+
+
+                            <p><a class="my-heading-text3">Procedure: </a>   <a class="hr2 my-text-font">{{ $hrpolicy->procedure  }}</a></p>
 
                         </div>
                     </div>

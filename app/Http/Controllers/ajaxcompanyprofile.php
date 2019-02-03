@@ -131,7 +131,6 @@ class AjaxCompanyProfile extends Controller
             //'address' => 'required', //aur kr lae
         ]);
 
-        echo 'A';
 
 
         if($validation->passes())

@@ -7,6 +7,7 @@ use App\education;
 use App\hrpolicy;
 use App\jobseekerprofile;
 use App\languages;
+use App\minterview;
 use App\notification;
 use App\prefferedcity;
 use App\savedvacancy;
@@ -58,6 +59,7 @@ class CompanyController extends Controller
     public function vacancyauth(){
 
         if(!Auth::guard()->check()){
+
             return redirect('/login');
         }
 
@@ -117,6 +119,7 @@ class CompanyController extends Controller
         $profile['cnic'] = $comuser->cnic;
 
         $profile['skype'] = $comuser->skype;
+        $profile['name'] = $comuser->company_name;
 
         $profile['image'] = empty($user->profile_pic) ? 'images/Profile.png':$user->profile_pic;
 
@@ -444,7 +447,7 @@ class CompanyController extends Controller
         $this->validate($request, [
             'oldpassword' => 'required|string',
             'newpassword' => 'required|string|min:6',
-            'password_confirmation' => 'required|string|min:6',
+            'password_confirmation' => 'required|string|min:6|confirmed',
         ]);
 
         $user = Auth::user();
@@ -675,6 +678,8 @@ class CompanyController extends Controller
 
                 'user_id'=>'required|int',
                  'vacancy_id'=>'required|int',
+                'date'=>'required',
+                'time'=>'required',
             ]);
 
             if($validation->passes())
@@ -686,11 +691,29 @@ class CompanyController extends Controller
 
                 $vacancyname=vacancy::where('id',$request->vacancy_id)->get()->first();
 
+                $company=companyprofile::where('user_id',$companyid->id)->get()->first();
+
 
                 $url = url('view/vacancy/'.$request->vacancy_id);
                 $html = <<<HTML
-The Company '{$companyid->display_name}' Called you for interview on  '<a href="{$url}">{$vacancyname->title}</a>' vacancy.
+The Company '{$companyid->display_name}' Called you for interview on  '<a href="{$url}">{$vacancyname->title}</a>' vacancy .
+ 
+ <div class="row">
+ <div class=" col-md-6">
+   <p> <a class="my-heading-text3">Address: </a>   <a class="my-text-font">{$company->address}</a></p>
+ 
+</div>
+
+<div class=" col-md-6">
+   <p> <a class="my-heading-text3">Schedule Date and time: </a>   <a class="my-text-font"> $request->date , $request->time.</a></p>
+ 
+</div>
+ 
+ </div>
+ 
 HTML;
+//var_dump();
+//die();
 
                 if($getuser){
 
@@ -699,6 +722,16 @@ HTML;
                         'message'=>$html,
                         'type'=> 'call for interview',
                         'viewed'=> '0',
+                        'date'=>$request->date,
+                        'time'=>$request->time,
+                    ]);
+
+                    minterview::create([
+                        'user_id'=> $getuser->id,
+                        'vacancy_id'=>$request->vacancy_id,
+                        'company_id'=>$company->id,
+                        'date'=>$request->date,
+                        'time'=>$request->time,
                     ]);
                     return redirect('/company/applicationslist');
                 }

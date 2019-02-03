@@ -23,35 +23,23 @@
         <div class="container shadow-sms p-3 mb-5 bg-white rounded ">
 
             <div class="row">
-                <div class="col-sm-2">
-                    <h5>Type : {{$vacancy->vacancy_type}}</h5>
+                <div class="col-md-4">
+                    <p> <a class="my-heading-text3">Type: </a>   <a class="my-text-font"> {{$vacancy->vacancy_type}}</a></p>
+
                 </div>
 
-                <div class="col-lg">
-
-                    <div class="row saved-jobs-remove-icon ">
-
-                        <div class="col-md-4">
-
-                            <a   href="{{url('/vacancy/removesaved/'.$vacancy->id)}}"  class="fa fa-remove red " ></a>
-
-
-
-                        </div>
-
-
-                    </div>
+                <div class="col-md-8 saved-jobs-remove-icon">
+                    <a   href="{{url('/vacancy/removesaved/'.$vacancy->id)}}"  class="fa fa-remove red " ></a>
                 </div>
 
 
 
             </div>
 
-            <div class="row mt-4">
+            <div class="row mt-2">
                 <div class="col-sm-3">
-                    <p> Title  {{$vacancy->title}}</p>
-                    <p> Description    {{$vacancy->description}}</p>
-
+                    <p> <a class="my-heading-text3">Title: </a>   <a class="my-text-font">  {{$vacancy->title}}</a></p>
+                    <p> <a class="my-heading-text3">Description: </a>   <a class="my-text-font">   {{$vacancy->description}}</a></p>
 
                 </div>
 

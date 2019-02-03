@@ -33,7 +33,12 @@
 
                             <div class="form-group">
                                 <label for="title">Title<span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="vacancytitle" id="vacancytitle"  aria-describedby="vacancytitlehelp" placeholder="Job Title">
+                                        <input type="text" class="form-control" name="vacancytitle"   value="{{ old('vacancytitle') }}" id="vacancytitle"  aria-describedby="vacancytitlehelp" placeholder="Job Title">
+                                @if ($errors->has('vacancytitle'))
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancytitle') }}</strong>
+                                    </span>
+                                @endif
                             </div>
 
                     </div>
@@ -41,8 +46,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="title">Job/Internship<span class="text-danger">*</span></label>
-                            <select class="custom-select mr-sm-2 square" name="type" id="type">
+                            <select class="custom-select mr-sm-2 square" name="type"   value="{{ old('type') }}" id="type">
 
+                                @if ($errors->has('type'))
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('type') }}</strong>
+                                    </span>
+                                @endif
                                 <option value="Job">Job</option>
                                 <option value="Internship">Internship</option>
 
@@ -58,7 +68,12 @@
 
                         <div class="form-group">
                             <label for="description">Description<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="vacancydescription" id="vacancydescription" required aria-describedby="vacancydescriptionhelp" placeholder="description">
+                            <input type="text" class="form-control" name="vacancydescription"   value="{{ old('vacancydescription') }}" id="vacancydescription" required aria-describedby="vacancydescriptionhelp" placeholder="description">
+                            @if ($errors->has('vacancydescription'))
+                                <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancydescription') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
                     </div>
@@ -66,8 +81,12 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="Pos">no of Positions<span class="text-danger">*</span></label>
-                            <input type="Pos" class="form-control" name="vacancyPos" id="vacancyPos" required aria-describedby="vacancyPoshelp" placeholder="no of Positions">
-
+                            <input type="number" class="form-control" name="vacancyPos"   value="{{ old('vacancyPos') }}" id="vacancyPos" required aria-describedby="vacancyPoshelp" placeholder="no of Positions">
+                            @if ($errors->has('vacancyPos'))
+                                <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancyPos') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
                     </div>
@@ -77,7 +96,12 @@
 
                             <label for="Industry">Industry<span class="text-danger">*</span></label>
 
-                            <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect" name="vacancyindustry" id="vacancyindustry" required aria-describedby="vacancyindustryhelp">
+                            <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect"   value="{{ old('vacancyindustry') }}" name="vacancyindustry" id="vacancyindustry" required aria-describedby="vacancyindustryhelp">
+                                @if ($errors->has('vacancyindustry'))
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancyindustry') }}</strong>
+                                    </span>
+                                @endif
                                 <option value="" disabled>Search by Industry</option>
 
                                 <option value="IT"> IT/Software Development</option>
@@ -86,7 +110,7 @@
                                 <option value="Engineering"> Engineering</option>
 
                                 <option value="Insurance"> Insurance </option>
-                                <option value="Banking/Financial Services ">Banking/Financial Services </option>
+                                <option value="Banking/Financial ">Banking/Financial Services </option>
                                 <option value="Healthcare / Hospital / Medical Jobs"> Healthcare / Hospital / Medical Jobs</option>
                                 <option value="Real Estate/Property Jobs"> Real Estate/Property Jobs</option>
 
@@ -95,7 +119,7 @@
                                 <option value="Call Center "> Call Center </option>
                                 <option value="Recruitment "> Recruitment </option>
 
-                                <option value="Consultants Jobs ">Consultants Jobs </option>
+                                <option value="Consultants ">Consultants Jobs </option>
                                 <option value="Construction/Cement/Metals Jobs "> Construction/Cement/Metals Jobs </option>
                                 <option value="Advertising  "> Advertising  </option>
                             </select>
@@ -112,9 +136,13 @@
 
                         <div class="form-group">
                             <label for="city">Job City<span class="text-danger">*</span></label>
-                            <select class="custom-select mr-sm-2 square" name="vacancycity" id="vacancycity">
-
-                                <option value="">Select City</option>
+                            <select class="custom-select mr-sm-2 square"   value="{{ old('vacancycity') }}" name="vacancycity" id="vacancycity">
+                                @if ($errors->has('vacancycity'))
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancycity') }}</strong>
+                                    </span>
+                                @endif
+                                <option >Select City</option>
                                 <option value="Ahmadpur East">Ahmadpur East</option>
                                 <option value="Ahmadpur Sial">Ahmadpur Sial</option>
                                 <option value="Alipur">Alipur</option>
@@ -285,8 +313,14 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="type">Job type<span class="text-danger">*</span></label>
-                            <select class="custom-select mr-sm-2 square" name="vacancytype" id="vacancytype">
+                            <select class="custom-select mr-sm-2 square"   value="{{ old('vacancytype') }}" name="vacancytype" id="vacancytype">
 
+                                @if ($errors->has('vacancytype'))
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancytype') }}</strong>
+                                    </span>
+                                @endif
+                                <option value="">Select Job Type</option>
                                 <option value="Full Time">Full Time</option>
                                 <option value="Part Time">Part Time</option>
                                 <option value="Contract">Contract</option>
@@ -300,8 +334,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="type">Job Shift<span class="text-danger">*</span></label>
-                            <select class="custom-select mr-sm-2 square" name="vacancyshift" id="vacancyshift">
-
+                            <select class="custom-select mr-sm-2 square"   value="{{ old('vacancyshift') }}" name="vacancyshift" id="vacancyshift">
+                                @if ($errors->has('vacancyshift'))
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancyshift') }}</strong>
+                                    </span>
+                                @endif
+                                <option value="">Select Shift</option>
                                 <option value="Morning">Morning</option>
                                 <option value="Night">Night</option>
                                 <option value="Afternoon">Afternoon</option>
@@ -323,9 +362,13 @@
 
                         <div class="form-group">
                             <label for="city">Degree Level<span class="text-danger">*</span></label>
-                            <select class="custom-select mr-sm-2 square" name="vacancydegreelevel" id="vacancydegreelevel">
-
-                                <option value="0" disabled>Select Degree Level</option> <option value="Not Required">Not Required</option> <option value="PHD - Doctorate">PHD - Doctorate</option> <option value="MS-M.Phil">MS-M.Phil</option> <option value="M.SC-MBA-BS">M.SC-MBA-BS</option> <option value="BSC-BA">BSC-BA</option> <option value="FA-FSC">FA-FSC</option> <option value="High School">High School</option> <option value="B.CS - B.IT">B.CS - B.IT</option> <option value="Intermediate A-Level">Intermediate A-Level</option> <option value="ACA - ACCA - CA - ACMA">ACA - ACCA - CA - ACMA</option> <option value="MBBS">MBBS</option> <option value="B.Com">B.Com</option> <option value="Diploma">Diploma </option> <option value="Short Courses">Short Courses</option> <option value="B.E - B.Tech">B.E - B.Tech</option> <option value="BBA - MBA">BBA - MBA</option> <option value="M.CS - MBA Marketing">M.CS - MBA Marketing</option> <option value="Pharm-D">Pharm-D</option> <option value="LLB - LLM">LLB - LLM</option> <option value="DAE">DAE</option> <option value="Bachelors">Bachelors</option> <option value="Masters">Masters</option> <option value="DVM">DVM</option> <option value="BS Electrical">BS Electrical</option> <option value="B.E Mechanical">B.E Mechanical</option> <option value="B.E-B.Sc">B.E-B.Sc</option> <option value="FCPS">FCPS</option> <option value="M.Com">M.Com</option> <option value="MBA">MBA</option> <option value="BBA">BBA</option> <option value="Civil Engineering">Civil Engineering</option> <option value="Primary">Primary</option> <option value="Middle">Middle</option> <option value="LLB">LLB</option> <option value="LLM">LLM</option> <option value="CA">CA</option> <option value="Mphil">Mphil</option> <option value="Matric"> Matric</option> <option value="MS">MS</option> <option value="Master">Master</option> <option value="MA">MA</option> <option value="BiT">BiT</option> <option value="BCS">BCS</option> <option value="DAE">DAE</option> <option value="Bachelor">Bachelor</option> <option value="MBBS">MBBS</option> <option value="B.ed">B.ed</option> <option value="M.ed">M.ed</option> <option value="Intermediate">Intermediate</option> <option value="ACCA">ACCA</option> <option value="B.Sc">B.Sc</option> <option value="BA">BA</option> <option value="Diploma">Diploma</option> <option value="P.G Diploma">P.G Diploma</option> <option value="ITI">ITI</option> <option value="BBA">BBA</option> <option value="MCA">MCA</option> <option value="MBA">MBA</option> <option value="B.Tech">B.Tech</option> <option value="MSc">MSc</option> <option value=">M.Tech">M.Tech</option> <option value="M.Sc - B.Sc">M.Sc - B.Sc</option> </select>
+                            <select class="custom-select mr-sm-2 square"   value="{{ old('vacancydegreelevel') }}" name="vacancydegreelevel" id="vacancydegreelevel">
+                                @if ($errors->has('vacancydegreelevel'))
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancydegreelevel') }}</strong>
+                                    </span>
+                                @endif
+                                <option value="" >Select Degree Level</option> <option value="Not Required">Not Required</option> <option value="PHD - Doctorate">PHD - Doctorate</option> <option value="MS-M.Phil">MS-M.Phil</option> <option value="M.SC-MBA-BS">M.SC-MBA-BS</option> <option value="BSC-BA">BSC-BA</option> <option value="FA-FSC">FA-FSC</option> <option value="High School">High School</option> <option value="B.CS - B.IT">B.CS - B.IT</option> <option value="Intermediate A-Level">Intermediate A-Level</option> <option value="ACA - ACCA - CA - ACMA">ACA - ACCA - CA - ACMA</option> <option value="MBBS">MBBS</option> <option value="B.Com">B.Com</option> <option value="Diploma">Diploma </option> <option value="Short Courses">Short Courses</option> <option value="B.E - B.Tech">B.E - B.Tech</option> <option value="BBA - MBA">BBA - MBA</option> <option value="M.CS - MBA Marketing">M.CS - MBA Marketing</option> <option value="Pharm-D">Pharm-D</option> <option value="LLB - LLM">LLB - LLM</option> <option value="DAE">DAE</option> <option value="Bachelors">Bachelors</option> <option value="Masters">Masters</option> <option value="DVM">DVM</option> <option value="BS Electrical">BS Electrical</option> <option value="B.E Mechanical">B.E Mechanical</option> <option value="B.E-B.Sc">B.E-B.Sc</option> <option value="FCPS">FCPS</option> <option value="M.Com">M.Com</option> <option value="MBA">MBA</option> <option value="BBA">BBA</option> <option value="Civil Engineering">Civil Engineering</option> <option value="Primary">Primary</option> <option value="Middle">Middle</option> <option value="LLB">LLB</option> <option value="LLM">LLM</option> <option value="CA">CA</option> <option value="Mphil">Mphil</option> <option value="Matric"> Matric</option> <option value="MS">MS</option> <option value="Master">Master</option> <option value="MA">MA</option> <option value="BiT">BiT</option> <option value="BCS">BCS</option> <option value="DAE">DAE</option> <option value="Bachelor">Bachelor</option> <option value="MBBS">MBBS</option> <option value="B.ed">B.ed</option> <option value="M.ed">M.ed</option> <option value="Intermediate">Intermediate</option> <option value="ACCA">ACCA</option> <option value="B.Sc">B.Sc</option> <option value="BA">BA</option> <option value="Diploma">Diploma</option> <option value="P.G Diploma">P.G Diploma</option> <option value="ITI">ITI</option> <option value="BBA">BBA</option> <option value="MCA">MCA</option> <option value="MBA">MBA</option> <option value="B.Tech">B.Tech</option> <option value="MSc">MSc</option> <option value=">M.Tech">M.Tech</option> <option value="M.Sc - B.Sc">M.Sc - B.Sc</option> </select>
 
 
                             </select>
@@ -338,7 +381,11 @@
                             <label for="type">Select Carrier Level<span class="text-danger">*</span></label>
 
 
-                                <select  name="vacancycarrierlevel" id="vacancycarrierlevel"class="form-control valid" aria-invalid="false"> <option disabled value="none">Select Career Level</option> <option value="Not Required">Not Required</option> <option value="Entry Level">Entry Level</option> <option value="Student (Undergraduate">Student (Undergraduate)</option> <option value="Experienced (Non Manager)">Experienced (Non Manager)</option> <option value="Manager">Manager</option> </select>
+                                <select  name="vacancycarrierlevel"   value="{{ old('vacancycarrierlevel') }}" id="vacancycarrierlevel"class="form-control valid" aria-invalid="false">  @if ($errors->has('vacancycarrierlevel'))
+                                        <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancycarrierlevel') }}</strong>
+                                    </span>
+                                    @endif<option  value="">Select Career Level</option> <option value="Not Required">Not Required</option> <option value="Entry Level">Entry Level</option> <option value="Student (Undergraduate">Student (Undergraduate)</option> <option value="Experienced (Non Manager)">Experienced (Non Manager)</option> <option value="Manager">Manager</option> </select>
 
 
                         </div>
@@ -353,9 +400,14 @@
                     <div class="col-md-6">
 
                         <div class="form-group">
-                            <label for="city">Skills Required<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="vacancySkills" id="vacancySkills" required aria-describedby="vacancySkillshelp" placeholder="Skills">
+                            <label for="skills">Skills Required<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="vacancySkills"   value="{{ old('vacancySkills') }}" id="vacancySkills" required aria-describedby="vacancySkillshelp" placeholder="Skills">
 
+                            @if ($errors->has('vacancySkills'))
+                                <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancySkills') }}</strong>
+                                    </span>
+                            @endif
                         </div>
 
                     </div>
@@ -363,8 +415,13 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="type">Salary</label>
-                            <input type="text" class="form-control" name="vacancySalary" id="vacancySalary" required aria-describedby="vacancySalaryhelp" placeholder="Salary">
+                            <input type="text" class="form-control" name="vacancySalary"   value="{{ old('vacancySalary') }}" id="vacancySalary" required aria-describedby="vacancySalaryhelp" placeholder="Salary">
 
+                            @if ($errors->has('vacancySalary'))
+                                <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancySalary') }}</strong>
+                                    </span>
+                            @endif
 
                         </div>
 
@@ -372,9 +429,14 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="type">Experience</label>
-                            <input type="number" class="form-control" name="vacancyExperience" id="vacancyExperience" required aria-describedby="vacancyExperiencehelp" placeholder="no of years">
+                            <label for="type">Experience in Year</label>
+                            <input type="number" class="form-control" name="vacancyExperience"   value="{{ old('vacancyExperience') }}" id="vacancyExperience" required aria-describedby="vacancyExperiencehelp" placeholder="no of years">
 
+                            @if ($errors->has('vacancyExperience'))
+                                <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancyExperience') }}</strong>
+                                    </span>
+                            @endif
 
                         </div>
 
@@ -390,7 +452,22 @@
 
                         <div class="form-group">
                             <label for="age">Age Range<span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="vacancyAge" id="vacancyAge" required aria-describedby="vacancySkillshelp" placeholder="from 18-50">
+
+                            <select class="custom-select mr-sm-2 square form-control"   value="{{ old('vacancyAge') }}" name="vacancyAge" id="vacancyAge"  placeholder="from 18-50">
+                                @if ($errors->has('vacancyAge'))
+                                    <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancyAge') }}</strong>
+                                    </span>
+                                @endif
+                                <option value="18-25">18-25</option>
+                                <option value="26-30">26-30</option>
+                                <option value="31-40">31-40</option>
+                                <option value="41-50">41-50</option>
+                                <option value="50-60">50-60</option>
+
+                            </select>
+
+
 
                         </div>
 
@@ -401,14 +478,25 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="hours">working hours<span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="vacancyworkinghours" id="vacancyworkinghours" required aria-describedby="vacancyhourshelp" placeholder="working hours">
+                            <input type="number" class="form-control" name="vacancyworkinghours"   value="{{ old('vacancyworkinghours') }}" id="vacancyworkinghours" required aria-describedby="vacancyhourshelp" placeholder="working hours">
 
+
+                            @if ($errors->has('vacancyworkinghours'))
+                                <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancyworkinghours') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="lastdate">Last date to Apply<span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" name="vacancylastdate" id="vacancylastdate" required aria-describedby="vacancyhourshelp">
+                            <input type="date" class="form-control" name="vacancylastdate"   value="{{ old('vacancylastdate') }}" id="vacancylastdate" required aria-describedby="vacancyhourshelp">
+                            @if ($errors->has('vacancylastdate'))
+                                <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('vacancylastdate') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 

@@ -47,20 +47,23 @@ class JobseekerController extends Controller
         endforeach;
 
 
-        $interships = vacancy::where(['vacancy_type'=>'intership'])->get();
+        $internships = vacancy::where(['vacancy_type'=>'internship'])->get();
 
 
-        $intershiplist = [];
+        $internshiplist = [];
 
-        foreach ($interships as $key=>$intership):
+        foreach ($internships as $key=>$internship):
 
-            $intershiplist[$key]['vacancy'] = $intership;
-            $intershiplist[$key]['company'] = companyprofile::where('user_id',$intership->user_fk)->get()->first();
-            $jobslist[$key]['user'] = User::where('id',$intership->user_fk)->get()->first();
+            $internshiplist[$key]['vacancy'] = $internship;
+            $internshiplist[$key]['company'] = companyprofile::where('user_id',$internship->user_fk)->get()->first();
+            $internshiplist[$key]['user'] = User::where('id',$internship->user_fk)->get()->first();
 
         endforeach;
 
-        return view('Landing',compact('jobslist','intershiplist'));
+//        var_dump($intershiplist);
+//        die();
+
+        return view('Landing',compact('jobslist','internshiplist'));
     }
     public function AuthCheck($view = ''){
 
@@ -296,9 +299,7 @@ class JobseekerController extends Controller
 
     public function vacancyview($id){
 
-        if(!Auth::guard()->check()){
-            return redirect('/login');
-        }
+
 
 
         $vacancy = vacancy::where('id',$id)->get();
@@ -312,21 +313,30 @@ class JobseekerController extends Controller
 
 ////////////////////
 
-        $user=Auth::user();
-        $savedcheck = 'Saved';
-        $appliedcheck='Applied';
 
-        $saved = savedvacancy::where(['jobseeker_id'=>$user->id,'vacancy_id'=>$id])->get();
-        $applied = appliedvacancy::where(['jobseeker_id'=>$user->id,'vacancy_id'=>$id])->get();
+        $savedcheck = '';
+        $appliedcheck='';
+
+        if(Auth::guard()->check()){
 
 
-        if( $saved->isEmpty()){
-            $savedcheck = url('/vacancy/save/'.$id);
+            $user=Auth::user();
+            $savedcheck = 'Saved';
+            $appliedcheck='Applied';
+
+            $saved = savedvacancy::where(['jobseeker_id'=>$user->id,'vacancy_id'=>$id])->get();
+            $applied = appliedvacancy::where(['jobseeker_id'=>$user->id,'vacancy_id'=>$id])->get();
+            if( $saved->isEmpty()){
+                $savedcheck = url('/vacancy/save/'.$id);
+            }
+
+            if( $applied->isEmpty()){
+                $appliedcheck = url('/apply/vacancy/'.$id);
+            }
         }
 
-        if( $applied->isEmpty()){
-            $appliedcheck = url('/apply/vacancy/'.$id);
-        }
+
+
 //        var_dump($savedcheck);
 //        die();
 
@@ -399,6 +409,26 @@ class JobseekerController extends Controller
         $rejectInvite->delete();
 
         return redirect('jobseeker/viewinvitation');
+    }
+
+    public function deleteNotification($id){
+
+        if(!Auth::guard()->check()){
+            return redirect('/login');
+
+
+        }
+
+
+        if(!Auth::user()->isJobSeeker()){
+            return view('/');
+        }
+
+        $c = notification::find($id);
+        $c->delete();
+
+        return redirect('/jobseeker/viewnotification');
+
     }
 
 
@@ -487,6 +517,8 @@ class JobseekerController extends Controller
 
         $notificationsview = $user->notifications(true);
 
+
+
         return view('notificationViewPage',compact('notifications','notificationsview'));
 
     }
@@ -541,6 +573,25 @@ class JobseekerController extends Controller
 
             return redirect('jobseeker/appliedjobs');
 
+
+}
+
+public function landingSearchType($type){
+
+    $vacancy = vacancy::where('industry',$type)->get();
+
+//    var_dump($vacancy);
+//    die();
+
+    return view('vacancySearchResultPageForAll',compact('vacancy'));
+
+}
+
+public function landingSearchcity($city){
+
+    $vacancy = vacancy::where('job_city',$city)->get();
+
+    return view('vacancySearchResultPageForAll',compact('vacancy'));
 
 }
 

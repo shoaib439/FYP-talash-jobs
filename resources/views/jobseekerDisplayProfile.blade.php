@@ -15,7 +15,7 @@
         <div class="container shadow-sms p-3 mt-3 mb-3  bg-white rounded ">
 
             <div class="d-flex">
-                <div class="w-15">
+                <div class="w-10">
                     <div class="jbs-logo-container">
                         <div class="jbs-logo">
                             <img class="profile-image-set " src="{{ (empty($user->profile_pic)) ? 'images/Profile.png':$user->profile_pic }}">
@@ -52,29 +52,33 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <strong>{{ $exp->company_position }}</strong>
+                     <a class="my-heading-text3">Position: </a>   <a class="my-text-font">{{ $exp->company_position }}</a>
                     </div>
 
 
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2">
-                        <p>{{ $exp->company_name }}</p>
+                    <div class="col-md-4">
+                          <a class="my-heading-text3">Company name: </a>   <a class="my-text-font">{{ $exp->company_name }}</a>
                     </div>
 
                     <div class="col-md-2">
-                        <p>{{ $exp->job_type }}</p>
+                           <a class="my-heading-text3">Job Type: </a>   <a class="my-text-font">{{ $exp->job_type }}</a>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2">
-                        <p>{{ $exp->start_date.'/'.$exp->end_date }}</p>
+                    <div class="col-md-4">
+                        <a class="my-heading-text3">Start Date: </a>   <a class="my-text-font">{{ $exp->start_date }}</a>
                     </div>
 
-
+                    <div class="col-md-4">
+                        <a class="my-heading-text3">End Date: </a>   <a class="my-text-font">{{ $exp->end_date }}</a>
+                    </div>
                 </div>
+
+
             @endforeach
             <hr>
 
@@ -88,7 +92,8 @@
             @foreach($education as $edu)
             <div class="row">
                 <div class="col-md-6">
-                    <strong>{{ $edu->degree_title }}</strong>
+                    <a class="my-heading-text3">Degree Title: </a>   <a class="my-text-font">{{ $edu->degree_title }}</a>
+
                 </div>
 
 
@@ -96,14 +101,12 @@
 
 
             <div class="row">
+                <div class="col-md-6">
+                    <a class="my-heading-text3">Institute: </a>   <a class="my-text-font">{{ $edu->institite }} , {{ $edu->city }}</a>
+                </div>
+
                 <div class="col-md-4">
-                    <p>{{ $edu->institute }} </p> <p>, {{ $edu->city }}</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-2">
-                    <p>{{ $edu->year_of_completion }}</p>
+                    <p> <a class="my-heading-text3">Year of Completion: </a>   <a class="my-text-font">{{ $edu->year_of_completion }} </a></p>
                 </div>
 
 
@@ -121,8 +124,8 @@
             </div>
 
             <div class="row">
-                <div class="col-md-2">
-                    {{ implode(', ',$skillarray)  }}
+                <div class="col-md-6">
+                   <a class="my-text-font"> {{ implode(', ',$skillarray)  }}  </a>
                 </div>
             </div>
 
@@ -136,7 +139,7 @@
 
             <div class="row">
                 <div class="col-md-2">
-                    {{ implode(', ',$cityarray)  }}
+                  <a class="my-text-font">   {{ implode(', ',$cityarray)  }} </a>
                 </div>
             </div>
 
@@ -150,7 +153,7 @@
 
             <div class="row">
                 <div class="col-md-2">
-                   {{ implode(', ',$langarray)  }}
+                  <a class="my-text-font">      {{ implode(', ',$langarray)  }} </a>
                 </div>
             </div>
 

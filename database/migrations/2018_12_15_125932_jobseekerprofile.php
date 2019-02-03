@@ -13,9 +13,12 @@ class Jobseekerprofile extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('jobseekerprofiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->unsignedInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('date_of_birth')->nullable();
             $table->string('js_address')->nullable();
 

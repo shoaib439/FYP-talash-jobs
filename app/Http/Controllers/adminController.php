@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\companyprofile;
 use App\feedback;
+use App\vacancy;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
@@ -19,7 +21,21 @@ class adminController extends Controller
             return redirect('/');
         endif;
 
-        return view('/adminfrontend/adminpanel');
+        $data=[];
+        $totalUsers=User::all('id')->toArray();
+        $totalVacancies=vacancy::all('id')->toArray();
+        $totaljs=User::where(['type'=>"jobseeker"])->get(['id']);
+        $totalcompany=User::where(['type'=>"company"])->get(['id']);
+
+        $data['user']=count($totalUsers);
+        $data['vacancy']=count($totalVacancies);
+        $data['jobseeker']=count($totaljs);
+        $data['company']=count($totalcompany);
+
+
+
+
+        return view('/adminfrontend/admindashboard',compact('data'));
 
     }
     public function admin( Request $request){
@@ -215,4 +231,65 @@ HTML;
         return redirect('/usersComplaints');
 
     }//end of deleteuser
+
+//    public function dashboardData(){
+//
+//        $totalUsers=User::all('id')->toArray();
+//        $totalVacancies=vacancy::all('id')->toArray();
+//        $totaljs=User::where(['type'=>"jobseeker"])->get('id');
+//        $totalcompany=User::where(['type'=>"company"])->get('id');
+//
+//        $c=count($totalUsers);
+//
+//        var_dump($c);
+//        die();
+//
+//
+//    }
+
+
+//masla here
+        public function manageposts(){
+
+            //$Users=User::where('type','company')->get();
+
+
+            $vacancy = vacancy::all();
+
+            $posts=[];
+            foreach ($vacancy as $key => $vac){
+
+                $user = User::where('id',$vac->user_fk)->get()->first();
+
+                if(!empty($user)){
+                    $posts[$key]['vacancy'] = $vac;
+                    $posts[$key]['user'] = $user->id;
+                }
+            }
+
+/*
+            foreach ($Users as $key => $user){
+
+               $posts[$key]  = [];
+
+                $vacancy=vacancy::where('user_fk',$user->id)->get();
+
+                $posts[$key]['vacancy'] = false;
+                if(!empty($vacancy) || $vacancy->isEmpty()):
+
+                    $posts[$key]['vacancy'] = $vacancy->first();
+                endif;
+
+
+
+            }
+*/
+
+//            $posts[$key]['user']=$Users;
+//                 var_dump($posts);
+//                          die();
+
+        return view('/adminfrontend.managePosts',compact('posts'));
+        }
+
 }

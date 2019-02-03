@@ -13,6 +13,44 @@ body {
   height: 100%;
 }
 
+.my-heading-text{
+  font-family: "Roboto Medium" ;
+  color: #3d4852;
+  font-size: 25px;
+}
+.my-text-font{
+
+  font-family: Helvetica
+}
+
+.my-heading-text2 {
+  font-family: "Roboto Medium" ;
+  color: #3d4852;
+  font-size: 22px;
+}
+
+.my-heading-text3 {
+  font-family: "Montserrat Medium" ;
+  color: #3d4852;
+  font-size: 18px;
+}
+
+.main-heading-admin{
+  font-family: "Montserrat Medium",sans-serif;
+  color: #07b108 !important;
+  font-size: 1.2rem;
+}
+.main-count-admin{
+  font-family: "Montserrat Medium",sans-serif;
+  color: rgba(53, 57, 59, 0.93); !important;
+  font-size: 3rem;
+}
+.border-my{
+  border-right: #232729;
+  border-right-style: groove;
+
+}
+
 #wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -408,6 +446,24 @@ button.bg-mybg:focus {
   font-family: 'Helvetica' !important;
 }
 
+
+.my-admin-cancel{
+  width: 25%;
+  background-color: #3d4852;
+  border-color: #3d4852;
+  color: #fff;
+  border-radius: 0;
+  font-family: 'Helvetica' !important;
+}
+.my-admin-btn2{
+  width: 25%;
+  background-color: #07b108;
+  border-color: #07b108;
+  color: #fff;
+  border-radius: 0;
+  font-family: 'Helvetica' !important;
+}
+
 .set-this{
   padding-right: 60px;
   justify-content: flex-end;
@@ -421,7 +477,7 @@ button.bg-mybg:focus {
   border-radius: 0;
   font-family: 'Helvetica' !important;
 }
-h6{
+.my-text-small{
 
-
+  font-family: "Montserrat Medium"
 }

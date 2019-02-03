@@ -66,7 +66,11 @@ Route::get('/reject/invite/{id}','jobseekerController@rejectInvite');
 
 Route::get('/accept/invite/{vid}/{cid}','jobseekerController@acceptInvite');
 
+Route::get('/delete/notification/{id}','jobseekerController@deleteNotification');
 
+
+Route::get('/search/industry/{industry}','jobseekerController@landingSearchType');
+Route::get('/search/city/{city}','jobseekerController@landingSearchcity');
 
 
 //Route::get('/jobseekerhome', function () {
@@ -128,6 +132,7 @@ Route::get('/company/searchresult', function () {
 });
 
 Route::get('/deletevacancy/{id}','CompanyController@deletevacancy');
+
 
 
 
@@ -227,7 +232,7 @@ Route::get('/submitfeedback','SubmissionFeedback@feedback');
 Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
 
 
-
+//Route::get('/submitfeedback','SubmissionFeedback@feedback');
 
 ////////////////////////////////////////////////COMMON ROUTESSSSS END/////////////////////////////////////////////////
 
@@ -295,7 +300,8 @@ Route::post('/ajax-remove-workexp','AjaxJobSeekerProfile@removeworkexp');
 Route::get('/ajax-get-cv/{id}','AjaxCV@getCVHTML');
 
 
-Route::get('buildCV/CV/{$id}','AjaxCV@buildCV');
+Route::get('buildCV/CV/{id}/preview','AjaxCV@buildCVPreview');
+Route::get('buildCV/CV/{id}','AjaxCV@buildCVPDF');
 
 
 Route::post('/ajax-current-user-data','AjaxCV@getUserData');
@@ -334,6 +340,8 @@ Route::get('/registeredUsers', function () {
 Route::get('/usersComplaints', function () {
     return view('/adminfrontend.usersComplaints');
 });
+
+Route::get('/managePosts','adminController@manageposts');
 
 Route::get('/registeredUsers','adminController@showUsers');
 

@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Dashboard</title>
+    <title>Talash Job Admin Dashboard</title>
 
     <!-- Bootstrap core CSS-->
 
@@ -47,20 +47,8 @@
 
         <div class="container-fluid">
 
-         @include('adminfrontend.admindashboard')
-
-            <!-- Area Chart Example-->
-            {{--<div class="card mb-3">--}}
-                {{--<div class="card-header">--}}
-                    {{--<i class="fas fa-chart-area"></i>--}}
-                    {{--Area Chart Example</div>--}}
-                {{--<div class="card-body">--}}
-                    {{--<canvas id="myAreaChart" width="100%" height="30"></canvas>--}}
-                {{--</div>--}}
-                {{--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>--}}
-            {{--</div>--}}
-
-            <!-- DataTables Example -->
+         @yield('admindashboard')
+            @yield('managePosts')
           @yield('registeredUsers')
             @yield('userscomplaints')
              @yield('usersfeedback')
@@ -96,8 +84,8 @@
             </div>
             <div class="modal-body">Are you sure you want to end your current session?.</div>
             <div class="modal-footer">
-                <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{route('logout')}}"
+                <button class="btn my-admin-cancel" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn my-admin-btn2" href="{{route('logout')}}"
                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>
 
                 <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none"> {{csrf_field()}} </form>
@@ -118,18 +106,18 @@
 <script src="{{url('adminstyles/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
 <!-- Page level plugin JavaScript-->
-<script src="{{url('adminstyles/vendor/chart.js/Chart.min.js')}}"></script>
 <script src="{{url('adminstyles/vendor/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{url('adminstyles/vendor/datatables/dataTables.bootstrap4.js')}}"></script>
 
 
 <!-- Custom scripts for all pages-->
-<script src="{{url('adminstyles/js/sb-admin.min.js')}}"></script>
+<script src="{{url('adminstyles/js/sb-admin.js')}}"></script>
 
 
 <!-- Demo scripts for this page-->
 <script src="{{url('adminstyles/js/demo/datatables-demo.js')}}"></script>
 <script src="{{url('adminstyles/js/demo/chart-area-demo.js')}}"></script>
+<script src="{{url('adminstyles/js/demo/chart-pie-demo.js')}}"></script>
 
 
 

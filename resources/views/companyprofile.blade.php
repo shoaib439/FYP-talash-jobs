@@ -45,7 +45,7 @@
                         <div class="w-85">
                             <div class="row jbs-username">
                                 <div class="col-md-12">
-                                    <b class="justify-content-center">{{ Auth::user()->display_name }}</b>
+                                    <b class="justify-content-center">{{ $profile['name'] }} </b>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
 
             <div class="row mt-4">
                 <div class="col-sm-3">
-                    <p><i class="fa fa-user"aria-hidden="true"></i>  <span id="company-personal-gender">  </span></p>
+                    <p><i class="fa fa-user"aria-hidden="true"></i>  <span id="company-personal-gender"> {{ Auth::user()->name }} </span></p>
                     <p><i class="fa fa-envelope" aria-hidden="true"></i>  <span id="company-personal-email">{{ Auth::user()->email }}</span></p>
                     <p><i class="fa fa-phone "aria-hidden="true"></i>  <span id="company-personal-phone"> {{ Auth::user()->phoneno }} </span></p>
                     <p><i class="fa fa-building-o" aria-hidden="true"></i><span id="company-personal-city"> {{ Auth::user()->city }}</span></p>

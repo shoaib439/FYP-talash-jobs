@@ -13,11 +13,12 @@ class HRpolicy extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('hrpolicy', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->string('no_of_interview');
             $table->string('procedure');
 

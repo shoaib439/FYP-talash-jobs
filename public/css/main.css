@@ -1,4 +1,29 @@
 
+@font-face {
+    font-family: "Raleway-Medium";
+    src: url("/public/fonts/raleway/Raleway-Medium.ttf");
+    src: url("/public/fonts/raleway/Raleway-Black.ttf");
+    src: url("/public/fonts/raleway/Raleway-SemiBold.ttf");
+    }
+
+h2{
+    font-family: "Montserrat Medium", serif;
+}
+
+h5{
+    font-family: Raleway-Medium;
+}
+
+body{
+    font-family: "Montserrat Medium"
+}
+
+.my-text-font{
+
+    font-family: Helvetica
+}
+
+
 .w-15{
     width: 15% !important;
 }
@@ -15,6 +40,13 @@
      border-left: 1px solid #686868;
  }
 
+.invalid-feedback-custom {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
 
  .red{
      color:red;
@@ -123,6 +155,11 @@
     font-size: 22px;
 }
 
+.my-heading-text3 {
+    font-family: "Montserrat Medium" ;
+    color: #3d4852;
+    font-size: 18px;
+}
  .shadow-sms{
      box-shadow: 0 0 6px rgba(0,0,0,0.5);
  }
@@ -231,7 +268,7 @@ height:100px;
     /*border: 1px solid #ccc;*/
 /*}*/
 .section-interviews{
-    background-color: #e7e7e7;
+
     padding: 25px 0;
 }
 .section-interviews .block-interview{
@@ -406,6 +443,19 @@ box-shadow: 20px 20px;
     border-radius: 5px;
     box-shadow: 0px 0px 7px #ccc;
 }
+.jbs-call-container{
+    z-index: 2;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 80%;
+    margin: auto;
+    height: 40%;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px #ccc;
+}
+
 .jbs-main{
     width: 100%;
     position: relative;
@@ -653,4 +703,11 @@ card-header:first-child {
 
 .set-margin{
     margin-right: 30px;
+}
+
+
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
 }

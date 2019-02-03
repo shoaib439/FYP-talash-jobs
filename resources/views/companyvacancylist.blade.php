@@ -49,7 +49,7 @@
                                 <td>{{$vacancylists['title']}}</td>
                                 <td>{{$vacancylists['vacancy_type']}}</td>
                                 <td class="justify-content-center">{{$vacancylists['no_of_position']}}</td>
-                                <td class="text-right">Active</td>
+                                <td class="text-right">{{$vacancylists['created_at']}}</td>
                                 <td class="td-actions text-right">
                                    {{--<button type="button" rel="tooltip" class="btn btn-dark  btn-sm" >--}}
                                         {{--<i class="fa fa-check-square-o"></i>--}}

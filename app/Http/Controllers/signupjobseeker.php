@@ -20,11 +20,11 @@ class Signupjobseeker extends Controller
 
 
         $this->validate($request, [
-            'fname' => 'required|string',
-            'lname' => 'required|string',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'phone' => 'required',
+            'fname' => 'required|string|max:255|min:3',
+            'lname' => 'required|string|max:255|min:3',
+            'email' => 'required|string|email|max:255|unique:users|min:11',
+            'password' => 'required|string|min:6|max:50|confirmed',
+            'phone' => 'required|min:11|max:13',
             'gender'=> 'required',
 
         ]);

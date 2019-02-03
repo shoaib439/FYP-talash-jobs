@@ -15,11 +15,12 @@ class Vacancy extends Migration
 
 
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('vacancy', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_fk');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_fk')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->string('vacancy_type');
             $table->string('description');
@@ -39,7 +40,8 @@ class Vacancy extends Migration
 
             $table->unsignedInteger('hr_id');
 
-            $table->foreign('hr_id')->references('id')->on('hrpolicy');
+//            $table->foreign('hr_id')->references('id')->on('hrpolicy');
+
             $table->string('hr_no_of_interview');
             $table->string('hr_procedure');
 

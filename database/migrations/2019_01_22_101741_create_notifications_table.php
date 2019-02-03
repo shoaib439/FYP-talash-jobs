@@ -12,15 +12,20 @@ class CreateNotificationsTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('notifications', function (Blueprint $table) {
+
+       {
+           Schema::enableForeignKeyConstraints();
+
+           Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->string('message');
             $table->string('type');
             $table->integer('viewed');
+            $table->string('date')->nullable();
+            $table->string('time')->nullable();
             $table->timestamps();
 
         });

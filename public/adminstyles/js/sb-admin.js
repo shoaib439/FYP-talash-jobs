@@ -37,4 +37,27 @@
     event.preventDefault();
   });
 
+  $(document).ready(function(){
+      if($('.count-effect').length){
+          $('.count-effect').each(function(){
+
+              var obj = $(this);
+
+              var count = $(this).data('count');
+
+              var i=0;
+
+              var intval = setInterval(function () {
+                  if(i >= count){
+                      clearInterval(intval);
+                  }
+
+                  obj.text(i);
+                  i++;
+              },100);
+          });
+      }
+
+
+  });
 })(jQuery); // End of use strict

@@ -32,7 +32,7 @@
 
             <div class="row">
                 <div class="col-md-10">
-                    <h5>Type :{{$data->vacancy_type}}</h5>
+                    <a class="my-heading-text3">Type: </a>   <a class="my-text-font">{{ $data->vacancy_type }}</a>
                 </div>
 
                 <div class="col-md-2 text-right ">
@@ -46,10 +46,9 @@
 
             <div class="row mt-4">
                 <div class="col-sm-3">
-                    <p> Title: {{$data->title}}</p>
-                    <p> Description   {{$data->description}} </p>
-                    <p> Applied on  {{$appliedarray[$key]}}  </p>
-
+                  <p> <a class="my-heading-text3">Title: </a>   <a class="my-text-font">{{ $data->title }}</a></p>
+                    <p> <a class="my-heading-text3">Description: </a>   <a class="my-text-font"><i>{{ $data->description }}</i></a></p>
+                    <p> <a class="my-heading-text3">Applied on: </a>   <a class="my-text-font">{{$appliedarray[$key]}}</a></p>
 
                 </div>
 
