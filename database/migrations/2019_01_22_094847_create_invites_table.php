@@ -13,16 +13,17 @@ class CreateInvitesTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('invites', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('jobseeker_id');
-            $table->foreign('jobseeker_id')->references('id')->on('users');
+            $table->foreign('jobseeker_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedInteger('company_id');
-            $table->foreign('company_id')->references('id')->on('users');
+            $table->foreign('company_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedInteger('vacancy_id');
-            $table->foreign('vacancy_id')->references('id')->on('vacancy');
+            $table->foreign('vacancy_id')->references('id')->on('vacancy')->onDelete('cascade');
 
             $table->string("invite_accept");
             $table->timestamps();

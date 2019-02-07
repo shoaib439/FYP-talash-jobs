@@ -52,6 +52,8 @@
           @yield('registeredUsers')
             @yield('userscomplaints')
              @yield('usersfeedback')
+            @yield('companyRequestPage')
+            @yield('AdminViewCompany')
 
 
 

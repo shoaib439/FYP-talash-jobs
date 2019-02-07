@@ -13,15 +13,16 @@ class CreateAppliedvacanciesTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('appliedvacancies', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('jobseeker_id');
-            $table->foreign('jobseeker_id')->references('id')->on('users');
+            $table->foreign('jobseeker_id')->references('id')->on('users')->onDelete('cascade');
 
 
 
             $table->unsignedInteger('vacancy_id');
-            $table->foreign('vacancy_id')->references('id')->on('vacancy');
+            $table->foreign('vacancy_id')->references('id')->on('vacancy')->onDelete('cascade');
             $table->string('applied_date');
             @$table->string('status');
             $table->timestamps();

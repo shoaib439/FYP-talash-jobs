@@ -163,6 +163,86 @@ $(document).ready(function(){
 
 
 
+    ////bio start
+    $('.jbs-edit-bio-btn').click(function (e) {
+        e.preventDefault();
+
+        var btn = $(this);
+        var containerid = btn.data('containerid');
+
+
+        var container = $('#'+containerid);
+        container.fadeIn();
+
+        var form = container.find('form');
+        if(!form.length){
+            return;
+        }
+
+        var openercontainer = $('#'+form.data('submission'));
+        var bio = openercontainer.find('#bio');
+        var carrierlevel = openercontainer.find('#carrierlevel');
+
+
+
+        // container.find('#gender').val(gender.text());
+        container.find('#my-bio').val(bio.text());
+
+        container.find('#my-carrierlevel').val(carrierlevel.text());
+
+
+
+
+
+    });
+
+    $('#jbs-bio-form').submit(function (e) {
+        e.preventDefault();
+
+        var form = $(this);
+        var bio = $('#bio',form);
+        var carrierlevel = $('#carrierlevel',form);
+        alert('A');
+
+        $.ajax({
+            type:'POST',
+            url:  window.location.origin+'/ajax-upload-bio',
+            data: new FormData(this),
+            dataType:'JSON',
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log(data);//ye line hr jagha dalni
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
+                var submission = $('#'+form.data('submission'));
+
+
+                var biohtml = $('.my-bio',submission);
+                var carrierlevelhtml = $('.my-carrierlevel',submission);
+
+
+
+
+                biohtml.html(bio.val()); //ye age ki value ko update kr ra html main
+                carrierlevelhtml.html(carrierlevel.val()); //ye phone ki value ko update kr ra html main
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data.responseText);
+                form.parents('.jbs-model').find(' > .jbs-model-background.jbs-close').click();
+            }
+        });
+
+
+
+    });
+
+
+
+    ///bio end
+
+
     $('.jbs-add-btn').click(function (e) {
         e.preventDefault();
 
@@ -219,6 +299,9 @@ $(document).ready(function(){
 
     //nechay wala code se update hoga
 
+
+
+    //personal start
     $('#jbs-personal-form').submit(function (e) {
         e.preventDefault();
 
@@ -330,20 +413,56 @@ $(document).ready(function(){
                         <input type="hidden" name="_token" value="`+token+`">
                         <input type="hidden" name="workexp_id" value="`+data.workexp_id+`" />
                     </form>
+                       
+                              <div class="row">
+                                <div class="col-md-3">
+                                <p >  <a class="my-heading-text3 my-fa">Position: </a>   <a class="my-text-font company-pos">` + pos.val() + `</a></p>
+
+                            </div>
+                            <div class="col-md-3">
+                                <p >  <a class="my-heading-text3 my-fa">location: </a>   <a class="my-text-font company-loc">` + location.val() + `</a></p>
+
+                            </div>
+
+
+
+                            <div class="col-md-6 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-3">
-                                <p class="company-name">` + name.val() + `</p>
-                                <p class="company-loc">` + location.val() + `</p>
-                                <p class="company-pos">` + pos.val() + `</p>
-                                <p class="company-jobtype">` + jobtype.val() + `</p>
-                                <p class="company-startdate">` + startdate.val() + `</p>
-                                <p class="company-enddate">` + enddate.val() + `</p>
-                                <p class="company-currentlyworking">` + currworkhtml + `</p>
+                                <p >     <a class="my-heading-text3 my-fa">Company name: </a>   <a class="my-text-font company-name">` + name.val() + `</a></p>
+
                             </div>
-                                <div class="col-md-9 text-right">
-                                    <i class="fa fa-close red we-remove-btn"></i>
-                                </div>
+
+                            <div class="col-md-3">
+                                <p><a class="my-heading-text3 my-fa">Job Type: </a><a class="my-text-font company-jobtype">` + jobtype.val() + `</a></p>
+
+
                             </div>
+
+                            <div class="col-md-3">
+                                <p><a class="my-heading-text3 my-fa">Currently Working: </a><a class="my-text-font company-currentlyworking">` + currworkhtml + `</a></p>
+
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p><a class="my-heading-text3 my-fa">Start Date: </a><a class="my-text-font company-startdate">` + startdate.val() + `</a></p>
+
+                            </div>
+
+                            
+                            <div class="col-md-3">
+                                <p><a class="my-heading-text3 my-fa">End Date: </a><a class="my-text-font company-enddate">` + enddate.val() + `</a></p>
+                            </div>
+                                
+                        </div>
+
                         </div>`);
 
 
@@ -411,20 +530,55 @@ $(document).ready(function(){
                         <input type="hidden" name="_token" value="`+token+`">
                         <input type="hidden" name="education_id" value="`+data.education_id+`" />
                     </form>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <p class="degree-title">` + degreetitle.val() + `</p>
-                            <p class="degree-yearofcompletion">` + yearofcompletion.val() + `</p>
-                            <p class="degree-cgpa">` + cgpa.val() + `</p>
-                            <p class="degree-level">` + degreelevel.val() + `</p>
-                            <p class="institute">` + institute.val() + `</p>
-                            <p class="location">` + location.val() + `</p>
-                            
+                   <div class="row">
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Degree Title: </a><a class="my-text-font my-fa degree-title">` + degreetitle.val() + `</a></p>
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Degree Level: </a><a class="my-text-font my-fa degree-level">` + degreelevel.val() + `</a></p>
+
+
+                            </div>
+
+
+                            <div class="col-md-2 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
                         </div>
-                        <div class="col-md-9 text-right">
-                            <i class="fa fa-close red we-remove-btn"></i>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Institute: </a><a class="my-text-font my-fa institute">` + institute.val() + `</a></p>
+
+                            </div>
+
+
+                            <div class="col-md-3">
+
+                                <p><a class="my-heading-text3 ">City: </a><a class="my-text-font location">` + location.val() + `</a></p>
+
+
+                            </div>
+
+                            <div class="col-md-2">
+                                <p><a class="my-heading-text3 ">Year of Completion: </a><a class="my-text-font my-fa degree-yearofcompletion">` + yearofcompletion.val() + `</a></p>
+
+
+
+                            </div>
+                             <div class="col-md-2">
+                                <p><a class="my-heading-text3 ">CGPA: </a><a class="my-text-font my-fa degree-cgpa">` + cgpa.val() + `</a></p>
+
+
+
+                            </div>
+
                         </div>
                     </div>
+
+
                 </div>`);
 
 
@@ -490,19 +644,53 @@ $(document).ready(function(){
                         <input type="hidden" name="_token" value="`+token+`">
                         <input type="hidden" name="jsproject_id" value="`+data.jsproject_id+`" />
                     </form>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <p class="project-title">`+projecttitle.val()+`</p>
-                            <p class="project-desc">`+projectdesc.val()+`</p>
-                            <p class="project-pstartdate">`+projectsd.val()+`</p>
-                            <p class="project-penddate">`+projected.val()+`</p>
-                            <p class="project-purl">`+projecturl.val()+`</p>
-                            
+                
+
+                             <div class="row">
+                            <div class="col-md-4">
+
+                                <p><a class="my-heading-text3 ">Project Title: </a><a class="my-text-font my-fa project-title">`+projecttitle.val()+`</a></p>
+
+                            </div>
+
+
+                            <div class="col-md-8 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
                         </div>
-                        <div class="col-md-9 text-right">
-                            <i class="fa fa-close red we-remove-btn"></i>
+
+                        <div class="row">
+                            <div class="col-md-7">
+
+                                <p><a class="my-heading-text3 ">Description: </a><a class="my-text-font my-fa project-desc">`+projectdesc.val()+`</a></p>
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Url: </a><a class="my-text-font my-fa project-purl">`+projecturl.val()+`</a></p>
+
+                            </div>
+
                         </div>
-                    </div>
+
+                        <div class="row">
+
+                            <div class="col-md-7">
+                                <p><a class="my-heading-text3">Start Date: </a><a class="my-text-font  my-fa project-pstartdate">`+projectsd.val()+`</a></p>
+
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3">End Date: </a><a class="my-text-font  my-fa project-penddate">`+projected.val()+`</a></p>
+
+                        </div>
+
+
+
+
+                            </div>
+
                 </div>`);
 
 
@@ -923,22 +1111,27 @@ $(document).ready(function(){
                         <input type="hidden" name="_token" value="`+token+`">
                         <input type="hidden" name="hr_id" value="`+data.hr_id+`" />
                     </form>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <p class="hr1">`+hr1.val()+`</p>
-                           
+                     <div class="row">
+                        <div class="col-md-10">
+
+                            <a class="my-heading-text3 ">No of Interview: </a>   <a class="hr1 my-text-font">`+hr1.val()+`</a>
+
+
                         </div>
-                      
+
                         <div class="col-md-2 text-right">
                             <i class="fa fa-close red we-remove-btn hr_policy_remove"></i>
                         </div>
                     </div>
                     <div class="row">
-                               <div class="col-md-8">
-                            <p class="hr2">`+hr2.val()+`</p>
-                           
+                        <div class="col-md-8">
+
+
+                            <p><a class="my-heading-text3">Procedure: </a>   <a class="hr2 my-text-font">`+hr2.val()+`</a></p>
+
                         </div>
-                     </div>
+                    </div>
+                </div>
                 </div>`);
 
 
@@ -1473,4 +1666,6 @@ function openJBSModel(containerid){
 $('#myCarousel').on('slide.bs.carousel', function () {
     // do something…
 })
+
+
 

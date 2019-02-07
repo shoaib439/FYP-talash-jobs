@@ -23,7 +23,7 @@ class Vacancy extends Migration
             $table->foreign('user_fk')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->string('vacancy_type');
-            $table->string('description');
+            $table->longText('description');
             $table->string('no_of_position');
             $table->string('industry');
             $table->string('job_city');
@@ -43,7 +43,7 @@ class Vacancy extends Migration
 //            $table->foreign('hr_id')->references('id')->on('hrpolicy');
 
             $table->string('hr_no_of_interview');
-            $table->string('hr_procedure');
+            $table->longText('hr_procedure');
 
             $table->timestamps();
         });

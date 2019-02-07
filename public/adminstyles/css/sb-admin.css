@@ -14,9 +14,10 @@ body {
 }
 
 .my-heading-text{
+  font-size: 25px;
   font-family: "Roboto Medium" ;
   color: #3d4852;
-  font-size: 25px;
+
 }
 .my-text-font{
 

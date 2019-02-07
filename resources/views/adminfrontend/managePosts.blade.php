@@ -37,8 +37,8 @@
                             <td>{{$vac['vacancy']->vacancy_type}}</td>
 
                             {{--{{url('/delete/'$User['id'])}}--}}
-                            <td class="set-center"> <a href={{url('/deletevacancy/'.$vac['vacancy']->id)}}><button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
-                                        <i class="fas fa-user-minus ju"></i>
+                            <td class="set-center"> <a href={{url('/admindeletevacancy/'.$vac['vacancy']->id)}}><button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm">
+                                        <i class="fas fa-trash ju"></i>
                                     </button> </a>
 
                                 <a href={{url('/view/vacancy/'.$vac['vacancy']->id)}}><button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm ml-sm-2">

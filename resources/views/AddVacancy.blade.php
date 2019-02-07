@@ -19,10 +19,17 @@
                         Vacancy Details
 
                     </div>
+
                     <div class="col-sm-4 mt-2">
                         <div class="text-right ">
                             Asterisk (<span class="text-danger">*</span>) indicates required field
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="{{url('company/hrPolicies')}}">Please define HR Policies First</a>
+
                     </div>
                 </div>
 
@@ -368,7 +375,69 @@
                                         <strong>{{ $errors->first('vacancydegreelevel') }}</strong>
                                     </span>
                                 @endif
-                                <option value="" >Select Degree Level</option> <option value="Not Required">Not Required</option> <option value="PHD - Doctorate">PHD - Doctorate</option> <option value="MS-M.Phil">MS-M.Phil</option> <option value="M.SC-MBA-BS">M.SC-MBA-BS</option> <option value="BSC-BA">BSC-BA</option> <option value="FA-FSC">FA-FSC</option> <option value="High School">High School</option> <option value="B.CS - B.IT">B.CS - B.IT</option> <option value="Intermediate A-Level">Intermediate A-Level</option> <option value="ACA - ACCA - CA - ACMA">ACA - ACCA - CA - ACMA</option> <option value="MBBS">MBBS</option> <option value="B.Com">B.Com</option> <option value="Diploma">Diploma </option> <option value="Short Courses">Short Courses</option> <option value="B.E - B.Tech">B.E - B.Tech</option> <option value="BBA - MBA">BBA - MBA</option> <option value="M.CS - MBA Marketing">M.CS - MBA Marketing</option> <option value="Pharm-D">Pharm-D</option> <option value="LLB - LLM">LLB - LLM</option> <option value="DAE">DAE</option> <option value="Bachelors">Bachelors</option> <option value="Masters">Masters</option> <option value="DVM">DVM</option> <option value="BS Electrical">BS Electrical</option> <option value="B.E Mechanical">B.E Mechanical</option> <option value="B.E-B.Sc">B.E-B.Sc</option> <option value="FCPS">FCPS</option> <option value="M.Com">M.Com</option> <option value="MBA">MBA</option> <option value="BBA">BBA</option> <option value="Civil Engineering">Civil Engineering</option> <option value="Primary">Primary</option> <option value="Middle">Middle</option> <option value="LLB">LLB</option> <option value="LLM">LLM</option> <option value="CA">CA</option> <option value="Mphil">Mphil</option> <option value="Matric"> Matric</option> <option value="MS">MS</option> <option value="Master">Master</option> <option value="MA">MA</option> <option value="BiT">BiT</option> <option value="BCS">BCS</option> <option value="DAE">DAE</option> <option value="Bachelor">Bachelor</option> <option value="MBBS">MBBS</option> <option value="B.ed">B.ed</option> <option value="M.ed">M.ed</option> <option value="Intermediate">Intermediate</option> <option value="ACCA">ACCA</option> <option value="B.Sc">B.Sc</option> <option value="BA">BA</option> <option value="Diploma">Diploma</option> <option value="P.G Diploma">P.G Diploma</option> <option value="ITI">ITI</option> <option value="BBA">BBA</option> <option value="MCA">MCA</option> <option value="MBA">MBA</option> <option value="B.Tech">B.Tech</option> <option value="MSc">MSc</option> <option value=">M.Tech">M.Tech</option> <option value="M.Sc - B.Sc">M.Sc - B.Sc</option> </select>
+                                <option value="" >Select Degree Level</option>
+                                    <option value="Not Required">Not Required</option>
+                                    <option value="PHD - Doctorate">PHD - Doctorate</option>
+                                    <option value="MS-M.Phil">MS-M.Phil</option>
+                                    <option value="M.SC-MBA-BS">M.SC-MBA-BS</option>
+                                    <option value="BSC-BA">BSC-BA</option>
+                                    <option value="FA-FSC">FA-FSC</option>
+                                    <option value="High School">High School</option>
+                                    <option value="B.CS - B.IT">B.CS - B.IT</option>
+                                    <option value="Intermediate A-Level">Intermediate A-Level</option>
+                                    <option value="ACA - ACCA - CA - ACMA">ACA - ACCA - CA - ACMA</option>
+                                    <option value="MBBS">MBBS</option> <option value="B.Com">B.Com</option>
+                                    <option value="Diploma">Diploma </option>
+                                    <option value="Short Courses">Short Courses</option>
+                                    <option value="B.E - B.Tech">B.E - B.Tech</option>
+                                    <option value="BBA - MBA">BBA - MBA</option>
+                                    <option value="M.CS - MBA Marketing">M.CS - MBA Marketing</option>
+                                    <option value="Pharm-D">Pharm-D</option>
+                                    <option value="LLB - LLM">LLB - LLM</option>
+                                    <option value="DAE">DAE</option>
+                                    <option value="Bachelors">Bachelors</option>
+                                    <option value="Masters">Masters</option>
+                                    <option value="DVM">DVM</option>
+                                    <option value="BS Electrical">BS Electrical</option>
+                                    <option value="B.E Mechanical">B.E Mechanical</option>
+                                    <option value="B.E-B.Sc">B.E-B.Sc</option>
+                                    <option value="FCPS">FCPS</option>
+                                    <option value="M.Com">M.Com</option>
+                                    <option value="MBA">MBA</option>
+                                    <option value="BBA">BBA</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                    <option value="Primary">Primary</option>
+                                    <option value="Middle">Middle</option>
+                                    <option value="LLB">LLB</option>
+                                    <option value="LLM">LLM</option>
+                                    <option value="CA">CA</option>
+                                    <option value="Mphil">Mphil</option>
+                                    <option value="Matric"> Matric</option>
+                                    <option value="MS">MS</option>
+                                    <option value="Master">Master</option>
+                                    <option value="MA">MA</option>
+                                    <option value="BiT">BiT</option>
+                                    <option value="BCS">BCS</option>
+                                    <option value="DAE">DAE</option>
+                                    <option value="Bachelor">Bachelor</option>
+                                    <option value="MBBS">MBBS</option>
+                                    <option value="B.ed">B.ed</option>
+                                    <option value="M.ed">M.ed</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="ACCA">ACCA</option>
+                                    <option value="B.Sc">B.Sc</option>
+                                    <option value="BA">BA</option>
+                                    <option value="Diploma">Diploma</option>
+                                    <option value="P.G Diploma">P.G Diploma</option>
+                                    <option value="ITI">ITI</option>
+                                    <option value="BBA">BBA</option>
+                                    <option value="MCA">MCA</option>
+                                    <option value="MBA">MBA</option>
+                                    <option value="B.Tech">B.Tech</option>
+                                    <option value="MSc">MSc</option>
+                                    <option value=">M.Tech">M.Tech</option>
+                                    <option value="M.Sc - B.Sc">M.Sc - B.Sc</option>
+                            </select>
 
 
                             </select>
@@ -385,7 +454,7 @@
                                         <span class="invalid-feedback-custom" role="alert">
                                         <strong>{{ $errors->first('vacancycarrierlevel') }}</strong>
                                     </span>
-                                    @endif<option  value="">Select Career Level</option> <option value="Not Required">Not Required</option> <option value="Entry Level">Entry Level</option> <option value="Student (Undergraduate">Student (Undergraduate)</option> <option value="Experienced (Non Manager)">Experienced (Non Manager)</option> <option value="Manager">Manager</option> </select>
+                                    @endif<option  value="">Select Career Level</option> <option value="Not Required">Not Required</option> <option value="Entry Level">Entry Level</option> <option value="Student (Undergraduate)">Student (Undergraduate)</option> <option value="Experienced (Non Manager)">Experienced (Non Manager)</option> <option value="Manager">Manager</option> </select>
 
 
                         </div>
@@ -512,8 +581,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <select class="form-control" name="choose_hr">
-                            <option selected disabled>Select your Custom HR policy</option>
+                        <select class="form-control" name="choose_hr" required>
+
                             @foreach($customHR as $hr)
                                 <option value="{{ $hr->id }}">{{ $hr->procedure }}</option>
                             @endforeach;

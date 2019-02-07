@@ -15,7 +15,7 @@
 
                     <!-- Content -->
                     <h2 class="font-weight-bold text-light text-uppercase mt-3 mb-4">Talash Jobs</h2>
-                    <p class="text-light">Here is description of talash jobs</p>
+                    <div style="text-align: justify; text-justify: inter-word;" class="text-light">Talash Jobs is one of the largest  recruitment platform connecting  potential talent to opportunities.  We understand success as client satisfaction and long term cooperation. Talash Jobs has managed to gain a good reputation in the market.Our teams exhibit great responsibility towards their work and are constantly trained to get better at client support.</div>
 
                 </div>
                 <!-- Grid column -->
@@ -96,6 +96,8 @@
                     </ul>
 
                 </div>
+
+
                 <!-- Grid column -->
 
                 <!-- Grid column -->
@@ -107,17 +109,12 @@
 
 <ul class="list-unstyled text-light">
     <li>
-        <a class="text-light" href="#">About Us</a>
+        <a class="text-light" href="{{'/aboutus'}}">About Us</a>
     </li>
     <li>
-        <a class="text-light" href="{{'/user/contactus'}}">Contact Us</a>
+        <a class="text-light" href="{{'/user/contactus'}}">Complaints</a>
     </li>
-    <li>
-        <a class="text-light" href="#">Privacy Policy</a>
-    </li>
-    <li>
-        <a class="text-light" href="#">Terms of use</a>
-    </li>
+
     <li>
         <a class="text-light" href="{{url('/submitfeedback')}}">Feedback</a>
     </li>

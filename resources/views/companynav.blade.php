@@ -51,6 +51,7 @@
     @yield('searchResult')
     @yield('HRpolicies')
     @yield('jsprofilee')
+    @yield('updateVacancyView')
 
 
 

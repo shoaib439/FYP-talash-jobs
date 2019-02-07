@@ -89,7 +89,7 @@ class SearchController extends Controller
 
                else {
 
-                   var_dump('B');die();
+//                   var_dump('B');die();
                    return "no vacancy found";
                }
 
@@ -118,7 +118,7 @@ class SearchController extends Controller
 
         $user = Auth::user();
 
-
+        $searchVacancy = [];
         if (!Auth::guard()->check()):
             return redirect('/login');
         else:
@@ -127,54 +127,54 @@ class SearchController extends Controller
                 if ($q != "") {
 
                     $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%'");
+                    $a = 'A';
 
-
-                    if($querytype && empty($querycity) && empty($queryindustry))
+                    if(!empty($querytype) && empty($querycity) && empty($queryindustry))
                     {
 
                         $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `vacancy_type`='".$querytype."'");
-
+                        $a = 'B';
                     }
 
-                    if($querycity && empty($querytype) && empty($queryindustry))
+                    if(!empty($querycity) && empty($querytype) && empty($queryindustry))
                     {
 
                         $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `job_city`='".$querycity."'");
-
+                        $a = 'c';
                     }
 
-                    if($queryindustry && empty($querytype) && empty($querycity))
+                    if(!empty($queryindustry) && empty($querytype) && empty($querycity))
                     {
                         $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `industry`='".$queryindustry."'");
-
+                        $a = 'd';
                     }
 
-                    if($querytype && $querycity && empty($queryindustry)  )
+                    if(!empty($querytype) && !empty($querycity) && empty($queryindustry)  )
                     {
 
                         $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `vacancy_type`='".$querytype ."' AND `job_city`='".$querycity."'");
-
+                        $a = 'e';
                     }
 
-                    if($querytype && $queryindustry && empty($querycity)  )
+                    if(!empty($querytype) && !empty($queryindustry) && empty($querycity)  )
                     {
 
                         $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `vacancy_type`='".$querytype ."' AND `industry`='".$queryindustry."'");
-
+                        $a = 'f';
                     }
 
-                    if($querycity && $queryindustry && empty($querytype))
+                    if(!empty($querycity) && !empty($queryindustry) && empty($querytype))
                     {
 
                         $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `job_city`='".$querycity ."' AND `industry`='".$queryindustry."'");
-
+                        $a = 'g';
                     }
 
-                    if($querycity && $querycity && $queryindustry)
+                    if(!empty($querycity) && !empty($querytype) && !empty($queryindustry))
                     {
 
                         $searchVacancy = DB::select("SELECT * FROM `vacancy` WHERE `title` LIKE '%".$q."%' AND `job_city`='".$querycity ."' AND `industry`='".$queryindustry."' AND `vacancy_type`='".$querytype."'");
-
+                        $a = 'h';
                     }
 
                     $users = [];
@@ -186,7 +186,7 @@ class SearchController extends Controller
 
                     endforeach;
 
-
+//                    dd($searchVacancy,$a,$querycity,$querytype,$queryindustry);
 
                    // var_dump($searchVacancy);
                    // die();
@@ -207,7 +207,7 @@ class SearchController extends Controller
 
         endif;
 
-        return redirect('/login');
+        return view('/searchVacancyResultPage',compact('searchVacancy'));
 
 
     }//

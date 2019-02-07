@@ -48,6 +48,7 @@ class Signupjobseeker extends Controller
             'phoneno' => $phone,
             'gender'=> $gender,
             'type'=> 'jobseeker',
+            'active_status'=>'0'
         ]);
 
 

@@ -38,6 +38,13 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				}
 
 			$i++;
+
+			$sql1="UPDATE `notifications` SET viewed='1' Where user_id='$jsid'And type='call for interview'";
+				if(mysqli_query($conn,$sql1)){
+					$data['success']=TRUE;
+				}else{
+					$data['success']=FALSE;
+				}
 		}
 
 	} else {

@@ -20,7 +20,7 @@ class HRpolicy extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
             $table->string('no_of_interview');
-            $table->string('procedure');
+            $table->longText('procedure');
 
 
             $table->timestamps();

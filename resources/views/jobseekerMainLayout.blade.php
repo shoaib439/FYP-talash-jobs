@@ -79,6 +79,44 @@
         {{--profile ended--}}
 
 
+        {{--bio started--}}
+        <div class="container shadow-sms p-3 mb-5 bg-white rounded " id="container-bio">
+
+
+            <div class="d-flex">
+
+
+                <div class="w-75">
+                    <div class="d-flex">
+                        <h2 class="my-heading-text">Biography</h2>
+                    </div>
+                </div>
+                <div class="w-25">
+                    <div class="jbs-add-icon">
+                        <a href="#" class="jbs-edit-bio-btn" data-containerid="jbs-edit-bio-container"><i class="fa fa-edit"></i> </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <p >   <a class="my-heading-text3 my-fa">About Me: </a> <a class="my-text-font my-bio"> {{$profile['bio']}}</a></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <p >  <a class="my-heading-text3 my-fa">Carrier Level: </a>   <a class="my-text-font my-carrierlevel"> {{$profile['carrierlevel']}}</a></p>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        {{--bio ended--}}
+
+
 
         <div class="container shadow-sms p-3 mb-5 bg-white rounded" id="container-work-experience">
 
@@ -111,12 +149,15 @@
                             <div class="col-md-3">
                                 <p >  <a class="my-heading-text3 my-fa">Position: </a>   <a class="my-text-font">{{ $exp->company_position }}</a></p>
 
-
+                            </div>
+                            <div class="col-md-3">
+                                <p >  <a class="my-heading-text3 my-fa">location: </a>   <a class="my-text-font">{{ $exp->company_location }}</a></p>
 
                             </div>
 
 
-                            <div class="col-md-9 text-right">
+
+                            <div class="col-md-6 text-right">
                                 <i class="fa fa-close red we-remove-btn"></i>
                             </div>
                         </div>
@@ -134,7 +175,21 @@
                             </div>
 
                             <div class="col-md-3">
-                                <p><a class="my-heading-text3 my-fa">Currently Working: </a><a class="my-text-font ">{{ $exp->currently_working }}</a></p>
+
+                                @if( $exp->currently_working=='no' )
+
+                                    <p><a class="my-heading-text3 my-fa">Currently Working: </a><a class="my-text-font "><i class="fa fa-close"></i></a></p>
+
+                                @endif
+
+
+
+                                    @if( $exp->currently_working=='yes' )
+
+                                        <p><a class="my-heading-text3 my-fa">Currently Working: </a><a class="my-text-font "><i class="fa fa-check"></i></a></p>
+
+
+                                    @endif
 
 
                             </div>
@@ -146,7 +201,7 @@
 
                             </div>
 
-                            @if( !$exp->currently_working=='yes' )
+                            @if( $exp->currently_working=='no' )
                             <div class="col-md-3">
                                 <p><a class="my-heading-text3 my-fa">End Date: </a><a class="my-text-font ">{{ $exp->end_date }}</a></p>
                             </div>
@@ -189,13 +244,18 @@
                             <input type="hidden" name="education_id" value="{{ $edu->id }}" />
                         </form>
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <p><a class="my-heading-text3 ">Degree Title: </a><a class="my-text-font my-fa">{{ $edu->degree_title  }}</a></p>
 
                             </div>
 
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <p><a class="my-heading-text3 ">Degree Level: </a><a class="my-text-font my-fa">{{ $edu->degree_level  }}</a></p>
+                            </div>
+
+                            <div class="col-md-2">
+                                <p><a class="my-heading-text3 ">CGPA: </a><a class="my-text-font my-fa">{{ $edu->cgpa  }}</a></p>
+
 
 
                             </div>
@@ -227,6 +287,8 @@
 
                             </div>
 
+
+
                         </div>
                     </div>
                 @endforeach
@@ -237,6 +299,92 @@
 
 
 
+
+
+        <div class="container shadow-sms p-3 mb-5 bg-white rounded" id="container-projects">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="jbs-we-title">
+                        <div class="w-75">
+                            <h2 class="my-heading-text">Projects</h2>
+                        </div>
+                        <div class="w-25">
+                            <div class="jbs-add-icon">
+                                <a href="#" class="jbs-add-btn" data-containerid="jbs-add-projects-container" ><i class=" green-icon-set fa fa-plus" ></i>  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="jbs-main-content-container">
+
+                @csrf
+                @foreach($jsproject as $key => $project)
+                    <div class="jbs-main-content" id="fa-content-{{ $key  }}" >
+                        <form class="fa-remove-form">
+                            @csrf
+                            <input type="hidden" name="jsproject_id" value="{{ $project->id }}" />
+                        </form>
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <p><a class="my-heading-text3 ">Project Title: </a><a class="my-text-font my-fa">{{ $project->project_title   }}</a></p>
+
+                            </div>
+
+
+                            <div class="col-md-8 text-right">
+                                <i class="fa fa-close red we-remove-btn"></i>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7">
+
+                                <p><a class="my-heading-text3 ">Description: </a><a class="my-text-font my-fa">{{ $project->project_desc   }}</a></p>
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3 ">Url: </a><a class="my-text-font my-fa">{{ $project->project_url   }}</a></p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-7">
+                                <p><a class="my-heading-text3">Start Date: </a><a class="my-text-font  my-fa">{{ $project->project_sd   }}</a></p>
+
+
+                            </div>
+
+                            <div class="col-md-5">
+                                <p><a class="my-heading-text3">End Date: </a><a class="my-text-font  my-fa">{{ $project->project_ed   }}</a></p>
+
+                            </div>
+
+
+
+
+                        </div>
+
+
+                    </div>
+                @endforeach
+
+            </div>
+
+
+        </div>
+
+
+
+
+        {{--Projects ended--}}
 
 
         <div class="container shadow-sms p-3 mb-5 bg-white rounded" id="container-functional-area">
@@ -339,7 +487,7 @@
                 <div class="col-md-12">
                     <div class="jbs-we-title">
                         <div class="w-75">
-                            <h2 class="my-heading-text">Preffered Job City</h2>
+                            <h2 class="my-heading-text">Preferred Job City</h2>
                         </div>
                         <div class="w-25">
                             <div class="jbs-add-icon">
@@ -411,92 +559,6 @@
 
         {{--</div>--}}
 
-
-
-        <div class="container shadow-sms p-3 mb-5 bg-white rounded" id="container-projects">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="jbs-we-title">
-                        <div class="w-75">
-                            <h2 class="my-heading-text">Projects</h2>
-                        </div>
-                        <div class="w-25">
-                            <div class="jbs-add-icon">
-                                <a href="#" class="jbs-add-btn" data-containerid="jbs-add-projects-container" ><i class=" green-icon-set fa fa-plus" ></i>  </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="jbs-main-content-container">
-
-                @csrf
-                @foreach($jsproject as $key => $project)
-                    <div class="jbs-main-content" id="fa-content-{{ $key  }}" >
-                        <form class="fa-remove-form">
-                            @csrf
-                            <input type="hidden" name="jsproject_id" value="{{ $project->id }}" />
-                        </form>
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <p><a class="my-heading-text3 ">Project Title: </a><a class="my-text-font my-fa">{{ $project->project_title   }}</a></p>
-
-                            </div>
-
-
-                            <div class="col-md-8 text-right">
-                                <i class="fa fa-close red we-remove-btn"></i>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-7">
-
-                                <p><a class="my-heading-text3 ">Description: </a><a class="my-text-font my-fa">{{ $project->project_desc   }}</a></p>
-
-                            </div>
-
-                            <div class="col-md-5">
-                                <p><a class="my-heading-text3 ">Url: </a><a class="my-text-font my-fa">{{ $project->project_url   }}</a></p>
-
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-7">
-                                <p><a class="my-heading-text3">Start Date: </a><a class="my-text-font  my-fa">{{ $project->project_sd   }}</a></p>
-
-
-                            </div>
-
-                            <div class="col-md-5">
-                                <p><a class="my-heading-text3">End Date: </a><a class="my-text-font  my-fa">{{ $project->project_ed   }}</a></p>
-
-                        </div>
-
-
-
-
-                            </div>
-
-
-                    </div>
-                @endforeach
-
-            </div>
-
-
-        </div>
-
-
-
-
-        {{--Projects ended--}}
         <div class="container shadow-sms p-3 mb-5 bg-white rounded" id="container-languages">
 
             <div class="row">
@@ -650,7 +712,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="companyenddate">End Date</label>
-                                        <input type="date" class="form-control" name="companyed" id="companyed" required aria-describedby="companyedhelp" placeholder="End Date">
+                                        <input type="date" class="form-control" name="companyed" id="companyed"  aria-describedby="companyedhelp" placeholder="End Date">
                                     </div>
                                 </div>
                             </div>
@@ -710,6 +772,8 @@
                                     <div class="form-group">
                                         <label for="degreetitle">Degree Title</label>
                                         <input type="text" class="form-control" id="degreetitle" name="degreetitle" required aria-describedby="degreetitlehelp" placeholder="Enter Degree Title">
+
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -729,7 +793,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="degreelevel">Degree Level</label>
-                                        <input type="text" class="form-control" id="degreelevel" name="degreelevel" required aria-describedby="degreelevelhelp" placeholder="Enter Degree Level">
+                                         <select class="custom-select mr-sm-2 square"   id="degreelevel" name="degreelevel">
+
+                                            <option disabled >Select Degree Level</option> <option value="PHD - Doctorate">PHD - Doctorate</option> <option value="MS-M.Phil">MS-M.Phil</option> <option value="M.SC-MBA-BS">M.SC-MBA-BS</option> <option value="BSC-BA">BSC-BA</option> <option value="FA-FSC">FA-FSC</option> <option value="High School">High School</option> <option value="B.CS - B.IT">B.CS - B.IT</option> <option value="Intermediate A-Level">Intermediate A-Level</option> <option value="ACA - ACCA - CA - ACMA">ACA - ACCA - CA - ACMA</option> <option value="MBBS">MBBS</option> <option value="B.Com">B.Com</option> <option value="Diploma">Diploma </option> <option value="Short Courses">Short Courses</option> <option value="B.E - B.Tech">B.E - B.Tech</option> <option value="BBA - MBA">BBA - MBA</option> <option value="M.CS - MBA Marketing">M.CS - MBA Marketing</option> <option value="Pharm-D">Pharm-D</option> <option value="LLB - LLM">LLB - LLM</option> <option value="DAE">DAE</option> <option value="Bachelors">Bachelors</option> <option value="Masters">Masters</option> <option value="DVM">DVM</option> <option value="BS Electrical">BS Electrical</option> <option value="B.E Mechanical">B.E Mechanical</option> <option value="B.E-B.Sc">B.E-B.Sc</option> <option value="FCPS">FCPS</option> <option value="M.Com">M.Com</option> <option value="MBA">MBA</option> <option value="BBA">BBA</option> <option value="Civil Engineering">Civil Engineering</option> <option value="Primary">Primary</option> <option value="Middle">Middle</option> <option value="LLB">LLB</option> <option value="LLM">LLM</option> <option value="CA">CA</option> <option value="Mphil">Mphil</option> <option value="Matric"> Matric</option> <option value="MS">MS</option> <option value="Master">Master</option> <option value="MA">MA</option> <option value="BiT">BiT</option> <option value="BCS">BCS</option> <option value="DAE">DAE</option> <option value="Bachelor">Bachelor</option> <option value="MBBS">MBBS</option> <option value="B.ed">B.ed</option> <option value="M.ed">M.ed</option> <option value="Intermediate">Intermediate</option> <option value="ACCA">ACCA</option> <option value="B.Sc">B.Sc</option> <option value="BA">BA</option> <option value="Diploma">Diploma</option> <option value="P.G Diploma">P.G Diploma</option> <option value="ITI">ITI</option> <option value="BBA">BBA</option> <option value="MCA">MCA</option> <option value="MBA">MBA</option> <option value="B.Tech">B.Tech</option> <option value="MSc">MSc</option> <option value=">M.Tech">M.Tech</option> <option value="M.Sc - B.Sc">M.Sc - B.Sc</option> </select>
+
+
+                                        </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -1220,6 +1290,72 @@
     </div>
 
     {{--Edit personal  ended--}}
+
+
+
+    {{--bio edit start--}}
+
+    <div class="jbs-model" id="jbs-edit-bio-container">
+        <div class="jbs-model-background jbs-close"></div>
+        <div class="jbs-container">
+            <div class="jbs-main">
+                <div class="jbs-header">
+                    <div class="jbs-title">
+                        <h3>Biography</h3>
+                    </div>
+                    <div class="jbs-close-container">
+                        <i class="fa fa-close jbs-close"></i>
+                    </div>
+                </div>
+                <form action="#" method="post" id="jbs-bio-form" data-submission="container-bio">
+                    <div class="jbs-content">
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="bio">Biography</label>
+                                        <textarea rows="4" cols="50" name="bio" class="form-control" id="bio" ></textarea>
+                                         </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="type">Select Carrier Level<span class="text-danger">*</span></label>
+
+
+                                        <select  name="carrierlevel" id="carrierlevel"  value="{{ old('carrierlevel') }}" id="carrierlevel"class="form-control valid" aria-invalid="false">  @if ($errors->has('carrierlevel'))
+                                                <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('carrierlevel') }}</strong>
+                                    </span>
+                                            @endif<option  value="">Select Career Level</option> <option value="Not Required">Not Required</option> <option value="Entry Level">Entry Level</option> <option value="Student (Undergraduate">Student (Undergraduate)</option> <option value="Experienced (Non Manager)">Experienced (Non Manager)</option> <option value="Manager">Manager</option> </select>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jbs-footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group align-class">
+                                        <input type="submit" class="form-control btn my-btn1" value="Save" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{csrf_field()}}
+                </form>
+            </div>
+        </div>
+    </div>
+    {{--bio edit end--}}
 
 
 

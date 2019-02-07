@@ -19,9 +19,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			mysqli_close($conn);
 	} else{
 
-			var_dump(mysqli_error($conn));
-			die();
-
 			$result["success"]="0";
 			$result["message"]="error";
 

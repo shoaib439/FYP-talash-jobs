@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name','name','display_name', 'email', 'password','gender','phoneno','city','type','role','profile_pic'
+        'first_name','last_name','name','display_name', 'email', 'password','gender','phoneno','city','type','role','profile_pic','active_status'
     ];
 
     /**
@@ -33,11 +33,14 @@ class User extends Authenticatable
     }
 
     public function isCompany(){
-        return ($this->type == 'company');
+        return ($this->type == 'company' );
     }
 
     public function isJobseeker(){
-        return ($this->type == 'jobseeker');
+        return ($this->type == 'jobseeker'&& $this->active_status=='0');
+    }
+    public function isActive(){
+        return ($this->active_status == '1');
     }
 
     public function notifications($all = false){

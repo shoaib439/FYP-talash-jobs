@@ -50,7 +50,9 @@
                     @if($savedcheck == 'Saved')
 
                         <a href="#" onclick="return false;" class="btn my-btn disabled">Saved</a>
-                    @elseif($savedcheck)
+                    @elseif($savedcheck == 'Date Expired')
+                        <a href="#" onclick="return false;" class="btn my-btn disabled">Date Expired</a>
+                    @else
                         <a href="{{ $savedcheck }}" class="btn my-btn">Save</a>
                     @endif
                 </div>
@@ -68,8 +70,8 @@
 
             <div class="row">
                 <b style="margin-left: 16px">Description  :</b>
-                <div class="col-md-6">
-                    <a class="my-text-font">{{  $vacancy->description  }}</a>
+                <div style="text-align: justify;" class="col-md-8">
+                    <a  class="my-text-font">{{  $vacancy->description  }}</a>
                 </div>
             </div>
 
@@ -96,7 +98,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <p>Experience Required: <a class="my-text-font">{{     $vacancy->experience   }} </a></p>
+                    <p>Experience Required: <a class="my-text-font">{{     $vacancy->experience   }} </a> Years</p>
                 </div>
 
                 <div class="col-md-4">
@@ -174,15 +176,15 @@
 
 
                         @if($appliedcheck == 'Applied')
-
                             <a href="#" onclick="return false;" class="btn my-btn2 disabled">Applied</a>
-                        @elseif($appliedcheck)
+                        @elseif($appliedcheck == 'Date Expired')
+                            <a href="#" onclick="return false;" class="btn my-btn2 disabled">Date Expired</a>
+                        @else
                             <a href="{{ $appliedcheck }}" class="btn my-btn2">Apply Now</a>
                         @endif
                 </div>
             </div>
             @endif
-
 
 
 

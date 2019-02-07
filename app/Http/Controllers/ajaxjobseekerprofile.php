@@ -38,7 +38,7 @@ class AjaxJobSeekerProfile extends Controller
             'companypos' => 'required|string',
             'companyjobtype' => 'required|string',
             'companysd' => 'required|string',
-            'companyed' => 'required|string',
+
         ]);
 
         if(!Auth::guard()->check()):
@@ -112,7 +112,7 @@ class AjaxJobSeekerProfile extends Controller
 
         $path = public_path('images');
         $validation = Validator::make($request->all(), [
-            'dp_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:1000'
+            'dp_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:5000'
         ]);
 
         if ($validation->passes()) {
@@ -222,6 +222,67 @@ class AjaxJobSeekerProfile extends Controller
     /////////////////////////
     ///
 
+
+    public function bioData(Request $request){
+
+
+        $validation = Validator::make($request->all(), [
+            //'dp_file' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000'
+            //'address' => 'required',
+            //'address' => 'required', //aur kr lae
+        ]);
+
+
+
+        if($validation->passes())
+        {
+
+            $bio = $request->bio;
+            $carrierlevel= $request->carrierlevel;
+
+
+
+            $user = Auth::User();
+            $myuser= jobseekerprofile::where(['user_id'=>$user->id])->get()->first();
+
+            $myuser->bio =$bio;
+
+            $myuser->carrierlevel = $carrierlevel;
+
+            $success = $myuser->save();
+
+            if($success){
+                return response()->json([
+                    'message'   => 'Data Upload Successfully',
+                    'success'   => '1',
+                    'class_name'  => 'alert-success',
+                    's' => $success
+                ]);
+            }
+
+
+            return response()->json([
+                'message'   => $success,
+                'success'   => '0',
+                'class_name'  => 'alert-success'
+            ]);
+
+
+
+        }
+        else
+        {
+            return response()->json([
+                'message'   => $validation->errors()->all(),
+                'uploaded_image' => '',
+                'class_name'  => 'alert-danger'
+            ]);
+        }
+
+
+
+    }
+    ////////////////////
     public  function uploadeducation(Request $request){
 
 
@@ -261,11 +322,11 @@ class AjaxJobSeekerProfile extends Controller
                 'user_id'=>$user->id,
                 'degree_title' => $request->degreetitle,
                 'year_of_completion' => $request->yearofcompletion,
-                'cgpa' => $request->yearofcompletion,
-                'degree_level' => $request->cgpa,
-                'institite' => $request->degreelevel,
-                'city' => $request->institute,
-                'end_date' => $request->location,
+                'cgpa' => $request->cgpa,
+                'degree_level' => $request->degreelevel,
+                'institite' => $request->institute,
+                'city' => $request->location,
+
 
             ]);
 

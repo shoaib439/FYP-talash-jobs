@@ -11,6 +11,7 @@ use App\invite;
 use App\jobseekerprofile;
 use App\jsProject;
 use App\languages;
+use App\minterview;
 use App\notification;
 use App\prefferedcity;
 use App\savedvacancy;
@@ -34,7 +35,7 @@ class JobseekerController extends Controller
     public function landingjobs(){
 
 
-        $jobs = vacancy::where(['vacancy_type'=>'job'])->get();
+        $jobs = vacancy::where(['vacancy_type'=>'job'])->take(3)->get();
 
         $jobslist = [];
 
@@ -47,7 +48,7 @@ class JobseekerController extends Controller
         endforeach;
 
 
-        $internships = vacancy::where(['vacancy_type'=>'internship'])->get();
+        $internships = vacancy::where(['vacancy_type'=>'internship'])->take(3)->get();
 
 
         $internshiplist = [];
@@ -98,13 +99,14 @@ class JobseekerController extends Controller
 
 
     public function home(){
+
         if(!Auth::guard()->check()){
             return redirect('/login');
         }
 
 
         if(!Auth::user()->isJobSeeker()){
-            return view('/');
+            return redirect('/');
         }
 
         $user = Auth::user();
@@ -115,6 +117,9 @@ class JobseekerController extends Controller
 
         $profile['js_address'] = $jsuser->js_address;
         $profile['date_of_birth'] = $jsuser->date_of_birth;
+
+        $profile['bio'] = $jsuser->bio;
+        $profile['carrierlevel'] = $jsuser->carrierlevel;
 
 
 
@@ -136,6 +141,7 @@ class JobseekerController extends Controller
         $education=education::where('user_id',$user->id)->get();
 
         $workexp=workexperience::where('user_id',$user->id)->get();
+
 
         $notifications = Auth::user()->notifications();
 
@@ -324,15 +330,25 @@ class JobseekerController extends Controller
             $savedcheck = 'Saved';
             $appliedcheck='Applied';
 
-            $saved = savedvacancy::where(['jobseeker_id'=>$user->id,'vacancy_id'=>$id])->get();
-            $applied = appliedvacancy::where(['jobseeker_id'=>$user->id,'vacancy_id'=>$id])->get();
-            if( $saved->isEmpty()){
-                $savedcheck = url('/vacancy/save/'.$id);
+            $vaclastdate = strtotime($vacancy->last_date);
+            $disable = false;
+            if( $vaclastdate > time() ){
+                $saved = savedvacancy::where(['jobseeker_id'=>$user->id,'vacancy_id'=>$id])->get();
+                $applied = appliedvacancy::where(['jobseeker_id'=>$user->id,'vacancy_id'=>$id])->get();
+                if(  $saved->isEmpty()){
+                    $savedcheck = url('/vacancy/save/'.$id);
+                }
+
+                if( $applied->isEmpty()){
+                    $appliedcheck = url('/apply/vacancy/'.$id);
+                }
+            }
+            else {
+                $savedcheck = 'Date Expired';
+                $appliedcheck = 'Date Expired';
             }
 
-            if( $applied->isEmpty()){
-                $appliedcheck = url('/apply/vacancy/'.$id);
-            }
+
         }
 
 
@@ -595,5 +611,69 @@ public function landingSearchcity($city){
 
 }
 
+public function jobseekerviewCompany($id)
+{
 
+    if (!Auth()->guard()->check()) {
+        return redirect('/');
+    } else {
+
+        if (Auth::user()->isJobseeker()) {
+            $user = Auth::User();
+            $responsive="";
+            $company = $user::where('id', $id)->get();
+            $companyData = companyprofile::where('user_id', $id)->get();
+            $jvacancy = vacancy::where(['user_fk' => $id, 'vacancy_type' => "Job"])->get();
+            $ivacancy = vacancy::where(['user_fk' => $id, 'vacancy_type' => "Internship"])->get();
+
+            $jobsCount = count($jvacancy);
+            $internshipCount = count($ivacancy);
+
+
+            $totalPos = vacancy::where('user_fk', $id)->sum('no_of_position');
+            $invited=minterview::where(['company_id'=>$id])->get();
+
+            if($totalPos=='0'){
+                $responsive="0";
+            }
+            else{
+                $r=count($invited)/$totalPos;
+                $responsive=$r*100;
+                $responsive = number_format($responsive, 0);
+            }
+
+//            var_dump($responsive);
+//            die();
+
+            $cData = [];
+
+            $cData['user'] = $company->first();
+            $cData['company'] = $companyData->first();
+
+            $cData['job'] = $jobsCount;
+            $cData['position'] = $totalPos;
+            $cData['internship'] = $internshipCount;
+            $cData['responsiveness'] = $responsive;
+
+
+
+
+
+//                var_dump($responsive);
+//                die();
+
+
+
+        }
+
+        return view('jobseekerViewCompany', compact('cData'));
+    }
+
+}
+
+
+            public function AboutUs(){
+
+                return view('Aboutus');
+            }
 }//end of jobseekerController

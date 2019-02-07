@@ -33,6 +33,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 					$data['data'][$i]['cweb'] = $row1['website'];
 					$data['data'][$i]['caddress'] = $row1['address'];
 					$data['data'][$i]['cpdesignation'] = $row1['person_designation'];
+					$data['data'][$i]['lat'] = $row1['company_lat'];
+					$data['data'][$i]['lng'] = $row1['company_lng'];
+
 			}
 		
 

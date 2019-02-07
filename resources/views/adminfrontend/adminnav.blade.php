@@ -42,6 +42,8 @@
                 {{--<a class="dropdown-item" href="#">Something else here</a>--}}
             {{--</div>--}}
         {{--</li>--}}
+        <li class="active navbar-brand"><a class="my-text-font" style="color: #ffffff; font-size: 16px;"     href="{{url('registeredUsers')}}">Registered Users</a></li>
+        <li class="active navbar-brand"><a class="my-text-font" style="color: #ffffff; font-size: 16px;" href="{{url('approve/companyRequest')}}">Company requests</a></li>
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user-circle fa-lg"></i>

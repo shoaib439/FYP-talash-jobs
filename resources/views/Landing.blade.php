@@ -36,7 +36,26 @@
 
             @endif
 
-        @if(Auth::user()->isCompany())
+        @if(Auth::user()->isCompany() &&!Auth::user()->isActive())
+            <div class="container-fluid">
+                <div class="btn-group dropdown-header">
+                    <button type="button" class="btn btn-secondary-me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->display_name }}
+                    </button>
+                    <div class="dropdown-menu ">
+
+                        <a class="dropdown-item" href="{{route('logout')}}"
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log Out</a>
+
+                        <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none"> {{csrf_field()}} </form>
+                    </div>
+                </div>
+
+            </div>
+
+
+        @elseif(Auth::user()->isActive())
+
             <div class="container-fluid">
                 <div class="btn-group dropdown-header">
                     <button type="button" class="btn btn-secondary-me dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -55,7 +74,9 @@
                 </div>
 
             </div>
+
         @endif
+
 
         @if(Auth::user()->isAdmin())
             <div class="container-fluid">
@@ -89,6 +110,9 @@
 @section('content')
 
 
+
+
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 main-header">
@@ -97,6 +121,7 @@
 
 
 
+                    @if(!Auth::guard()->check() ||  (Auth::guard()->check() && Auth::User()->isJobseeker() ) )
                     <form action="{{url('/search-advanced')}}" method="POST">
                         @csrf
 
@@ -115,11 +140,13 @@
                                     <div class="col-md-3 p-1">
 
                                         <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect" name="industrytype">
-                                            <option value="" disabled>Search by Industry</option>
-                                            <option value="IT"> IT/Software Development</option>
+                                            <option  value="" selected>Select Industry</option>
+
+
                                             <option value="Medical">Medical/Health</option>
                                             <option value="Accounting"> Accounting</option>
                                             <option value="Engineering"> Engineering</option>
+                                            <option value="IT"> IT/Software Development</option>
 
                                             <option value="Insurance"> Insurance </option>
                                             <option value="Banking/Financial Services ">Banking/Financial Services </option>
@@ -141,7 +168,7 @@
                                     <div class="col-md-3 p-1">
 
                                         <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect" name="vacancytype">
-                                            <option  value="" selected>Job/Internship</option>
+                                            <option value=""  selected>Select Type</option>
                                             <option value="job">Job</option>
                                             <option value="internship">Internship</option>
 
@@ -152,7 +179,7 @@
                                     <div class="col-md-3 p-1">
 
                                         <select class="custom-select mr-sm-2 square" id="inlineFormCustomSelect" name="cityname">
-                                            <option value="">Select City</option>
+                                            <option value="" selected>Select City</option>
                                             <option value="Ahmadpur East">Ahmadpur East</option>
                                             <option value="Ahmadpur Sial">Ahmadpur Sial</option>
                                             <option value="Alipur">Alipur</option>
@@ -324,9 +351,6 @@
                         </div>
                     </div>
 
-
-
-
                     <div class="col-md-12 submit-btn-container">
                         <div class="row w-100 flex-center">
                             <div class="col-md-3">
@@ -335,6 +359,30 @@
                         </div>
                     </div>
                     </form>
+                    @endif
+
+                        @if(  Auth::guard()->check() && Auth::User()->isActive()  )
+
+                            @csrf
+
+                            <div class="col-md-12">
+                                <div class="text-center employer-landing">
+                                    <b>Welcome</b> <br>
+
+                                    <b class="mt-5"> {{Auth::User()->display_name}}</b>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 submit-btn-container">
+                                <div class="row w-100 flex-center">
+                                    <div class="col-md-3">
+                                        <a href="{{'company/AddVacancy'}}" class="btn header-form-btn">Post Vacancy</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        @endif
                 </div>
 
 
@@ -388,7 +436,7 @@
 
             {{--</div>--}}
             <div class="col-md-12 section-interviews">
-                <div class ="cv-heading text-center mb-4"><h2 class="green-icon-set">LATEST JOBS</h2></div>
+                <div class ="cv-heading text-center mb-4"><h2 class="green-icon-set"><b>LATEST JOBS</b></h2></div>
                 <div class="row ">
 
                      @foreach($jobslist as $job)
@@ -403,7 +451,7 @@
                                     @endif
                                 </div>
                                 <div class="interview-description">
-                                    <a href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5 class="green-icon-set">{{$job['vacancy']->title}}</h5></a>
+                                    <a class ="my-heading-text" href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5 class="green-icon-set">{{$job['vacancy']->title}}</h5></a>
                                     <p>{{$job['company']->company_name}}</p>
                                 </div>
                             </div>
@@ -430,7 +478,7 @@
 
             {{--</div>--}}
             <div class="col-md-12 section-interviews ">
-                <div class ="cv-heading text-center mb-4 "><h2 class="green-icon-set">LATEST INTERNSHIPS</h2></div>
+                <div class ="cv-heading text-center mb-4 "><h2 class="green-icon-set"><b>LATEST INTERNSHIPS</b></h2></div>
                 <div class="row">
 
 
@@ -441,8 +489,9 @@
                                         <img src="{{asset($job['user']->profile_pic)}}" />
                                     </div>
                                     <div class="interview-description">
-                                        <a href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5>{{$job['vacancy']->title}}</h5></a>
+                                        <a  href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5 class ="my-heading-text">{{$job['vacancy']->title}}</h5></a>
                                         <p>{{$job['company']->company_name}}</p>
+
                                     </div>
                                 </div>
                             </div>

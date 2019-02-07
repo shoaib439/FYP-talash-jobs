@@ -26,7 +26,7 @@
                 </div>
 
                 <div class=" col-md-3 mb-5 curve-border offset-md-1 ">
-                    <p class="h6">Signup as Employeer</p>
+                    <p class="h6">Signup as Employer</p>
                 </div>
             </div>
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Talash Jobs</title>
+    <meta name="description" content="Free Web tutorials">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="{{URL::asset ('/')}}" >
     <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">
@@ -38,6 +39,9 @@
 @yield('InvitationAcceptedPage')
 @yield('jsprofile')
 @yield('searchVacancySectionforAll')
+@yield('companyApprovalPage')
+@yield('jobseekerViewCompany')
+@yield('aboutUs')
 
 
 

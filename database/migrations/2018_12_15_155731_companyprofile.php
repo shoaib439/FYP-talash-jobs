@@ -28,6 +28,8 @@ class Companyprofile extends Migration
           $table->string('person_name');
           $table->string('skype')->nullable();
           $table->string('person_designation');
+          $table->string('company_lat')->nullable();
+          $table->string('company_lng')->nullable();
           $table->timestamps();
       });
     }

@@ -6,7 +6,7 @@
  {{--* Time: 5:24 PM--}}
  {{--*/--}}
 
-@extends('companynav')
+@extends('main')
 
 @section('content')
     <div class="container">
@@ -16,7 +16,7 @@
                     <div class="card-header">{{ __('Reset Password') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{url('user/resetpasswordpage')}}">
+                        <form method="POST" action="{{url('/user/resetpasswordpage')}}">
                             @csrf
 
                             <div class="form-group row">
@@ -37,7 +37,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">New Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="newpassword" required>
+                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback-custom" role="alert">
@@ -52,6 +52,12 @@
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+
+                                    @if ($errors->has('password_confirmation'))
+                                        <span class="invalid-feedback-custom" role="alert">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 

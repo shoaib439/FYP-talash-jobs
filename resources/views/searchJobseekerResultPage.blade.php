@@ -28,7 +28,7 @@
 
         <div class="container-fluid ">
 
-            <div class="container shadow-sms p-3 mt-3  bg-white rounded ">
+            <div class="container shadow-sms p-3 mt-3 mb-4 bg-white rounded ">
 
                 <div class="d-flex">
                     <div class="w-15">

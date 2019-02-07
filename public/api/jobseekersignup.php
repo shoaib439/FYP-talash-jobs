@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 	}
 
 
-	$sql="INSERT INTO `users` (first_name,last_name,name,display_name,phoneno,gender,email,password,type) VALUES ('$first_name','$last_name','$name','$display_name','$phoneno','$gender','$email','$password','$type')";
+	$sql="INSERT INTO `users` (first_name,last_name,name,display_name,phoneno,gender,email,password,type,active_status) VALUES ('$first_name','$last_name','$name','$display_name','$phoneno','$gender','$email','$password','$type','0')";
 
 	if(mysqli_query($conn,$sql)){
 

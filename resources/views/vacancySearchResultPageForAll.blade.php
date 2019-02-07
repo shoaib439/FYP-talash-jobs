@@ -47,7 +47,7 @@
     @foreach($vacancy as $key => $data)
         <div class="container-fluid ">
 
-            <div class="container shadow-sms p-3 mt-3  bg-white rounded ">
+            <div class="container shadow-sms p-3 mt-3 mb-4 bg-white rounded ">
 
                 <div class="row">
                     <div class="col-md-10">
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="col-sm-12">
-                        <p style="text-indent: 90px;" class="my-text-font"> {{$data->description}} </p>
+                        <p style="text-indent: 90px; text-align: justify" class="my-text-font "> {{$data->description}} </p>
 
                     </div>
 

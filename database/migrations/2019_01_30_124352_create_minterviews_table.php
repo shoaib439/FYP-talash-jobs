@@ -13,11 +13,12 @@ class CreateMinterviewsTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('minterviews', function (Blueprint $table) {
             $table->increments('id');
 
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('vacancy_id')->nullable();
             $table->string('company_id');
             $table->string('date')->nullable();

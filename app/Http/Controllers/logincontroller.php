@@ -68,18 +68,22 @@ class Logincontroller extends Controller
 
             $User = new User;
 
-            if(auth::attempt(['email'=>$email,'password'=>$password])):
-                $verify = $User::where(['email' => $email])->get()->first();
+        if(auth::attempt(['email'=>$email,'password'=>$password])):
+            $verify = $User::where(['email' => $email])->get()->first();
 
-                if($verify->type == 'jobseeker' && !$verify->isAdmin()){
-                    // Session::set('user_type', 'jobseeker');
-                    return redirect('/jobseekerhome');
-                }
-                elseif(!$verify->isAdmin()){
-                    // Session::set('user_type', 'company');
-                    return redirect('/company/main');
-                }
-            endif;
+            if($verify->type == 'jobseeker' && !$verify->isAdmin()){
+                // Session::set('user_type', 'jobseeker');
+                return redirect('/jobseekerhome');
+            }
+            elseif(!$verify->isAdmin() && $verify->isActive()){
+
+
+                // Session::set('user_type', 'company');
+                return redirect('/company/main');
+            }
+            return redirect('/companyApprovalPage');
+
+        endif;
 
             return redirect('/login')->withInput(['msg'=>'Invalid Username or Password']);
 

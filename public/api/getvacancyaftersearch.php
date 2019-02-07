@@ -39,6 +39,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$data['data'][$i]['vinterview'] = $row['hr_no_of_interview'];
 		$data['data'][$i]['vproced'] = $row['hr_procedure'];
 
+		$data['data'][$i]['vldcheck'] = "no";
+		if(strtotime($row['last_date']) < time()){
+			$data['data'][$i]['vldcheck'] = "yes";
+		}
+
 		$result1 = $conn->query("SELECT * FROM `appliedvacancies` WHERE `jobseeker_id`='{$jsid}' AND `vacancy_id`='$vid'");
 
 		if($result1->num_rows > 0){

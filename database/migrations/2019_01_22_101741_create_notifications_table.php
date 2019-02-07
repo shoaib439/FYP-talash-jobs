@@ -26,6 +26,8 @@ class CreateNotificationsTable extends Migration
             $table->integer('viewed');
             $table->string('date')->nullable();
             $table->string('time')->nullable();
+               $table->integer('vacancy_id')->nullable();
+               $table->integer('company_id')->nullable();
             $table->timestamps();
 
         });

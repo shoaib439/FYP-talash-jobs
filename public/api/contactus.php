@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 	require_once 'connecting.php';
 
-	$sql="INSERT INTO contactus (type,name, email, subject, message) VALUES ('jobseeker','$uname','$uemail','$subject','$message')";
+	$sql="INSERT INTO contactus (type,name, email, subject, message,solve) VALUES ('jobseeker','$uname','$uemail','$subject','$message','pending')";
 
 	if(mysqli_query($conn,$sql)){
 

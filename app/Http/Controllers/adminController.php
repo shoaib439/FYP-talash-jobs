@@ -15,43 +15,98 @@ use App\notification;
 
 class adminController extends Controller
 {
-    public function home(){
+    public function home()
+    {
 
-        if(!Auth::user()->isAdmin()):
+        if (!Auth::user()->isAdmin()):
             return redirect('/');
         endif;
 
-        $data=[];
-        $totalUsers=User::all('id')->toArray();
-        $totalVacancies=vacancy::all('id')->toArray();
-        $totaljs=User::where(['type'=>"jobseeker"])->get(['id']);
-        $totalcompany=User::where(['type'=>"company"])->get(['id']);
+        $data = [];
+        $adminrole=null;
+        $totalUsers = User::where(['role'=>$adminrole])->get()->toArray();
+        $totalVacancies = vacancy::all('id')->toArray();
+        $totaljs = User::where(['type' => "jobseeker"])->get(['id']);
+        $totalcompany = User::where(['type' => "company"])->get(['id']);
 
-        $data['user']=count($totalUsers);
-        $data['vacancy']=count($totalVacancies);
-        $data['jobseeker']=count($totaljs);
-        $data['company']=count($totalcompany);
+        $data['user'] = count($totalUsers);
+        $data['vacancy'] = count($totalVacancies);
+        $data['jobseeker'] = count($totaljs);
+        $data['company'] = count($totalcompany);
 
 
-
-
-        return view('/adminfrontend/admindashboard',compact('data'));
+        return view('/adminfrontend/admindashboard', compact('data'));
 
     }
-    public function admin( Request $request){
 
-        if($request->isMethod('post')){
-            $data=$request->input();
+    public function adminViewCompany($id){
+
+        if (!Auth()->guard()->check())
+
+        {
+            return redirect('/');
+        }
+
+        else {
+
+            if (Auth::user()->isAdmin()) {
+                $user=Auth::User();
+
+                $company=$user::where('id',$id)->get();
+                $companyData=companyprofile::where('user_id',$id)->get();
+//                $jvacancy=vacancy::where(['user_fk'=>$id,'vacancy_type'=>"Job"])->get();
+//                $ivacancy=vacancy::where(['user_fk'=>$id,'vacancy_type'=>"Internship"])->get();
+//
+//                $jobsCount=count($jvacancy);
+//                $internshipCount=count($ivacancy);
+
+                $totalPos=vacancy::where('user_fk',$id)->sum('no_of_position');
+
+//                dd($totalPos);
+//                die();
+             //   $totaljobs=vacancy::where('type',"Job")->get();
+
+//                                dd($internshipCount);
+//                                 die();
+
+                $cData=[];
+
+                $cData['user']=$company->first();
+                $cData['company']=$companyData->first();
+//
+//                $cData['job']=$jobsCount;
+//                $cData['position']=$totalPos;
+//                $cData['internship']=$internshipCount;
+
+
+
+//                dd($cData);
+//                die();
+
+
+
+                return view('adminfrontend.AdminViewCompany',compact('cData'));
+
+            }
+
+        }
+
+    }
+
+    public function admin(Request $request)
+    {
+
+        if ($request->isMethod('post')) {
+            $data = $request->input();
             $User = new User;
-            if(auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
+            if (auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
 
                 $verify = $User::where(['email' => $data['email']])->get()->first();
 
-                if($verify->role == '1'){
+                if ($verify->role == '1') {
                     // Session::set('user_type', 'jobseeker');
                     return redirect('/adminpanel');
-                }
-                else{
+                } else {
                     // Session::set('user_type', 'company');
                     Auth::logout();
                     return redirect('/login');
@@ -59,8 +114,7 @@ class adminController extends Controller
             }
 
 
-
-            }
+        }
 //                echo "success"; die;
 //                return redirect('/adminpanel');
 //
@@ -74,8 +128,10 @@ class adminController extends Controller
 
         return redirect('/Adminlogin');
     }
-    public function loginPage(){
-        if(Auth::guard()->check()){
+
+    public function loginPage()
+    {
+        if (Auth::guard()->check()) {
             return redirect('/');
         }
         return view('/adminfrontend/Adminlogin');
@@ -85,7 +141,7 @@ class adminController extends Controller
     public function admincheck()
     {
 
-        if(!Auth::guard()->check()){
+        if (!Auth::guard()->check()) {
             return redirect('/Adminlogin');
         }
 
@@ -106,43 +162,49 @@ class adminController extends Controller
 //    }//end of showComplaints
 
 
-    public function showUsers(){
+    public function showUsers()
+    {
 
-      //  $Users=User::all()->toArray();
+        //  $Users=User::all()->toArray();
 
-        $adminrole=null;
-        $Users=User::where(['role'=>$adminrole])->get()->toArray();
+        $adminrole = null;
+        $Users = User::where(['role' => $adminrole])->get()->toArray();
 
         return view('/adminfrontend.registeredUsers', compact('Users'));
-
-
 
 
     }//end of showUsers
 
 
-    public function deleteuser($id){
+    public function deleteuser($id)
+    {
 
 //        $Users=User->find
 //
 //       DB::table('users')->where('id','$id')->delete();
 
         $user = User::find($id);
-        $user->delete();
-       return redirect('registeredUsers');
+        if($user->type=='company'){
+            DB::table('notifications')->where('company_id',$id)->delete();
+            DB::table('minterviews')->where('company_id',$id)->delete();
+            $user->delete();
+        }
+        else
+        {
+            $user->delete();
+        }
 
-
+        return redirect('registeredUsers');
 
 
     }//end of deleteuser
 
 
-    public function showComplaints(){
+    public function showComplaints()
+    {
 
 
-        $complaints=contactus::all()->toArray();
-
-
+        $complaints = contactus::all()->toArray();
 
 
         return view('/adminfrontend.usersComplaints', compact('complaints'));
@@ -150,17 +212,19 @@ class adminController extends Controller
     }
 
 
-    public function showFeedback(){
+    public function showFeedback()
+    {
 
 
-        $feedback=feedback::all()->toArray();
+        $feedback = feedback::all()->toArray();
 
         return view('/adminfrontend.usersfeedback', compact('feedback'));
 
     }
 
 
-    public function complaintResponse(Request $request){
+    public function complaintResponse(Request $request)
+    {
 
         if (!Auth()->guard()->check()) {
             return redirect('/');
@@ -168,36 +232,34 @@ class adminController extends Controller
             if (Auth::user()->isAdmin()) {
 
 
-                $validation=Validator::make($request->all(),[
+                $validation = Validator::make($request->all(), [
 
-                    'user_email'=>'required|email',
-                    'complaint_id'=>'required|int',
+                    'user_email' => 'required|email',
+                    'complaint_id' => 'required|int',
                 ]);
 
-                if($validation->passes())
-                {
-                    $complaint=contactus::where(['id'=>$request->complaint_id,'email'=>$request->user_email])->get()->first();
+                if ($validation->passes()) {
+                    $complaint = contactus::where(['id' => $request->complaint_id, 'email' => $request->user_email])->get()->first();
 
-                    $user=User::where('email',$request->user_email)->get()->first();
+                    $user = User::where('email', $request->user_email)->get()->first();
 
 //                  var_dump($complaint);
 //                  die();
                     $html = <<<HTML
 Your Complaint related to Subject <strong> '{$complaint->subject}'</strong>is resolved.
 HTML;
-                    $s='solved';
+                    $s = 'solved';
 
-                    if($complaint){
+                    if ($complaint) {
 
                         DB::update("UPDATE `contactus` SET `solve`='{$s}' WHERE `id`='{$request->complaint_id}'");
 
                         notification::create([
-                            'user_id'=> $user->id,
-                            'message'=>$html,
-                            'type'=> 'Customer Support',
-                            'viewed'=> '0',
+                            'user_id' => $user->id,
+                            'message' => $html,
+                            'type' => 'Customer Support',
+                            'viewed' => '0',
                         ]);
-
 
 
                     }
@@ -205,13 +267,11 @@ HTML;
 
                     return redirect('/usersComplaints');
 
-                }
-                else
-                {
+                } else {
                     return response()->json([
                         'success' => '0',
-                        'message'   => $validation->errors()->all(),
-                        'class_name'  => 'alert-danger'
+                        'message' => $validation->errors()->all(),
+                        'class_name' => 'alert-danger'
                     ]);
                 }
 
@@ -219,12 +279,11 @@ HTML;
         }
 
 
-
     }
 
 
-
-    public function deletecomplaint($id){
+    public function deletecomplaint($id)
+    {
 
         $c = contactus::find($id);
         $c->delete();
@@ -249,47 +308,128 @@ HTML;
 
 
 //masla here
-        public function manageposts(){
+    public function manageposts()
+    {
 
-            //$Users=User::where('type','company')->get();
+        //$Users=User::where('type','company')->get();
 
 
-            $vacancy = vacancy::all();
+        $vacancy = vacancy::all();
 
-            $posts=[];
-            foreach ($vacancy as $key => $vac){
+        $posts = [];
+        foreach ($vacancy as $key => $vac) {
 
-                $user = User::where('id',$vac->user_fk)->get()->first();
+            $user = User::where('id', $vac->user_fk)->get()->first();
 
-                if(!empty($user)){
-                    $posts[$key]['vacancy'] = $vac;
-                    $posts[$key]['user'] = $user->id;
-                }
+            if (!empty($user)) {
+                $posts[$key]['vacancy'] = $vac;
+                $posts[$key]['user'] = $user->id;
             }
+        }
 
-/*
-            foreach ($Users as $key => $user){
+        /*
+                    foreach ($Users as $key => $user){
 
-               $posts[$key]  = [];
+                       $posts[$key]  = [];
 
-                $vacancy=vacancy::where('user_fk',$user->id)->get();
+                        $vacancy=vacancy::where('user_fk',$user->id)->get();
 
-                $posts[$key]['vacancy'] = false;
-                if(!empty($vacancy) || $vacancy->isEmpty()):
+                        $posts[$key]['vacancy'] = false;
+                        if(!empty($vacancy) || $vacancy->isEmpty()):
 
-                    $posts[$key]['vacancy'] = $vacancy->first();
-                endif;
+                            $posts[$key]['vacancy'] = $vacancy->first();
+                        endif;
 
 
 
-            }
-*/
+                    }
+        */
 
 //            $posts[$key]['user']=$Users;
 //                 var_dump($posts);
 //                          die();
 
-        return view('/adminfrontend.managePosts',compact('posts'));
+        return view('/adminfrontend.managePosts', compact('posts'));
+    }
+
+
+    public function companyRequest()
+    {
+
+        if (!Auth()->guard()->check())
+
+        {
+            return redirect('/');
         }
 
-}
+        else
+
+            {
+                    if(Auth::user()->isAdmin())
+                        {
+
+
+                            $companyRequest=User::where(['type'=>'company','active_status'=>'0'])->get();
+
+//                            var_dump($companyRequest);
+//                            die();
+
+                            return view('adminfrontend.companyRequestPage',compact('companyRequest'));
+
+
+                        }
+
+             }
+
+    }
+
+    public function approveCompany($id){
+
+
+        if (!Auth()->guard()->check())
+
+        {
+            return redirect('/');
+        }
+
+        else
+
+        {
+            if(Auth::user()->isAdmin()) {
+                $s='1';
+
+                DB::update("UPDATE `users` SET `active_status`='{$s}' WHERE `id`='{$id}'");
+                return redirect('approve/companyRequest');
+
+            }
+        }
+
+
+    }
+
+    public function admindeletevacancy($id){
+
+//        $Users=User->Ffind
+        // $vacancy=vacancy::find($id);
+//
+        DB::table('vacancy')->where('id',$id)->delete();
+        DB::table('notifications')->where('vacancy_id',$id)->delete();
+        DB::table('minterviews')->where('vacancy_id',$id)->delete();
+
+
+//        $vacancy=vacancy::find($id);
+//        $vacancy->detete();
+
+
+
+        return redirect('/managePosts');
+
+
+
+
+    }//end of deleteuser
+
+
+
+
+}//end of controller

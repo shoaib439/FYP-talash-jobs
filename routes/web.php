@@ -72,6 +72,8 @@ Route::get('/delete/notification/{id}','jobseekerController@deleteNotification')
 Route::get('/search/industry/{industry}','jobseekerController@landingSearchType');
 Route::get('/search/city/{city}','jobseekerController@landingSearchcity');
 
+Route::get('/jobseekerview/company/{id}','jobseekerController@jobseekerviewCompany');
+
 
 //Route::get('/jobseekerhome', function () {
 //    return view('jobseekerMainLayout');
@@ -136,12 +138,15 @@ Route::get('/deletevacancy/{id}','CompanyController@deletevacancy');
 
 
 
+
+
 Route::post('/update/status/','CompanyController@updateStatus');
 
 Route::post('/updateStatus','CompanyController@updateStatuspage');
 
 
 
+Route::get('/companyApprovalPage','CompanyController@approvalPage');
 
 
 
@@ -154,6 +159,10 @@ Route::post('/updateStatus','CompanyController@updateStatuspage');
 //    return view('AddVacancy');
 //});
 Route::post('/company/AddVacancy/','postvacancy@addvacancy');
+
+Route::post('/company/UpdateVacancy/','CompanyController@updateVacancyData');
+
+
 
 Route::get('/company/hrPolicies','CompanyController@HRpolicies');
 
@@ -180,6 +189,12 @@ Route::post('/invite','CompanyController@jobseekerInviteSubmit'); //->where('id'
 
 
 Route::post('/callforinterview','CompanyController@Callforinterview');
+
+
+
+Route::get('/updatevacancy/{id}','CompanyController@updateVacancy');
+
+
 //Route::get('/company/comHRpolicies', function () {
 //    return view('companysearch');
 //    });
@@ -231,6 +246,7 @@ Route::get('/submitfeedback','SubmissionFeedback@feedback');
 
 Route::post('/submitfeedback','SubmissionFeedback@feedbacksubmit');
 
+Route::get('/aboutus','jobseekerController@AboutUs');
 
 //Route::get('/submitfeedback','SubmissionFeedback@feedback');
 
@@ -262,6 +278,11 @@ Route::post('/ajax-upload-personal','AjaxCompanyProfile@personData');
 Route::post('ajax-upload-exp','AjaxJobSeekerProfile@workexperience');
 Route::post('ajax-upload-edu','AjaxJobSeekerProfile@uploadeducation');
 Route::post('/ajax-upload-jspersonal','AjaxJobSeekerProfile@personData');
+
+
+
+Route::post('/ajax-upload-bio','AjaxJobSeekerProfile@bioData');
+
 Route::post('/ajax-upload-language','AjaxJobSeekerProfile@uploadlanguages');
 
 Route::post('/ajax-upload-hobby','AjaxJobSeekerProfile@uploadhobby');
@@ -356,6 +377,14 @@ Route::post('/markAsSolve','adminController@complaintResponse');
 
 Route::get('/delete/complaint/{id}','adminController@deletecomplaint');
 
+
+Route::get('/adminview/company/{id}','adminController@adminViewCompany');
+
+Route::get('/approve/companyRequest','adminController@companyRequest');
+
+Route::get('/approve/companyRequest/{id}','adminController@approveCompany');
+
+Route::get('/admindeletevacancy/{id}','adminController@admindeletevacancy');
 
 
 ////////////////////////////////////////////////admin data end///////////////////////////////////////////

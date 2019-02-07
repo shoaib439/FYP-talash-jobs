@@ -37,7 +37,7 @@
             </div>
 
             <div class="row mt-2">
-                <div class="col-sm-3">
+                <div style="text-align: justify;" class="col-md-8">
                     <p> <a class="my-heading-text3">Title: </a>   <a class="my-text-font">  {{$vacancy->title}}</a></p>
                     <p> <a class="my-heading-text3">Description: </a>   <a class="my-text-font">   {{$vacancy->description}}</a></p>
 

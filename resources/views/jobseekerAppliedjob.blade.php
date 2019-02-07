@@ -45,31 +45,35 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-sm-3">
+                <div style="text-align: justify;" class="col-md-8">
                   <p> <a class="my-heading-text3">Title: </a>   <a class="my-text-font">{{ $data->title }}</a></p>
                     <p> <a class="my-heading-text3">Description: </a>   <a class="my-text-font"><i>{{ $data->description }}</i></a></p>
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row ">
+
+                <div class="col-md-6">
                     <p> <a class="my-heading-text3">Applied on: </a>   <a class="my-text-font">{{$appliedarray[$key]}}</a></p>
+                </div>
+                <div class="col-md-3 applied-jobs-btns">
+
+                    <a href="{{url('/vacancy/withdraw/'.$data->id)}}"  class="btn my-btn">Withdraw</a>
 
                 </div>
-
-            <div class="col-lg">
-
-                <div class="row applied-jobs-btns">
-
-                    <div class="col-md-4">
-
-                        <a href="{{url('/vacancy/withdraw/'.$data->id)}}"  class="btn my-btn">Withdraw</a>
-
-                    </div>
-                    <div class="col-md-4">
+                <div class="col-md-3 applied-jobs-btns">
 
 
-                        <button type="submit"  class="btn my-btn check-status-btn" data-container="jbs-add-status-container-{{ $key }}" >Check Status</button>
-                    </div>
-
+                    <button type="submit"  class="btn my-btn check-status-btn" data-container="jbs-add-status-container-{{ $key }}" >Check Status</button>
                 </div>
+
             </div>
-            </div>
+
 
         </div>
     </div>

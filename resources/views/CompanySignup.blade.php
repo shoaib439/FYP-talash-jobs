@@ -152,6 +152,8 @@
                 </div>
                 <div class="col-md-12 bg-light">
                     <div class="form-group text-center ">
+                        <input type="hidden" name="company_lat" id="company_lat" />
+                        <input type="hidden"  name="company_lng" id="company_lng" />
                         <button type="submit" class="btn btn-success my-btn2 btn-md"  id="Cbtn" >Signup</button>
                     </div>
                 </div>
@@ -159,7 +161,7 @@
                 {{csrf_field()}}
             </form>
 
-            <div id="map"></div>
+            <div id="map" ></div>
 
 
 
@@ -175,7 +177,8 @@
                     var autocomplete = new google.maps.places.Autocomplete(input);
                         map = new google.maps.Map(document.getElementById('map'), {
                             center: {lat: -34.397, lng: 150.644},
-                            zoom: 8
+                            zoom: 12
+
                         });
                       //  infoWindow = new google.maps.InfoWindow;
 
@@ -206,6 +209,9 @@
                                 // infoWindow.open(map);
 
                                 map.setCenter(pos);
+
+                                $('#company_lat').val(pos.lat);
+                                $('#company_lng').val(pos.lng);
 
                             }, function() {
                                 handleLocationError(true, infoWindow, map.getCenter());

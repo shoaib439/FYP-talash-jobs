@@ -59,7 +59,7 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-sm-3">
+                <div class="col-md-4">
                     <p><i class="fa fa-user"aria-hidden="true"></i>  <span id="company-personal-gender"> {{ Auth::user()->name }} </span></p>
                     <p><i class="fa fa-envelope" aria-hidden="true"></i>  <span id="company-personal-email">{{ Auth::user()->email }}</span></p>
                     <p><i class="fa fa-phone "aria-hidden="true"></i>  <span id="company-personal-phone"> {{ Auth::user()->phoneno }} </span></p>
@@ -68,7 +68,7 @@
 
                 </div>
 
-                <div class="col-sm-3">
+                <div class="col-md-8">
                     <p><i class="fa fa-id-card"aria-hidden="true"></i> <span id="company-personal-cnic">{{ $profile['cnic'] }}</span></p>
                     <p><i class="fa fa-link"aria-hidden="true"></i> <span id="company-personal-website">{{ $profile['website'] }}</span></p>
                     <p><i class="fa fa-skype"aria-hidden="true"></i>  <span id="company-personal-skype">{{ $profile['skype'] }}</span></p>

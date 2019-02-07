@@ -57,9 +57,9 @@
                                     <a  href="{{url('/view/vacancy/'.$vacancylists['id'])}}" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" >
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    {{--<button type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" >--}}
-                                        {{--<i class="fa fa-edit" style="color: #ffffff"></i>--}}
-                                    {{--</button>--}}
+                                    <a href={{url('/updatevacancy/'.$vacancylists['id'])}} type="button" rel="tooltip" class="btn btn-primary btn-just-icon btn-sm" >
+                                        <i class="fa fa-edit" style="color: #ffffff"></i>
+                                    </a>
                                     <a href={{url('/deletevacancy/'.$vacancylists['id'])}}><button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" >
                                         <i class="fa fa-remove"></i>
                                         </button></a>

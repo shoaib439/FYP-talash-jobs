@@ -22,10 +22,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 main-header">
-            <img src="{{asset('images/postjobimage.jpg')}}"  class="header-background" alt="Responsive image">
+            <img src="{{asset('images/postjobimage2.jpg')}}"  class="header-background" alt="Responsive image">
             <div class="row form-container ">
                 <div class="col-md-12 submit-text ">
-                    <h2>Post a job to start hiring from our platform</h2>
+                    <h2 style="color: #ffffff">Post a job to start hiring from our platform</h2>
 
                 </div>
                 <div class="col-md-12 submit-btn-container">

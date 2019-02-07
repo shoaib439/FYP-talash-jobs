@@ -88,6 +88,7 @@
     </div>
 
     <script src="{{url('adminstyles/vendor/chart.js/Chart.min.js')}}"></script>
+
     <script type="text/javascript">
 
         var ctx = document.getElementById("myPieChart");

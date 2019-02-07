@@ -46,10 +46,6 @@ class AjaxCV extends Controller
         return $html = $this->getConvertedHTML($path);
 
 
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($html);
-        return $pdf->stream(Auth::user()->display_name."_cv.pdf", array("Attachment" => false));
-
     }
 
 
@@ -95,6 +91,7 @@ class AjaxCV extends Controller
 
         $dom->getElementById('jobseeker_address')->nodeValue = $user->jsaddress;
 
+        $dom->getElementById('jobseeker_bio')->nodeValue = $patienttable->bio;
 
         //WORK EXP
 
@@ -176,6 +173,9 @@ HTML;
         //END Hobby
 
 
+
+
+
         //EDUCATION
 
 
@@ -203,10 +203,10 @@ HTML;
         endif;
 
         //END EDUCATION
+/*
 
 
-
-        /*$avatarUrl = url($user->profile_pic);
+        $avatarUrl = url($user->profile_pic);
         $arrContextOptions=array(
                 "ssl"=>array(
                     "verify_peer"=>false,
@@ -221,11 +221,11 @@ $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
 
 
        // return '<img src="'.$imageData.'" />';
-         str_replace('/', '\\', public_path($user->profile_pic));
+         //str_replace('/', '\\', public_path($user->profile_pic));
 
         $dom->getElementById('profile_image')->setAttribute('src', $imageData);
 
-        */
+*/
 
 
         /* FOR PREVIEW */

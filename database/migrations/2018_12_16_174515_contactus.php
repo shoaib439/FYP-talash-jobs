@@ -21,7 +21,7 @@ class Contactus extends Migration
             $table->string('email');
             $table->string('type');
             $table->string('subject');
-            $table->string('message');
+            $table->longText('message');
             $table->string('solve');
 
             $table->timestamps();

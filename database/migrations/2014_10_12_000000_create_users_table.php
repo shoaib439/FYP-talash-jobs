@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('role')->nullable();
             $table->string('profile_pic')->nullable();
             $table->string('address')->nullable();
+            $table->integer('active_status')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -33,7 +33,8 @@ class Signupcompany extends Controller
             'industry' => 'required|string',
             'link' => 'required|string|url',
             'designation' => 'required|string',
-
+            'company_lat' => 'required',
+            'company_lng' => 'required',
 
         ]);
 
@@ -49,6 +50,7 @@ class Signupcompany extends Controller
             'gender'=>  $request->gender,
             'type'=> 'company',
             'city'=>    $request->city,
+            'active_status'=>'0'
         ]);
 
 
@@ -61,10 +63,12 @@ class Signupcompany extends Controller
             'cnic'=>  $request->cnic,
             'person_name'=> $request->username,
             'person_designation'=>    $request->designation,
+            'company_lat' => $request->company_lat,
+            'company_lng' => $request->company_lng,
         ]);
         if($user && $companyuser){
             Auth::attempt(['email'=>$request->email,'password'=>$request->password]);
-            return redirect('/');
+            return redirect('/companyApprovalPage');
         }
         else{
             return redirect('/jobseekerSignup');

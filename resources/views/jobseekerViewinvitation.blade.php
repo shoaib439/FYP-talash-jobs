@@ -4,7 +4,7 @@
 
     @if(empty($inviteData))
         <div class="container-fluid">
-            <div class="container shadow-sms p-3 mt-3 pb-1 bg-white rounded ">
+            <div class="container shadow-sms p-3 mt-3 mb-4 pb-1 bg-white rounded ">
                 <div class="row">
 
                     <div class="col-md-12">
