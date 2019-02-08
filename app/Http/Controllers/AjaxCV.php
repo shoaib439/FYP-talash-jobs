@@ -63,6 +63,7 @@ class AjaxCV extends Controller
         $pdf->loadHTML($html);
         return $pdf->stream(Auth::user()->display_name."_cv.pdf");
 
+
     }
 
     public function getConvertedHTML($path){
@@ -80,7 +81,7 @@ class AjaxCV extends Controller
 
 
         $user = Auth::user();
-        $patienttable = jobseekerprofile::where('user_id',$user->id)->get()->first();
+        $js = jobseekerprofile::where('user_id',$user->id)->get()->first();
 
         $dom->getElementsByTagName('title')->item(0)->nodeValue = $user->display_name;
         $dom->getElementById('jobseeker_name')->nodeValue = $user->display_name;
@@ -91,7 +92,7 @@ class AjaxCV extends Controller
 
         $dom->getElementById('jobseeker_address')->nodeValue = $user->jsaddress;
 
-        $dom->getElementById('jobseeker_bio')->nodeValue = $patienttable->bio;
+        $dom->getElementById('jobseeker_bio')->nodeValue = $js->bio;
 
         //WORK EXP
 
@@ -203,8 +204,8 @@ HTML;
         endif;
 
         //END EDUCATION
-/*
 
+/*
 
         $avatarUrl = url($user->profile_pic);
         $arrContextOptions=array(
@@ -226,7 +227,6 @@ $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
         $dom->getElementById('profile_image')->setAttribute('src', $imageData);
 
 */
-
 
         /* FOR PREVIEW */
 
@@ -269,4 +269,7 @@ $imageData = 'data:image/' . $type . ';base64,' . $avatarBase64Data;
             'msg'=>'Validation'
         ]);
     }
+
+
+
 }

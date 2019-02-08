@@ -282,9 +282,7 @@ Route::post('/ajax-upload-jspersonal','AjaxJobSeekerProfile@personData');
 
 
 Route::post('/ajax-upload-bio','AjaxJobSeekerProfile@bioData');
-
 Route::post('/ajax-upload-language','AjaxJobSeekerProfile@uploadlanguages');
-
 Route::post('/ajax-upload-hobby','AjaxJobSeekerProfile@uploadhobby');
 Route::post('/ajax-upload-skills','AjaxJobSeekerProfile@uploadskills');
 Route::post('/ajax-upload-prefferedcity','AjaxJobSeekerProfile@uploadprefferedcity');
@@ -323,6 +321,9 @@ Route::get('/ajax-get-cv/{id}','AjaxCV@getCVHTML');
 
 Route::get('buildCV/CV/{id}/preview','AjaxCV@buildCVPreview');
 Route::get('buildCV/CV/{id}','AjaxCV@buildCVPDF');
+
+
+
 
 
 Route::post('/ajax-current-user-data','AjaxCV@getUserData');

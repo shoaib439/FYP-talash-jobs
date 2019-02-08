@@ -9,30 +9,41 @@
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{asset('images/searchbgimage.jpg')}}"  alt="First slide">
+                    <img class="d-block w-100" src="{{asset('images/postjobimage2.jpg')}}"  alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('images/searchbgimage.jpg')}}" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="{{asset('images/searchbgimage.jpg')}}" alt="Third slide">
+                    <img class="d-block w-100" src="{{asset('images/df.png')}}" alt="Second slide">
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
-        <a href="{{ url('buildCV/CV/1/preview') }}" class="btn my-btn2">Preview CV</a>
-        <a href="{{ url('buildCV/CV/1') }}" class="btn my-btn2">Download CV</a>
+    </div>
+
+
+
+    <div class="row text-center mb-4 mt-4">
+        <div class="col-md-12">
+            <img src="{{ asset('images/cv1image.png') }}" width="40%" />
+            <a href="{{ url('buildCV/CV/1/preview') }}" id="preview_link" class="btn my-btn2">Preview CV Template 1</a>
+            <a href="{{ url('buildCV/CV/1') }}" class="btn my-btn2">Download CV</a>
+        </div>
+    </div>
+    <div class="row text-center mb-4 mt-4">
+        <div class="col-md-12">
+            <img src="{{ asset('images/cv2image.png') }}" width="40%" />
+            <a href="{{ url('buildCV/CV/2/preview') }}" id="preview_link" class="btn my-btn2">Preview CV Template 2</a>
+            <a href="{{ url('buildCV/CV/2') }}" class="btn my-btn2">Download CV</a>
+        </div>
+    </div>
+    <div class="row text-center mb-4 mt-4">
+        <div class="col-md-12">
+            <img src="{{ asset('images/cv3image.png') }}" width="40%" />
+            <a href="{{ url('buildCV/CV/3/preview') }}" id="preview_link" class="btn my-btn2">Preview CV Template 3</a>
+            <a href="{{ url('buildCV/CV/3') }}" class="btn my-btn2">Download CV</a>
+        </div>
+    </div>
     </div>
 
 

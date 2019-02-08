@@ -437,26 +437,34 @@
             {{--</div>--}}
             <div class="col-md-12 section-interviews">
                 <div class ="cv-heading text-center mb-4"><h2 class="green-icon-set"><b>LATEST JOBS</b></h2></div>
-                <div class="row ">
+                <div class="row mt-3 ml-3">
 
                      @foreach($jobslist as $job)
-                        <div class="col-md-4 ">
-                            <div class="block-interview shadow-sms bg-white ">
 
-                                <div class="interview-logo">
-                                    @if(!empty(($job['user']->profile_pic)))
-                                    <img src="{{asset($job['user']->profile_pic)}}" />
-                                    @else
-                                        <img src="{{asset('images/company_default.png')}}" />
-                                    @endif
+                        <div class="col-md-4 ">
+                            <div class="card shadow-sms bg-white">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="interview-logo">
+                                            @if(!empty(($job['user']->profile_pic)))
+                                                <img src="{{asset($job['user']->profile_pic)}}" />
+                                            @else
+                                                <img src="{{asset('images/company_default.png')}}" />
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-left">
+                                        <div class="interview-description">
+                                            <a class ="my-heading-text" href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5 class=" my-heading-text20">{{$job['vacancy']->title}}</h5></a>
+                                            <p>{{$job['company']->company_name}}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="interview-description">
-                                    <a class ="my-heading-text" href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5 class="green-icon-set">{{$job['vacancy']->title}}</h5></a>
-                                    <p>{{$job['company']->company_name}}</p>
-                                </div>
+
                             </div>
                         </div>
                     @endforeach
+
 
                 </div>
             </div>
@@ -479,20 +487,27 @@
             {{--</div>--}}
             <div class="col-md-12 section-interviews ">
                 <div class ="cv-heading text-center mb-4 "><h2 class="green-icon-set"><b>LATEST INTERNSHIPS</b></h2></div>
-                <div class="row">
+                <div class="row ml-3">
 
 
                         @foreach($internshiplist as $job)
                             <div class="col-md-4 ">
-                                <div class="block-interview shadow-sms bg-white">
-                                    <div class="interview-logo">
-                                        <img src="{{asset($job['user']->profile_pic)}}" />
-                                    </div>
-                                    <div class="interview-description">
-                                        <a  href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5 class ="my-heading-text">{{$job['vacancy']->title}}</h5></a>
-                                        <p>{{$job['company']->company_name}}</p>
+                                <div class="card shadow-sms bg-white">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="interview-logo">
+                                                <img src="{{asset($job['user']->profile_pic)}}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-left">
+                                            <div class="interview-description">
+                                                <a  href="{{ url('/view/vacancy/'.$job['vacancy']->id)  }}"><h5 class ="my-heading-text20">{{$job['vacancy']->title}}</h5></a>
+                                                <p>{{$job['company']->company_name}}</p>
 
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         @endforeach

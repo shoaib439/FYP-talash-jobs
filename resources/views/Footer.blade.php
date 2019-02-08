@@ -90,7 +90,7 @@
                             <a class="text-light" href="{{ '/search/city/peshawar' }}">peshawar</a>
                         </li>
                         <li>
-                            <a class="text-light" href="{{ '/search/city/Silakot' }}">Silakot</a>
+                            <a class="text-light" href="{{ url('/search/city/Silakot') }}">Silakot</a>
                         </li>
 
                     </ul>
